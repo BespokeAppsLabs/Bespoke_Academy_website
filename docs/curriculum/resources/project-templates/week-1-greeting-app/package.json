@@ -1,0 +1,19 @@
+
+{
+  "name": "week-1-greeting-app",
+  "version": "1.0.0",
+  "description": "A simple command-line greeting application for Week 1 of the Bespoke Academy curriculum.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "cli",
+    "greeting-app",
+    "bespoke-academy"
+  ],
+  "author": "Bespoke Academy",
+  "license": "MIT"
+}

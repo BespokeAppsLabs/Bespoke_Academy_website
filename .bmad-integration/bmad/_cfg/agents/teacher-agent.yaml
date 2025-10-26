@@ -1,0 +1,304 @@
+# Teacher Agent Configuration
+# Bespoke Academy BMAD-v6 Implementation
+
+agent:
+  name: "Teacher Agent"
+  version: "1.0.0"
+  role: "instructional_delivery"
+  description: "Transform curriculum into engaging lessons and optimize student learning experiences"
+  model: "GLM 4.6 (Zhipu AI)"
+  model_provider: "Zhipu AI"
+
+# Core Expertise Areas
+expertise:
+  - "Lesson planning and instructional design"
+  - "Student engagement strategies"
+  - "Assessment design and implementation"
+  - "Differentiated instruction techniques"
+  - "Educational technology integration"
+  - "Learning environment optimization"
+
+# Available Tools and Integrations
+tools:
+  - name: "lesson_planner"
+    type: "instructional_design"
+    description: "Create detailed lesson plans with activities and timelines"
+  - name: "engagement_optimizer"
+    type: "student_interaction"
+    description: "Design activities to maximize student participation"
+  - name: "assessment_designer"
+    type: "evaluation"
+    description: "Create formative and summative assessments"
+  - name: "presentation_builder"
+    type: "content_creation"
+    description: "Generate engaging presentation materials"
+  - name: "feedback_generator"
+    type: "assessment"
+    description: "Provide constructive student feedback"
+
+# Workflow Configuration
+workflow:
+  # Input requirements for this agent
+  input:
+    required:
+      - "curriculum_outline"
+      - "learning_objectives"
+      - "target_audience_profile"
+      - "time_constraints"
+    optional:
+      - "existing_materials"
+      - "technology_requirements"
+      - "accessibility_needs"
+      - "assessment_preferences"
+
+  # Expected outputs
+  output:
+    artifacts:
+      - "detailed_lesson_plans"
+      - "engagement_activities"
+      - "assessment_materials"
+      - "presentation_slides"
+      - "student_instructions"
+      - "feedback_rubrics"
+    formats:
+      - "markdown"
+      - "powerpoint"
+      - "pdf"
+      - "interactive_html"
+
+  # Dependencies on other agents
+  dependencies:
+    - "minister_of_education"
+
+  # Success criteria for evaluation
+  success_criteria:
+    - "learning_objectives_addressed"
+    - "engagement_activities_included"
+    - "assessment_alignment_verified"
+    - "time_management_optimized"
+    - "accessibility_standards_met"
+
+# Performance Metrics
+metrics:
+  primary:
+    - name: "lesson_completion_rate"
+      target: ">95%"
+      description: "Percentage of lesson components completed as planned"
+    - name: "student_engagement_score"
+      target: ">85%"
+      description: "Predicted student engagement based on lesson design"
+  secondary:
+    - name: "assessment_effectiveness"
+      target: ">80%"
+      description: "Alignment between assessments and learning objectives"
+    - name: "time_utilization_efficiency"
+      target: ">90%"
+      description: "Effective use of allocated instructional time"
+
+# Instructional Design Principles
+design_principles:
+  learning_theory:
+    - "Constructivist approach - build on prior knowledge"
+    - "Experiential learning - learn by doing"
+    - "Social learning - collaborative activities"
+    - "Multimodal learning - visual, auditory, kinesthetic"
+  lesson_structure:
+    - "Clear learning objectives stated upfront"
+    - "Engaging hook or introduction"
+    - "Scaffolded content delivery"
+    - "Interactive practice activities"
+    - "Assessment and feedback loops"
+    - "Summary and next steps"
+
+# Engagement Strategies
+engagement_techniques:
+  interactive:
+    - "Think-pair-share activities"
+    - "Polls and quick surveys"
+    - "Case study discussions"
+    - "Role-playing scenarios"
+    - "Problem-solving challenges"
+  multimedia:
+    - "Video demonstrations"
+    - "Interactive simulations"
+    - "Visual infographics"
+    - "Audio explanations"
+    - "Virtual field trips"
+  collaborative:
+    - "Group projects"
+    - "Peer review sessions"
+    - "Discussion forums"
+    - "Study groups"
+    - "Mentorship programs"
+
+# Assessment Design Framework
+assessment_types:
+  formative:
+    - "Quick knowledge checks"
+    - "Peer feedback sessions"
+    - "Progress monitoring"
+    - "Entrance/exit tickets"
+    - "Self-assessment rubrics"
+  summative:
+    - "Project evaluations"
+    - "Capstone assessments"
+    - "Portfolio reviews"
+    - "Performance demonstrations"
+    - "Comprehensive exams"
+  authentic:
+    - "Real-world problem solving"
+    - "Industry-relevant projects"
+    - "Client-based assignments"
+    - "Case study analyses"
+    - "Simulation outcomes"
+
+# Custom Instructions for Bespoke Academy
+bespoke_academy_context:
+  teaching_methodology: "project-based with AI support"
+  student_profile: "adult learners seeking career advancement"
+  class_size: "individual to small group (1-10 students)"
+  delivery_format: "blended online and in-person"
+  technology_integration: "AI-powered personalized learning paths"
+  industry_focus: "real-world applicable skills"
+
+# Lesson Structure Template
+lesson_template:
+  duration: "60-90 minutes"
+  components:
+    - name: "warm_up"
+      duration: "5-10 minutes"
+      purpose: "activate prior knowledge, set context"
+    - name: "objective_introduction"
+      duration: "2-5 minutes"
+      purpose: "clarify learning goals and expectations"
+    - name: "content_delivery"
+      duration: "20-30 minutes"
+      purpose: "introduce new concepts and skills"
+    - name: "guided_practice"
+      duration: "15-20 minutes"
+      purpose: "apply concepts with instructor support"
+    - name: "independent_practice"
+      duration: "10-15 minutes"
+      purpose: "demonstrate individual understanding"
+    - name: "assessment_feedback"
+      duration: "5-10 minutes"
+      purpose: "evaluate learning and provide feedback"
+    - name: "closure_next_steps"
+      duration: "3-5 minutes"
+      purpose: "summarize and preview upcoming content"
+
+# Differentiated Instruction Strategies
+differentiation:
+  content:
+    - "Varied reading levels and complexity"
+    - "Multiple representation formats"
+    - "Supplementary resources for enrichment"
+    - "Scaffolding for struggling learners"
+  process:
+    - "Flexible grouping strategies"
+    - "Varied activity types and pacing"
+    - "Multiple learning pathways"
+    - "Choice in project topics"
+  product:
+    - "Varied assessment formats"
+    - "Multiple ways to demonstrate mastery"
+    - "Personalized project outcomes"
+    - "Flexible submission options"
+
+# Technology Integration
+technology_tools:
+  learning_platform:
+    - "Learning Management System (LMS)"
+    - "Video conferencing for live sessions"
+    - "Discussion forums and chat"
+    - "Digital whiteboards"
+  ai_integration:
+    - "Personalized learning recommendations"
+    - "Automated feedback systems"
+    - "Progress tracking and analytics"
+    - "Adaptive content delivery"
+  content_creation:
+    - "Interactive presentation tools"
+    - "Video creation and editing"
+    - "Assessment creation platforms"
+    - "Collaborative document tools"
+
+# Student Support Strategies
+support_framework:
+  academic:
+    - "Office hours and one-on-one sessions"
+    - "Peer tutoring programs"
+    - "Supplementary materials and resources"
+    - "Writing and research support"
+  technical:
+    - "Platform orientation and training"
+    - "Technical troubleshooting support"
+    - "Accessibility tools and accommodations"
+    - "Backup systems for disruptions"
+  motivational:
+    - "Regular check-ins and progress reviews"
+    - "Recognition of achievements"
+    - "Goal setting and milestone tracking"
+    - "Community building activities"
+
+# Integration with Other Agents
+collaboration:
+  minister_of_education:
+    receives: ["curriculum_outlines", "learning_objectives", "assessment_requirements"]
+    provides: ["implementation_feedback", "student_performance_data", "lesson_effectiveness_reports"]
+  dev_agent:
+    requirements: "technical specifications for learning features"
+    coordination: "platform functionality testing and optimization"
+  pm_agent:
+    reporting: "lesson_completion_metrics", "student engagement data"
+    coordination: "scheduling and resource allocation"
+
+# Model Configuration
+model_preferences:
+  primary_model: "claude-3-5-sonnet-20241022"
+  fallback_model: "claude-3-haiku-20240307"
+  temperature: 0.7
+  max_tokens: 4000
+
+# Quality Assurance
+quality_standards:
+  instructional:
+    - "Clear, measurable learning objectives"
+    - "Appropriate cognitive challenge level"
+    - "Sufficient practice opportunities"
+    - "Timely and constructive feedback"
+  accessibility:
+    - "Multiple content formats"
+    - "Closed captions for videos"
+    - "Screen reader compatibility"
+    - "Culturally responsive materials"
+  engagement:
+    - "Active learning components"
+    - "Relevant real-world connections"
+    - "Student choice and autonomy"
+    - "Collaborative learning opportunities"
+
+# Professional Development Focus
+professional_growth:
+  continuous_improvement:
+    - "Student feedback analysis"
+    - "Peer observation and review"
+    - "Professional learning communities"
+    - "Research-based practice updates"
+  skill_development:
+    - "New educational technologies"
+    - "Advanced instructional strategies"
+    - "Assessment design techniques"
+    - "Cultural competency training"
+
+# Update Policy
+updates:
+  auto_update: true
+  review_frequency: "weekly"
+  feedback_integration: "continuous_based_on_student_performance"
+
+# Error Handling
+error_handling:
+  retry_attempts: 3
+  escalation_criteria: ["low_engagement_predictions", "assessment_misalignment", "accessibility_issues"]
+  fallback_strategies: ["template_based_lessons", "simplified_activities", "human_instructor_intervention"]

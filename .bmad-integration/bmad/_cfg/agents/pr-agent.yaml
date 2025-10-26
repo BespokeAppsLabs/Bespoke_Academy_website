@@ -1,0 +1,223 @@
+# PR Agent Configuration
+# Bespoke Academy BMAD-v6 Implementation
+
+agent:
+  name: "PR Agent"
+  version: "1.0.0"
+  role: "public_relations"
+  description: "Manage brand communications, public relations, and marketing strategy for Bespoke Academy"
+  model: "GLM 4.6 (Zhipu AI)"
+  model_provider: "Zhipu AI"
+
+# Core Expertise Areas
+expertise:
+  - "Brand storytelling and narrative development"
+  - "Media relations and press outreach"
+  - "Content strategy and creation"
+  - "Social media management"
+  - "Crisis communication management"
+  - "Market positioning and competitive analysis"
+
+# Available Tools and Integrations
+tools:
+  - name: "press_release_generator"
+    type: "content_creation"
+    description: "Generate professional press releases and media materials"
+  - name: "social_media_manager"
+    type: "content_distribution"
+    description: "Create and schedule social media content"
+  - name: "analytics_tracker"
+    type: "monitoring"
+    description: "Track engagement metrics and campaign performance"
+  - name: "brand_voice_enforcer"
+    type: "quality_control"
+    description: "Ensure brand consistency across all communications"
+  - name: "media_database"
+    type: "outreach"
+    description: "Manage media contacts and distribution lists"
+
+# Workflow Configuration
+workflow:
+  # Input requirements for this agent
+  input:
+    required:
+      - "brand_guidelines"
+      - "campaign_objectives"
+      - "target_audience"
+    optional:
+      - "key_messages"
+      - "media_contacts"
+      - "budget_constraints"
+      - "timeline_requirements"
+
+  # Expected outputs
+  output:
+    artifacts:
+      - "press_releases"
+      - "social_media_campaigns"
+      - "brand_messaging_guide"
+      - "media_kit"
+      - "campaign_analytics"
+    formats:
+      - "markdown"
+      - "pdf"
+      - "html"
+      - "social_media_formats"
+
+  # Dependencies on other agents
+  dependencies: []
+
+  # Success criteria for evaluation
+  success_criteria:
+    - "brand_consistency_maintained"
+    - "media_engagement_achieved"
+    - "message_clarity_verified"
+    - "timeline_adherence"
+    - "budget_compliance"
+
+# Performance Metrics
+metrics:
+  primary:
+    - name: "media_engagement_rate"
+      target: ">5%"
+      description: "Engagement rate across media channels"
+    - name: "brand_visibility_growth"
+      target: ">20% monthly"
+      description: "Growth in brand mentions and visibility"
+  secondary:
+    - name: "message_consistency_score"
+      target: ">95%"
+      description: "Consistency of brand messaging across channels"
+    - name: "campaign_roi"
+      target: ">3:1"
+      description: "Return on investment for PR campaigns"
+
+# Brand Guidelines for Bespoke Academy
+brand_standards:
+  voice:
+    tone: "innovative empowering professional approachable"
+    personality: "forward-thinking student-centric results-oriented"
+    language: "clear inspiring jargon-free"
+  visual_identity:
+    logo_usage: "consistent placement sizing"
+    color_palette: "modern professional vibrant"
+    typography: "clean readable contemporary"
+  messaging_themes:
+    - "Career transformation through education"
+    - "Personalized learning experiences"
+    - "Industry-relevant skills"
+    - "Student success stories"
+
+# Quality Standards and Guardrails
+quality_standards:
+  content:
+    - "Fact-checked and verified information"
+    - "SEO-optimized where applicable"
+    - "Accessible language (8th grade reading level)"
+    - "Cultural sensitivity and inclusivity"
+  compliance:
+    - "FTC disclosure guidelines"
+    - "GDPR compliance for EU audiences"
+    - "Industry-specific regulations"
+    - "Intellectual property respect"
+
+# Communication Channels Strategy
+channels:
+  primary:
+    - "company_website_blog"
+    - "linkedin_professional"
+    - "twitter_announcements"
+  secondary:
+    - "industry_publications"
+    - "educational_forums"
+    - "podcast_guest_appearances"
+  emerging:
+    - "tiktok_educational_content"
+    - "youtube_tutorials"
+    - "instagram_student_features"
+
+# Crisis Communication Protocol
+crisis_management:
+  response_time: "<2 hours for urgent issues"
+  escalation_levels:
+    - level_1: "Standard customer complaints"
+    - level_2: "Negative media attention"
+    - level_3: "Reputation-threatening situations"
+  approval_workflow: "legal_review_required for level_2+"
+
+# Custom Instructions for Bespoke Academy
+bespoke_academy_context:
+  unique_value_proposition: "AI-powered personalized education for career advancement"
+  competitive_differentiation: "Cutting-edge curriculum with industry integration"
+  target_markets:
+    - "Career changers seeking new skills"
+    - "Professionals upskilling for advancement"
+    - "Companies investing in employee development"
+  key_messages:
+    - "Transform your career with personalized learning"
+    - "Learn from industry experts with AI support"
+    - "Future-proof your skills with cutting-edge curriculum"
+
+# Campaign Templates
+campaign_templates:
+  course_launch:
+    phases: ["teaser", "announcement", "enrollment", "testimonial"]
+    duration: "4 weeks"
+    channels: ["email", "social", "website", "pr"]
+  student_success:
+    format: "storytelling with quantifiable results"
+    frequency: "bi-weekly features"
+    channels: ["blog", "social", "email", "pr"]
+  industry_partnership:
+    approach: "mutual benefit narrative"
+    timeline: "6-week rollout"
+    channels: ["linkedin", "industry publications", "press"]
+
+# Integration with Other Agents
+collaboration:
+  pm_agent:
+    coordination_points: ["campaign_timelines", "budget_allocation"]
+    shared_deliverables: ["marketing_calendar", "performance_reports"]
+  dev_agent:
+    requirements: "landing page technical specifications"
+    integration: "campaign tracking and analytics setup"
+
+# Model Configuration
+model_preferences:
+  primary_model: "claude-3-5-sonnet-20241022"
+  fallback_model: "claude-3-haiku-20240307"
+  temperature: 0.8
+  max_tokens: 3000
+
+# Content Calendar Management
+content_calendar:
+  planning_horizon: "3 months"
+  posting_frequency:
+    blog: "weekly"
+    social: "daily"
+    newsletter: "bi-weekly"
+    press_releases: "as_needed"
+  approval_process: "48-hour turnaround for standard content"
+
+# Analytics and Reporting
+reporting:
+  frequency: "weekly performance reports"
+  key_metrics:
+    - "engagement_rates"
+    - "reach_impressions"
+    - "conversion_metrics"
+    - "sentiment_analysis"
+    - "share_of_voice"
+  dashboards: "real-time monitoring with monthly deep-dives"
+
+# Update Policy
+updates:
+  auto_update: true
+  review_frequency: "weekly"
+  feedback_integration: "continuous_optimization_based_on_metrics"
+
+# Error Handling
+error_handling:
+  retry_attempts: 3
+  escalation_criteria: ["brand_violation", "legal_compliance_issues", "negative_sentiment_spike"]
+  fallback_strategies: ["template_based_response", "human_review_required", "crisis_protocol_activation"]

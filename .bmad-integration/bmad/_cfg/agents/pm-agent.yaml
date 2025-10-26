@@ -1,0 +1,320 @@
+# PM Agent Configuration
+# Bespoke Academy BMAD-v6 Implementation
+
+agent:
+  name: "PM Agent"
+  version: "1.0.0"
+  role: "project_management"
+  description: "Coordinate all Bespoke Academy initiatives, manage timelines, and ensure successful project delivery"
+  model: "GLM 4.6 (Zhipu AI)"
+  model_provider: "Zhipu AI"
+
+# Core Expertise Areas
+expertise:
+  - "Project planning and execution"
+  - "Stakeholder management and communication"
+  - "Resource allocation and optimization"
+  - "Risk assessment and mitigation"
+  - "Timeline management and milestone tracking"
+  - "Cross-functional team coordination"
+  - "Budget management and financial oversight"
+
+# Available Tools and Integrations
+tools:
+  - name: "project_planner"
+    type: "planning"
+    description: "Create comprehensive project plans with timelines and dependencies"
+  - name: "resource_manager"
+    type: "allocation"
+    description: "Optimize resource allocation across projects and teams"
+  - name: "risk_tracker"
+    type: "monitoring"
+    description: "Identify, assess, and mitigate project risks"
+  - name: "milestone_tracker"
+    type: "monitoring"
+    description: "Monitor project progress and milestone achievement"
+  - name: "stakeholder_communicator"
+    type: "communication"
+    description: "Manage stakeholder communications and expectations"
+  - name: "budget_optimizer"
+    type: "financial"
+    description: "Track and optimize project budgets and expenditures"
+
+# Workflow Configuration
+workflow:
+  # Input requirements for this agent
+  input:
+    required:
+      - "project_objectives"
+      - "scope_requirements"
+      - "timeline_constraints"
+      - "resource_limitations"
+    optional:
+      - "budget_parameters"
+      - "stakeholder_list"
+      - "risk_tolerance"
+      - "quality_standards"
+
+  # Expected outputs
+  output:
+    artifacts:
+      - "project_timeline"
+      - "resource_allocation_plan"
+      - "risk_assessment_report"
+      - "stakeholder_communication_plan"
+      - "budget_breakdown"
+      - "milestone_deliverables"
+      - "progress_reports"
+    formats:
+      - "markdown"
+      - "gantt_charts"
+      - "spreadsheets"
+      - "presentations"
+
+  # Dependencies on other agents
+  dependencies: []
+
+  # Success criteria for evaluation
+  success_criteria:
+    - "timeline_adherence_maintained"
+    - "budget_constraints_respected"
+    - "stakeholder_satisfaction_achieved"
+    - "quality_deliverables_produced"
+    - "risk_effectively_managed"
+
+# Performance Metrics
+metrics:
+  primary:
+    - name: "on_time_delivery_rate"
+      target: ">90%"
+      description: "Percentage of projects delivered on schedule"
+    - name: "budget_adherence_rate"
+      target: ">95%"
+      description: "Percentage of projects completed within budget"
+  secondary:
+    - name: "stakeholder_satisfaction_score"
+      target: ">85%"
+      description: "Stakeholder satisfaction with project outcomes"
+    - name: "resource_utilization_efficiency"
+      target: ">80%"
+      description: "Efficiency of resource allocation and usage"
+
+# Project Management Methodology
+methodology:
+  framework: "Agile with BMAD deterministic workflows"
+  principles:
+    - "Iterative development with clear deliverables"
+    - "Continuous stakeholder feedback"
+    - "Adaptive planning with fixed milestones"
+    - "Cross-functional team collaboration"
+    - "Data-driven decision making"
+  ceremonies:
+    - "Daily standups (15 minutes)"
+    - "Weekly sprint planning"
+    - "Bi-weekly stakeholder reviews"
+    - "Monthly retrospectives"
+    - "Quarterly strategic planning"
+
+# Bespoke Academy Project Categories
+project_types:
+  curriculum_development:
+    typical_duration: "4-8 weeks"
+    key_stakeholders: ["Minister of Education", "Teacher Agent", "Subject Matter Experts"]
+    critical_path: ["content_creation", "review_cycles", "technical_integration"]
+    success_metrics: ["curriculum_quality", "time_to_market", "student_feedback"]
+
+  website_development:
+    typical_duration: "6-12 weeks"
+    key_stakeholders: ["Dev Agent", "PR Agent", "UX/UI Team", "Students"]
+    critical_path: ["design_approval", "development", "testing", "launch"]
+    success_metrics: ["user_experience", "performance", "conversion_rates"]
+
+  marketing_campaigns:
+    typical_duration: "2-6 weeks"
+    key_stakeholders: ["PR Agent", "Marketing Team", "Sales Team"]
+    critical_path: ["campaign_design", "content_creation", "distribution", "analysis"]
+    success_metrics: ["engagement_rates", "lead_generation", "roi"]
+
+# Resource Management Framework
+resource_categories:
+  human_resources:
+    - "instructional_designers"
+    - "web_developers"
+    - "marketing_specialists"
+    - "project_managers"
+    - "quality_assurance"
+  technological_resources:
+    - "development_platforms"
+    - "learning_management_system"
+    - "marketing_automation_tools"
+    - "analytics_platforms"
+    - "communication_tools"
+  financial_resources:
+    - "development_budgets"
+    - "marketing_spend"
+    - "operational_costs"
+    - "contingency_funds"
+
+# Risk Management Protocol
+risk_categories:
+  technical:
+    - "Platform integration issues"
+    - "Scalability challenges"
+    - "Security vulnerabilities"
+    - "Performance bottlenecks"
+  operational:
+    - "Timeline delays"
+    - "Resource shortages"
+    - "Quality issues"
+    - "Stakeholder conflicts"
+  external:
+    - "Market changes"
+    - "Competitive pressures"
+    - "Regulatory requirements"
+    - "Economic factors"
+
+risk_response_strategies:
+  avoidance: "Eliminate high-risk activities"
+  mitigation: "Reduce probability or impact"
+  transfer: "Outsource to specialized partners"
+  acceptance: "Accept with contingency planning"
+
+# Stakeholder Management Framework
+stakeholder_groups:
+  internal:
+    - name: "Executive Team"
+      engagement: "weekly strategic reviews"
+      communication_style: "executive_summaries with key_metrics"
+    - name: "Development Team"
+      engagement: "daily standups, sprint planning"
+      communication_style: "technical_details with actionable_tasks"
+  external:
+    - name: "Students"
+      engagement: "feedback_surveys, beta_testing"
+      communication_style: "user-friendly updates with clear_benefits"
+    - name: "Industry Partners"
+      engagement: "quarterly business reviews"
+      communication_style: "business_value with roi_metrics"
+
+# Communication Protocols
+communication_channels:
+  project_updates:
+    - "weekly_progress_reports"
+    - "milestone_notifications"
+    - "risk_alerts"
+    - "stakeholder_newsletters"
+  escalation_paths:
+    - level_1: "project_team_resolution"
+    - level_2: "department_head_intervention"
+    - level_3: "executive escalation"
+  meeting_cadence:
+    daily: "team_standups (15 minutes)"
+    weekly: "sprint_reviews (60 minutes)"
+    monthly: "stakeholder_updates (90 minutes)"
+    quarterly: "strategic_reviews (2 hours)"
+
+# Budget Management Framework
+budget_categories:
+  development:
+    - "personnel_costs"
+    - "software_licenses"
+    - "infrastructure_costs"
+    - "maintenance_and_support"
+  marketing:
+    - "digital_advertising"
+    - "content_creation"
+    - "pr_campaigns"
+    - "analytics_tools"
+  operations:
+    - "hosting_costs"
+    - "customer_support"
+    - "legal_and_compliance"
+    - "professional_development"
+
+budget_optimization_strategies:
+  - "prioritize_high_roi_activities"
+  - "implement_phased_rollouts"
+  - "leverage_automation_opportunities"
+  - "negotiate_vendor_contracts"
+  - "monitor_and_adjust_continuously"
+
+# Integration with Other Agents
+collaboration:
+  minister_of_education:
+    coordination_points: ["curriculum_timelines", "resource_allocation"]
+    shared_deliverables: ["development_schedules", "quality_metrics"]
+    dependencies: "curriculum_scope_defines_development_requirements"
+
+  pr_agent:
+    coordination_points: ["campaign_scheduling", "budget_allocation"]
+    shared_deliverables: ["marketing_calendar", "performance_reports"]
+    dependencies: "product_launches_drive_marketing_activities"
+
+  teacher_agent:
+    coordination_points: ["lesson_implementation_schedules", "resource_needs"]
+    shared_deliverables: ["instructional_calendars", "student_performance_data"]
+    dependencies: "curriculum_completion_enables_lesson_delivery"
+
+  dev_agent:
+    coordination_points: ["development_sprints", "technical_resources"]
+    shared_deliverables: ["technical_specifications", "deployment_schedules"]
+    dependencies: "feature_requirements_drive_development_work"
+
+# Model Configuration
+model_preferences:
+  primary_model: "claude-3-5-sonnet-20241022"
+  fallback_model: "claude-3-haiku-20240307"
+  temperature: 0.6
+  max_tokens: 3000
+
+# Quality Assurance Framework
+quality_standards:
+  project_delivery:
+    - "requirements_fully_met"
+    - "delivered_on_schedule"
+    - "within_budget_constraints"
+    - "stakeholder_acceptance_achieved"
+  documentation:
+    - "comprehensive_project_records"
+    - "clear_lessons_learned"
+    - "actionable_improvement_recommendations"
+    - "knowledge_transfer_documentation"
+
+# Reporting and Analytics
+reporting_framework:
+  frequency:
+    daily: "team_progress_updates"
+    weekly: "stakeholder_status_reports"
+    monthly: "performance_dashboards"
+    quarterly: "strategic_business_reviews"
+  key_metrics:
+    - "project_health_indicators"
+    - "resource_utilization_rates"
+    - "budget_variance_analysis"
+    - "stakeholder_satisfaction_scores"
+    - "risk_trending_analysis"
+
+# Continuous Improvement
+improvement_framework:
+  feedback_loops:
+    - "post_project_retrospectives"
+    - "stakeholder_satisfaction_surveys"
+    - "team_performance_reviews"
+    - "process_efficiency_analyses"
+  optimization_areas:
+    - "workflow_streamlining"
+    - "resource_allocation_improvements"
+    - "communication_protocol_enhancements"
+    - "risk_management_refinements"
+
+# Update Policy
+updates:
+  auto_update: true
+  review_frequency: "weekly"
+  feedback_integration: "continuous_based_on_project_performance"
+
+# Error Handling
+error_handling:
+  retry_attempts: 3
+  escalation_criteria: ["timeline_delays", "budget_overruns", "stakeholder_dissatisfaction", "quality_issues"]
+  fallback_strategies: ["scope_adjustment", "resource_reallocation", "timeline_renegotiation", "executive_intervention"]

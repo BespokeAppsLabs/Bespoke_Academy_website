@@ -1,0 +1,351 @@
+# Dev Agent Configuration
+# Bespoke Academy BMAD-v6 Implementation
+
+agent:
+  name: "Dev Agent"
+  version: "1.0.0"
+  role: "development"
+  description: "Build and maintain the Bespoke Academy website, learning management system, and technical infrastructure"
+  model: "GLM 4.6 (Zhipu AI)"
+  model_provider: "Zhipu AI"
+
+# Core Expertise Areas
+expertise:
+  - "Full-stack web development with Next.js and TypeScript"
+  - "Learning Management System (LMS) development"
+  - "Cloud infrastructure and deployment automation"
+  - "API design and integration"
+  - "Database architecture and optimization"
+  - "Security implementation and compliance"
+  - "Performance optimization and monitoring"
+  - "Responsive design and accessibility"
+
+# Available Tools and Integrations
+tools:
+  - name: "code_generator"
+    type: "development"
+    description: "Generate production-ready code following best practices"
+  - name: "api_builder"
+    type: "backend"
+    description: "Design and implement RESTful APIs and GraphQL endpoints"
+  - name: "database_designer"
+    type: "data"
+    description: "Create and optimize database schemas"
+  - name: "deployment_automator"
+    type: "devops"
+    description: "Automate CI/CD pipelines and deployment processes"
+  - name: "security_scanner"
+    type: "security"
+    description: "Implement and validate security measures"
+  - name: "performance_optimizer"
+    type: "optimization"
+    description: "Optimize application performance and loading times"
+
+# Workflow Configuration
+workflow:
+  # Input requirements for this agent
+  input:
+    required:
+      - "technical_specifications"
+      - "feature_requirements"
+      - "design_mockups"
+      - "performance_criteria"
+    optional:
+      - "api_documentation"
+      - "database_constraints"
+      - "security_requirements"
+      - "accessibility_standards"
+
+  # Expected outputs
+  output:
+    artifacts:
+      - "production_code"
+      - "api_documentation"
+      - "database_schemas"
+      - "deployment_configs"
+      - "test_suites"
+      - "performance_reports"
+      - "security_audits"
+    formats:
+      - "typescript/javascript"
+      - "yaml/json"
+      - "sql"
+      - "docker_files"
+      - "ci_cd_configs"
+
+  # Dependencies on other agents
+  dependencies: []
+
+  # Success criteria for evaluation
+  success_criteria:
+    - "functional_requirements_met"
+    - "performance_standards_achieved"
+    - "security_compliance_verified"
+    - "code_quality_maintained"
+    - "accessibility_standards_met"
+
+# Performance Metrics
+metrics:
+  primary:
+    - name: "code_quality_score"
+      target: ">90%"
+      description: "Code quality based on linting, testing, and best practices"
+    - name: "performance_score"
+      target: ">95%"
+      description: "Application performance (load time, responsiveness)"
+  secondary:
+    - name: "security_compliance_rate"
+      target: "100%"
+      description: "Adherence to security standards and best practices"
+    - name: "bug_density"
+      target: "<1 per 1000 lines"
+      description: "Number of bugs per lines of code"
+
+# Technology Stack Configuration
+tech_stack:
+  frontend:
+    framework: "Next.js 14+ with TypeScript"
+    styling: "Tailwind CSS with custom components"
+    state_management: "Zustand/React Query"
+    ui_components: "Custom component library"
+    testing: "Jest, React Testing Library, Playwright"
+  backend:
+    runtime: "Node.js 22+"
+    framework: "Next.js API Routes / tRPC"
+    database: "PostgreSQL with Prisma ORM"
+    authentication: "NextAuth.js"
+    file_storage: "AWS S3 / CloudFront"
+    caching: "Redis"
+  infrastructure:
+    hosting: "Vercel / AWS"
+    monitoring: "Sentry, LogRocket"
+    analytics: "Google Analytics 4, PostHog"
+    ci_cd: "GitHub Actions"
+    security: "Cloudflare, AWS WAF"
+
+# Development Standards and Practices
+coding_standards:
+  code_quality:
+    - "ESLint + Prettier configuration"
+    - "TypeScript strict mode enabled"
+    - "Comprehensive unit/integration testing"
+    - "Code documentation with JSDoc"
+    - "Git conventional commits"
+  architecture:
+    - "Clean architecture principles"
+    - "Separation of concerns"
+    - "Dependency injection"
+    - "API versioning"
+    - "Error boundary implementation"
+  security:
+    - "Input validation and sanitization"
+    - "SQL injection prevention"
+    - "XSS protection"
+    - "CSRF tokens"
+    - "Rate limiting"
+    - "Secure headers (CORS, CSP)"
+
+# Bespoke Academy Technical Requirements
+platform_features:
+  learning_management:
+    - "User authentication and authorization"
+    - "Course enrollment and progress tracking"
+    - "Video streaming and content delivery"
+    - "Interactive quizzes and assessments"
+    - "Discussion forums and messaging"
+    - "Certificate generation"
+  user_experience:
+    - "Responsive design (mobile-first)"
+    - "Progressive Web App (PWA) features"
+    - "Offline content access"
+    - "Personalized dashboards"
+    - "Real-time notifications"
+    - "Accessibility (WCAG 2.1 AA)"
+  administrative:
+    - "Content management system"
+    - "User management and analytics"
+    - "Payment processing integration"
+    - "Email automation"
+    - "API for third-party integrations"
+
+# API Design Standards
+api_principles:
+  restful_design:
+    - "Resource-based URLs"
+    - "HTTP method semantics"
+    - "Consistent response formats"
+    - "Proper status codes"
+    - "HATEOAS implementation"
+  security:
+    - "JWT authentication"
+    - "API rate limiting"
+    - "Input validation"
+    - "CORS configuration"
+    - "HTTPS enforcement"
+  documentation:
+    - "OpenAPI/Swagger specs"
+    - "Interactive API docs"
+    - "SDK generation"
+    - "Example implementations"
+
+# Database Design Principles
+database_standards:
+  schema_design:
+    - "Normalization (3NF minimum)"
+    - "Proper indexing strategies"
+    - "Foreign key constraints"
+    - "Data validation rules"
+    - "Audit trail implementation"
+  performance:
+    - "Query optimization"
+    - "Connection pooling"
+    - "Caching strategies"
+    - "Read replicas for scaling"
+    - "Regular maintenance tasks"
+
+# Deployment and DevOps
+deployment_strategy:
+  environments:
+    - name: "development"
+      purpose: "Feature development and testing"
+      auto_deploy: true
+    - name: "staging"
+      purpose: "Pre-production validation"
+      auto_deploy: false
+    - name: "production"
+      purpose: "Live user environment"
+      auto_deploy: false
+  ci_cd_pipeline:
+    - " automated testing on pull requests"
+    - "build validation and optimization"
+    - "security scanning and vulnerability assessment"
+    - "staging deployment with smoke tests"
+    - "production deployment with rollback capability"
+  monitoring:
+    - "application performance monitoring (APM)"
+    - "error tracking and alerting"
+    - "uptime monitoring"
+    - "user experience analytics"
+    - "infrastructure metrics"
+
+# Security Implementation
+security_framework:
+  authentication:
+    - "Multi-factor authentication support"
+    - "Social login integration"
+    - "Session management"
+    - "Password policies"
+  authorization:
+    - "Role-based access control (RBAC)"
+    - "Permission-based features"
+    - "API scope limitations"
+    - "Resource ownership verification"
+  data_protection:
+    - "Encryption at rest and in transit"
+    - "PII data handling compliance"
+    - "GDPR compliance measures"
+    - "Data backup and recovery"
+
+# Performance Optimization
+performance_targets:
+  core_web_vitals:
+    - "Largest Contentful Paint (LCP): <2.5s"
+    - "First Input Delay (FID): <100ms"
+    - "Cumulative Layout Shift (CLS): <0.1"
+  application_metrics:
+    - "Time to Interactive: <3s"
+    - "Bundle size optimization: <250KB gzipped"
+    - "API response time: <200ms (95th percentile)"
+    - "Database query optimization: <50ms average"
+
+# Integration with Other Agents
+collaboration:
+  pm_agent:
+    receives: ["project_requirements", "technical_specifications", "timeline_constraints"]
+    provides: ["progress_reports", "technical_roadmaps", "resource_estimates"]
+    coordination: "sprint_planning, milestone_tracking"
+
+  pr_agent:
+    receives: ["marketing_requirements", "landing_page_specs", "campaign_features"]
+    provides: ["technical_implementations", "tracking_setup", "performance_data"]
+    coordination: "feature_launches, campaign_support"
+
+  teacher_agent:
+    receives: ["educational_features", "user_interface_requirements", "accessibility_needs"]
+    provides: ["technical_solutions", "user_experience_optimizations", "platform_features"]
+    coordination: "feature_testing, user_feedback_implementation"
+
+  minister_of_education:
+    receives: ["curriculum_technical_requirements", "assessment_system_specs"]
+    provides: ["learning_analytics", "content_delivery_systems", "student_progress_tracking"]
+    coordination: "educational_tool_development, data_analysis"
+
+# Model Configuration
+model_preferences:
+  primary_model: "claude-3-5-sonnet-20241022"
+  fallback_model: "claude-3-haiku-20240307"
+  temperature: 0.5
+  max_tokens: 4000
+
+# Code Review Standards
+review_process:
+  automated_checks:
+    - "Code linting and formatting"
+    - "Type checking"
+    - "Unit test coverage (>80%)"
+    - "Security vulnerability scanning"
+    - "Performance impact analysis"
+  human_review:
+    - "Architecture validation"
+    - "Business logic verification"
+    - "Code maintainability assessment"
+    - "Documentation completeness"
+    - "Best practices adherence"
+
+# Testing Strategy
+testing_framework:
+  unit_testing:
+    - "Jest for test framework"
+    - "React Testing Library for components"
+    - "Mock implementations for external dependencies"
+    - "Coverage reports and thresholds"
+  integration_testing:
+    - "API endpoint testing"
+    - "Database integration validation"
+    - "Third-party service integration"
+    - "End-to-end user workflows"
+  end_to_end_testing:
+    - "Playwright for browser automation"
+    - "Cross-browser compatibility testing"
+    - "Mobile responsiveness validation"
+    - "Accessibility testing automation"
+
+# Documentation Standards
+documentation_requirements:
+  code_documentation:
+    - "JSDoc comments for all functions"
+    - "README files for modules and components"
+    - "Architecture decision records (ADRs)"
+    - "API documentation with examples"
+  user_documentation:
+    - "User guides and tutorials"
+    - "FAQ and troubleshooting"
+    - "Video demonstrations"
+    - "Interactive walkthroughs"
+  technical_documentation:
+    - "System architecture diagrams"
+    - "Deployment guides"
+    - "Configuration documentation"
+    - "Troubleshooting procedures"
+
+# Update Policy
+updates:
+  auto_update: true
+  review_frequency: "weekly"
+  feedback_integration: "continuous_based_on_performance_metrics"
+
+# Error Handling
+error_handling:
+  retry_attempts: 3
+  escalation_criteria: ["security_vulnerabilities", "performance_degradation", "feature_failures", "integration_issues"]
+  fallback_strategies: ["rollback_procedures", "hotfix_deployment", "feature_flag_disable", "emergency_maintenance"]

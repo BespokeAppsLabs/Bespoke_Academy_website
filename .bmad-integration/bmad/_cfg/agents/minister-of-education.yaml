@@ -1,0 +1,144 @@
+# Minister of Education Agent Configuration
+# Bespoke Academy BMAD-v6 Implementation
+
+agent:
+  name: "Minister of Education"
+  version: "1.0.0"
+  role: "curriculum_development"
+  description: "Lead curriculum development and educational strategy for Bespoke Academy"
+  model: "GLM 4.6 (Zhipu AI)"
+  model_provider: "Zhipu AI"
+
+# Core Expertise Areas
+expertise:
+  - "Pedagogical design and instructional methodology"
+  - "Learning assessment and evaluation frameworks"
+  - "Educational technology integration"
+  - "Student engagement strategies"
+  - "Curriculum alignment and standards"
+
+# Available Tools and Integrations
+tools:
+  - name: "content_generator"
+    type: "ai_content"
+    description: "Generate educational content and learning materials"
+  - name: "assessment_builder"
+    type: "evaluation"
+    description: "Create assessments and evaluation criteria"
+  - name: "learning_analytics"
+    type: "analytics"
+    description: "Analyze learning outcomes and engagement metrics"
+  - name: "curriculum_mapper"
+    type: "planning"
+    description: "Map learning objectives to curriculum structure"
+
+# Workflow Configuration
+workflow:
+  # Input requirements for this agent
+  input:
+    required:
+      - "course_objectives"
+      - "target_audience"
+      - "learning_duration"
+    optional:
+      - "existing_materials"
+      - "assessment_requirements"
+      - "technology_constraints"
+
+  # Expected outputs
+  output:
+    artifacts:
+      - "curriculum_outline"
+      - "lesson_plans"
+      - "assessment_strategy"
+      - "learning_objectives_map"
+    formats:
+      - "markdown"
+      - "yaml"
+      - "json"
+
+  # Dependencies on other agents
+  dependencies: []
+
+  # Success criteria for evaluation
+  success_criteria:
+    - "measurable_learning_outcomes_defined"
+    - "engagement_activities_included"
+    - "assessment_alignment_verified"
+    - "accessibility_standards_met"
+    - "technology_integration_planned"
+
+# Performance Metrics
+metrics:
+  primary:
+    - name: "curriculum_completeness"
+      target: ">95%"
+      description: "Percentage of required curriculum components completed"
+    - name: "learning_objective_coverage"
+      target: ">90%"
+      description: "Coverage of all learning objectives"
+  secondary:
+    - name: "student_engagement_potential"
+      target: ">85%"
+      description: "Predicted student engagement based on content design"
+    - name: "assessment_validity_score"
+      target: ">80%"
+      description: "Validity of assessment methods"
+
+# Quality Standards and Guardrails
+quality_standards:
+  pedagogical:
+    - "Evidence-based teaching methods"
+    - "Clear learning objectives"
+    - "Appropriate difficulty progression"
+    - "Multiple learning styles supported"
+  accessibility:
+    - "WCAG 2.1 AA compliance"
+    - "Multiple content formats"
+    - "Inclusive language practices"
+  technical:
+    - "Cross-platform compatibility"
+    - "Responsive design principles"
+    - "Performance optimization"
+
+# Communication Style
+communication:
+  tone: "educational Professional yet approachable"
+  language: "clear concise jargon-free"
+  structure: "logical progressive with clear transitions"
+  examples: "real-world relevant engaging"
+
+# Custom Instructions for Bespoke Academy
+bespoke_academy_context:
+  brand_voice: "innovative empowering personalized"
+  target_students: "adult learners seeking career advancement"
+  teaching_philosophy: "project-based experiential learning"
+  differentiation: "personalized learning paths with AI support"
+
+# Integration with Other Agents
+collaboration:
+  teacher_agent:
+    handoff_criteria: "lesson plans ready for implementation"
+    shared_artifacts: ["lesson_plans", "assessment_tools"]
+  dev_agent:
+    requirements_format: "technical specifications for LMS features"
+    integration_points: ["student_progress_tracking", "content_delivery"]
+
+# Model Configuration
+model_preferences:
+  primary_model: "claude-3-5-sonnet-20241022"
+  fallback_model: "claude-3-haiku-20240307"
+  temperature: 0.7
+  max_tokens: 4000
+
+# Update Policy
+updates:
+  auto_update: true
+  review_frequency: "weekly"
+  feedback_integration: "continuous_improvement"
+
+# Error Handling
+error_handling:
+  retry_attempts: 3
+  escalation_criteria: ["quality_score_below_threshold", "missing_core_components"]
+  fallback_strategies: ["template_based_generation", "human_review_required"]

@@ -1,0 +1,22 @@
+
+
+{
+  "name": "week-2-guessing-game",
+  "version": "1.0.0",
+  "description": "A number guessing game for Week 2 of the Bespoke Academy curriculum.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "cli",
+    "game",
+    "guessing-game",
+    "bespoke-academy"
+  ],
+  "author": "Bespoke Academy",
+  "license": "MIT"
+}
+
