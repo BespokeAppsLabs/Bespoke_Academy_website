@@ -193,7 +193,7 @@ export function VideoHeroWithAudioControl({
         <div className="mx-auto max-w-4xl space-y-6">
           <div className="bg-card/50 backdrop-blur-sm rounded-lg p-6">
             {/* Scrambled heading while animating, then final text */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-primary">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-primary">
               <span aria-label={finalHeading} className="block leading-tight">
                 {scrambledText}
                 <span className="inline-block w-1 h-full bg-primary animate-blink ml-1">&nbsp;</span>
@@ -201,13 +201,13 @@ export function VideoHeroWithAudioControl({
             </h1>
 
             <p className="mx-auto max-w-2xl text-lg text-secondary-foreground sm:text-xl md:text-2xl leading-relaxed mt-2">
-              Building the innovators of tomorrow through hands-on learning and expert guidance.
+              40-Week Hands-On Learning Journey for Grades 8-11
             </p>
 
             <p className="mx-auto max-w-3xl text-base text-muted-foreground leading-relaxed mt-2">
-              We equip the next generation of innovators with the skills and knowledge to excel in AI and Robotics.
-              Our hands-on curriculum and expert guidance empower students to explore, create, and lead in the rapidly
-              evolving tech landscape.
+              From complete beginner to technology creator. Your child will build their own AI-powered robots
+              while developing confidence, problem-solving skills, and future-ready capabilities in a safe,
+              supervised environment with all equipment included.
             </p>
 
             {!isInteracted && isPlaying && (
@@ -223,12 +223,36 @@ export function VideoHeroWithAudioControl({
             )}
           </div>
 
+          {/* Key Value Propositions */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-6 mb-6">
+            <div className="bg-card/60 backdrop-blur-sm rounded-lg p-3 text-center">
+              <p className="text-sm font-semibold text-primary">Zero Prior Knowledge</p>
+              <p className="text-xs text-muted-foreground">Perfect for beginners</p>
+            </div>
+            <div className="bg-card/60 backdrop-blur-sm rounded-lg p-3 text-center">
+              <p className="text-sm font-semibold text-primary">All Equipment Included</p>
+              <p className="text-xs text-muted-foreground">R5000+ value</p>
+            </div>
+            <div className="bg-card/60 backdrop-blur-sm rounded-lg p-3 text-center">
+              <p className="text-sm font-semibold text-primary">Safe Environment</p>
+              <p className="text-xs text-muted-foreground">Professional supervision</p>
+            </div>
+            <div className="bg-card/60 backdrop-blur-sm rounded-lg p-3 text-center">
+              <p className="text-sm font-semibold text-primary">Friday Schedule</p>
+              <p className="text-xs text-muted-foreground">Fits with school</p>
+            </div>
+            <div className="bg-card/60 backdrop-blur-sm rounded-lg p-3 text-center">
+              <p className="text-sm font-semibold text-primary">Portfolio Development</p>
+              <p className="text-xs text-muted-foreground">College applications</p>
+            </div>
+          </div>
+
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <motion.div whileHover={{ scale: 1.05 }}>
               <Button asChild size="lg" className="w-full sm:w-auto group">
-                <Link href="#curriculum">
-                  Explore Curriculum
+                <Link href="#enrollment">
+                  Enroll Your Child Today
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
@@ -236,9 +260,9 @@ export function VideoHeroWithAudioControl({
 
             <motion.div whileHover={{ scale: 1.05 }}>
               <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto group">
-                <Link href="#download">
+                <Link href="#contact">
                   <Download className="mr-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
-                  Download Full Curriculum
+                  Download Parent Information Kit
                 </Link>
               </Button>
             </motion.div>

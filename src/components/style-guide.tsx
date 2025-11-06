@@ -26,25 +26,42 @@ export function StyleGuide() {
       <div className="mx-auto max-w-7xl space-y-16">
         {/* Header */}
         <header className="space-y-4 border-b border-border pb-8">
-          <h1 className="text-5xl font-bold text-balance">OpeN9 Design System</h1>
+          <h1 className="text-5xl font-bold text-balance text-cyber-blue">
+            GenZ-Professional Design System
+          </h1>
           <p className="text-xl text-muted-foreground">
-            A comprehensive style guide for educational platform interfaces
+            A modern, GenZ-friendly yet professional design system for Bespoke Academy
           </p>
         </header>
 
         {/* Color Palette */}
         <section className="space-y-6">
-          <h2 className="text-3xl font-bold">Color Palette</h2>
+          <h2 className="text-3xl font-bold">GenZ-Professional Color Palette</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <div className="space-y-2">
-              <div className="h-24 rounded-lg bg-primary" />
-              <p className="font-semibold">Primary</p>
-              <p className="text-sm text-muted-foreground">Orange (#d46c08)</p>
+              <div className="h-24 rounded-lg bg-cyber-blue" />
+              <p className="font-semibold">Cyber Blue</p>
+              <p className="text-sm text-muted-foreground">#0080FF</p>
             </div>
             <div className="space-y-2">
-              <div className="h-24 rounded-lg bg-secondary border border-border" />
-              <p className="font-semibold">Secondary</p>
-              <p className="text-sm text-muted-foreground">Light Peach (#ffe8d1)</p>
+              <div className="h-24 rounded-lg bg-electric-purple" />
+              <p className="font-semibold">Electric Purple</p>
+              <p className="text-sm text-muted-foreground">#B794F6</p>
+            </div>
+            <div className="space-y-2">
+              <div className="h-24 rounded-lg bg-neon-cyan" />
+              <p className="font-semibold">Neon Cyan</p>
+              <p className="text-sm text-muted-foreground">#00FFFF</p>
+            </div>
+            <div className="space-y-2">
+              <div className="h-24 rounded-lg bg-tech-green" />
+              <p className="font-semibold">Tech Green</p>
+              <p className="text-sm text-muted-foreground">#00FF88</p>
+            </div>
+            <div className="space-y-2">
+              <div className="h-24 rounded-lg bg-ai-orange" />
+              <p className="font-semibold">AI Orange</p>
+              <p className="text-sm text-muted-foreground">#FF6B35</p>
             </div>
             <div className="space-y-2">
               <div className="h-24 rounded-lg bg-background border border-border" />
@@ -54,32 +71,12 @@ export function StyleGuide() {
             <div className="space-y-2">
               <div className="h-24 rounded-lg bg-surface border border-border" />
               <p className="font-semibold">Surface</p>
-              <p className="text-sm text-muted-foreground">Dark Brown (#261f18)</p>
-            </div>
-            <div className="space-y-2">
-              <div className="h-24 rounded-lg bg-[#00ffff]" />
-              <p className="font-semibold">Accent Cyan</p>
-              <p className="text-sm text-muted-foreground">#00ffff</p>
-            </div>
-            <div className="space-y-2">
-              <div className="h-24 rounded-lg bg-[#b794f6]" />
-              <p className="font-semibold">Accent Purple</p>
-              <p className="text-sm text-muted-foreground">#b794f6</p>
-            </div>
-            <div className="space-y-2">
-              <div className="h-24 rounded-lg bg-[#00ff88]" />
-              <p className="font-semibold">Accent Green</p>
-              <p className="text-sm text-muted-foreground">#00ff88</p>
+              <p className="text-sm text-muted-foreground">Dark Matter (#1a1a2e)</p>
             </div>
             <div className="space-y-2">
               <div className="h-24 rounded-lg bg-muted-foreground border border-border" />
               <p className="font-semibold">Muted</p>
               <p className="text-sm text-muted-foreground">Gray tones</p>
-            </div>
-            <div className="space-y-2">
-              <div className="h-24 rounded-lg bg-[#2b2927]" />
-              <p className="font-semibold">Background (Dark)</p>
-              <p className="text-sm text-muted-foreground">#2b2927</p>
             </div>
           </div>
         </section>
@@ -324,7 +321,7 @@ export function StyleGuide() {
 
         {/* Footer */}
         <footer className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          <p>OpeN9 Design System • Built with Next.js and Tailwind CSS</p>
+          <p>GenZ-Professional Design System • Built with Next.js and Tailwind CSS</p>
         </footer>
       </div>
     </div>

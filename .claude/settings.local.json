@@ -3,7 +3,25 @@
     "allow": [
       "WebFetch(domain:bmadcodes.com)",
       "WebFetch(domain:github.com)",
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:console.groq.com)",
+      "Bash(yarn build:*)",
+      "WebFetch(domain:unsplash.com)",
+      "WebFetch(domain:images.unsplash.com)",
+      "mcp__MCP_DOCKER__browser_navigate",
+      "mcp__MCP_DOCKER__browser_fill_form",
+      "mcp__MCP_DOCKER__browser_press_key",
+      "mcp__MCP_DOCKER__browser_close",
+      "mcp__MCP_DOCKER__fetch",
+      "Bash(curl:*)",
+      "Bash(yarn dev:*)",
+      "WebFetch(domain:ui.aceternity.com)",
+      "WebFetch(domain:motion.dev)",
+      "WebFetch(domain:ui.shadcn.com)",
+      "Bash(yarn add:*)",
+      "WebFetch(domain:vercel.com)",
+      "Bash(rm:*)",
+      "Bash(yarn shadcn add:*)"
     ],
     "deny": [],
     "ask": []

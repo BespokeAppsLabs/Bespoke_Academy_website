@@ -1,0 +1,58 @@
+# Bespoke Academy - AI Robotics Education
+# robots.txt for search engine crawling
+
+User-agent: *
+Allow: /
+
+# Allow crawling of important directories
+Allow: /images/
+Allow: /css/
+Allow: /js/
+Allow: /_next/static/
+Allow: /api/
+
+# Disallow crawling of admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /_next/image
+Disallow: /.well-known/
+
+# Disallow crawling of chatbot API endpoints
+Disallow: /api/chat/
+
+# Special instructions for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Block unwanted crawlers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://bespoke-academy.co.za/sitemap.xml
+
+# Crawl delay (optional, be considerate with server resources)
+Crawl-delay: 1
+
+# Additional notes:
+# - This site is an educational platform for AI robotics training
+# - Target audience: Parents, schools, and students in Grades 8-11
+# - Primary location: Lephalale, Limpopo, South Africa
+# - Secondary locations: Cape Town, Johannesburg, Pretoria, Durban
+# - Content includes: Curriculum information, program details, enrollment forms
+# - All images are optimized for educational purposes
