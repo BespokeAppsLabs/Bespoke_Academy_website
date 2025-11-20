@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" role="img" aria-labelledby="brain-circuit-stacked-title">
+  <title id="brain-circuit-stacked-title">Bespoke Academy - Brain Circuit Stacked Logo</title>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0080FF"/>
+      <stop offset="60%" style="stop-color:#0077cc"/>
+      <stop offset="100%" style="stop-color:#10b981"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.5"/>
+      <feOffset dx="0" dy="2"/>
+      <feFlood flood-color="#000" flood-opacity=".15"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Logo Mark -->
+  <circle cx="40" cy="25" r="18" fill="url(#g)" filter="url(#shadow)"/>
+  <g transform="translate(40,25)">
+    <!-- Simplified brain -->
+    <path d="M -8,-6 C -10,-6 -11,-4 -11,-1.5 C -11,0.5 -10,2 -8.5,3.5 C -7.5,4.5 -6,5.5 -4,5.5 C -2,5.5 -0.5,5 0.5,3.5 C 1.5,2 2,0.5 2,-1.5 C 2,-3.5 0.5,-5 -1,-5.5 C -3,-6 -5,-6 -8,-6 Z" fill="#fff" opacity=".9"/>
+    <path d="M -6,-3 C -4,-2 -2,-1 0,0" stroke="#fff" stroke-width=".7" fill="none" opacity=".6"/>
+    <path d="M -7,0 C -5,1 -3,2 -1,2.5" stroke="#fff" stroke-width=".7" fill="none" opacity=".6"/>
+
+    <!-- Simplified circuit -->
+    <g id="circuit">
+      <line x1="0" y1="-6" x2="6" y2="-6" stroke="#fff" stroke-width="1" opacity=".8"/>
+      <line x1="6" y1="-6" x2="6" y2="-2" stroke="#fff" stroke-width="1" opacity=".8"/>
+      <line x1="6" y1="-2" x2="3" y2="-2" stroke="#fff" stroke-width="1" opacity=".8"/>
+      <line x1="3" y1="-2" x2="3" y2="2" stroke="#fff" stroke-width="1" opacity=".8"/>
+      <line x1="3" y1="2" x2="9" y2="2" stroke="#fff" stroke-width="1" opacity=".8"/>
+      <line x1="0" y1="0" x2="6" y2="0" stroke="#fff" stroke-width="1" opacity=".8"/>
+      <line x1="6" y1="0" x2="6" y2="3" stroke="#fff" stroke-width="1" opacity=".8"/>
+      <line x1="6" y1="3" x2="9" y2="3" stroke="#fff" stroke-width="1" opacity=".8"/>
+      <line x1="0" y1="6" x2="6" y2="6" stroke="#fff" stroke-width="1" opacity=".8"/>
+      <line x1="6" y1="6" x2="6" y2="3" stroke="#fff" stroke-width="1" opacity=".8"/>
+
+      <!-- Nodes -->
+      <circle cx="6" cy="-2" r="1.2" fill="#fff" opacity=".9" filter="url(#glow)"/>
+      <circle cx="3" cy="2" r="1.2" fill="#fff" opacity=".9" filter="url(#glow)"/>
+      <circle cx="6" cy="3" r="1.2" fill="#fff" opacity=".9" filter="url(#glow)"/>
+      <circle cx="9" cy="2" r="1.5" fill="#fff" opacity="1"/>
+      <circle cx="9" cy="3" r="1.5" fill="#fff" opacity="1"/>
+      <circle cx="0" cy="-6" r="1" fill="#fff" opacity=".8"/>
+      <circle cx="0" cy="0" r="1" fill="#fff" opacity=".8"/>
+      <circle cx="0" cy="6" r="1" fill="#fff" opacity=".8"/>
+    </g>
+
+    <!-- Interface -->
+    <line x1="-0.5" y1="-7" x2="-0.5" y2="7" stroke="#fff" stroke-width=".5" opacity=".5" stroke-dasharray="1.5,1.5"/>
+    <circle cx="0" cy="0" r="1.5" fill="none" stroke="#fff" stroke-width=".8" opacity=".8"/>
+  </g>
+
+  <!-- Stacked Text -->
+  <text x="40" y="52" font-family="Geist Sans,sans-serif" font-size="10" font-weight="700" fill="#1a1a1a" text-anchor="middle">Bespoke</text>
+  <text x="40" y="62" font-family="Geist Sans,sans-serif" font-size="8" font-weight="600" fill="#10b981" text-anchor="middle" letter-spacing=".3">Academy</text>
+</svg>

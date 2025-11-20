@@ -29,14 +29,8 @@ export function ChatInput({
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const recognitionRef = useRef<any>(null)
 
-  // Auto-resize textarea
-  useEffect(() => {
-    const textarea = textareaRef.current
-    if (textarea) {
-      textarea.style.height = 'auto'
-      textarea.style.height = `${Math.min(textarea.scrollHeight, 120)}px`
-    }
-  }, [message])
+  // Fixed 2-line height - no auto-resize needed
+  // Textarea is set to h-[88px] (approximately 2 lines)
 
   // Initialize speech recognition
   useEffect(() => {
@@ -82,11 +76,6 @@ export function ChatInput({
     if (trimmedMessage && !disabled) {
       onSendMessage(trimmedMessage)
       setMessage('')
-
-      // Reset textarea height
-      if (textareaRef.current) {
-        textareaRef.current.style.height = 'auto'
-      }
     }
   }
 
@@ -117,9 +106,10 @@ export function ChatInput({
   const isAtLimit = charCount >= maxLength
 
   return (
-    <form onSubmit={handleSubmit} className={cn("space-y-2", className)}>
-      <div className="flex items-end gap-2">
-        <div className="flex-1 relative">
+    <form onSubmit={handleSubmit} className={cn("space-y-2 group", className)}>
+      <div className="flex items-center gap-2 relative">
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent rounded-lg pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="flex-1 relative z-10">
           <textarea
             ref={textareaRef}
             value={message}
@@ -129,14 +119,16 @@ export function ChatInput({
             disabled={disabled}
             maxLength={maxLength}
             className={cn(
-              "w-full resize-none rounded-lg border border-input bg-background px-4 py-3 text-sm",
-              "placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/50",
+              "w-full resize-none rounded-lg border border-zinc-600 bg-zinc-800 px-4 py-3 text-sm text-zinc-100",
+              "placeholder:text-zinc-400 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30",
               "disabled:cursor-not-allowed disabled:opacity-50",
-              "min-h-[44px] max-h-[120px]",
+              "h-[88px] relative z-10 overflow-y-auto",
+              "scrollbar-hide",
+              "focus:bg-zinc-750 transition-all duration-200",
+              "shadow-sm focus:shadow-lg focus:shadow-primary/10",
               disabled && "cursor-not-allowed"
             )}
-            rows={1}
-          />
+                      />
 
           {/* Character count */}
           {isNearLimit && (
@@ -158,15 +150,18 @@ export function ChatInput({
             onClick={toggleListening}
             disabled={disabled}
             className={cn(
-              "shrink-0 transition-colors",
-              isListening && "bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              "shrink-0 transition-all duration-200 border border-zinc-600 hover:border-primary/50 relative z-10",
+              "hover:bg-zinc-700 hover:shadow-md hover:shadow-primary/10",
+              "focus:border-primary focus:bg-zinc-700 focus:shadow-md focus:shadow-primary/10",
+              "flex items-center justify-center",
+              isListening && "bg-red-950/30 text-red-400 border-red-800/50 hover:bg-red-950/50 hover:border-red-700 animate-pulse"
             )}
             title={isListening ? "Stop recording" : "Start voice input"}
           >
             {isListening ? (
-              <MicOff className="h-4 w-4" />
+              <MicOff className="h-4 w-4 stroke-red-400 fill-red-400/20" strokeWidth="1.5" />
             ) : (
-              <Mic className="h-4 w-4" />
+              <Mic className="h-4 w-4 stroke-emerald-400 fill-emerald-400/10" strokeWidth="1.5" />
             )}
           </Button>
         )}
@@ -176,20 +171,28 @@ export function ChatInput({
           type="submit"
           size="icon"
           disabled={!message.trim() || disabled || isAtLimit}
-          className="shrink-0"
+          className={cn(
+            "shrink-0 relative z-10 transition-all duration-200",
+            "bg-gradient-to-br from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700",
+            "border-2 border-emerald-400/50 hover:border-emerald-300",
+            "shadow-lg shadow-emerald-500/25 hover:shadow-xl hover:shadow-emerald-500/40",
+            "hover:scale-105 active:scale-95",
+            "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100",
+            "flex items-center justify-center"
+          )}
         >
-          <Send className="h-4 w-4" />
+          <Send className="h-4 w-4 stroke-white fill-white/20" strokeWidth="1.5" />
         </Button>
       </div>
 
       {/* Voice listening indicator */}
       {isListening && (
-        <div className="flex items-center gap-2 text-sm text-destructive">
+        <div className="flex items-center gap-2 text-sm text-red-400">
           <div className="flex gap-1">
             {[0, 1, 2].map((index) => (
               <div
                 key={index}
-                className="h-2 w-2 rounded-full bg-destructive animate-pulse"
+                className="h-2 w-2 rounded-full bg-red-400 animate-pulse"
                 style={{
                   animationDelay: `${index * 0.1}s`
                 }}
@@ -201,7 +204,7 @@ export function ChatInput({
       )}
 
       {/* Help text */}
-      <div className="text-xs text-muted-foreground">
+      <div className="text-xs text-zinc-400">
         Press Enter to send, Shift+Enter for new line
       </div>
     </form>

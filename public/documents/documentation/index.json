@@ -1,0 +1,131 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2024-11-02",
+  "contextFiles": [
+    {
+      "filename": "curriculum.md",
+      "title": "Curriculum",
+      "contextType": "curriculum",
+      "description": "Comprehensive 40-week AI and Robotics curriculum overview",
+      "primaryUrl": "/curriculum",
+      "relatedUrls": ["/programs", "/projects", "/outcomes"],
+      "lastModified": "2024-11-02",
+      "wordCount": 450,
+      "keywords": ["curriculum", "40-week", "AI", "robotics", "phases", "beginners"]
+    },
+    {
+      "filename": "programs.md",
+      "title": "Programs",
+      "contextType": "programs",
+      "description": "Program details and educational offerings at Bespoke Academy",
+      "primaryUrl": "/programs",
+      "relatedUrls": ["/curriculum", "/enroll", "/outcomes"],
+      "lastModified": "2024-11-02",
+      "wordCount": 380,
+      "keywords": ["programs", "education", "instructors", "class size", "mentorship"]
+    },
+    {
+      "filename": "projects.md",
+      "title": "Projects",
+      "contextType": "projects",
+      "description": "Student projects and portfolio development information",
+      "primaryUrl": "/projects",
+      "relatedUrls": ["/curriculum", "/outcomes", "/portfolio"],
+      "lastModified": "2024-11-02",
+      "wordCount": 420,
+      "keywords": ["projects", "portfolio", "capstone", "robotics", "AI", "showcase"]
+    },
+    {
+      "filename": "pricing.md",
+      "title": "Pricing",
+      "contextType": "pricing",
+      "description": "Tuition costs, payment plans, and financial assistance",
+      "primaryUrl": "/pricing",
+      "relatedUrls": ["/enroll", "/programs", "/financial-aid"],
+      "lastModified": "2024-11-02",
+      "wordCount": 360,
+      "keywords": ["pricing", "tuition", "payment plans", "financial aid", "cost"]
+    },
+    {
+      "filename": "schedule.md",
+      "title": "Schedule",
+      "contextType": "schedule",
+      "description": "Class schedules, timing, and academic calendar information",
+      "primaryUrl": "/schedule",
+      "relatedUrls": ["/programs", "/enroll", "/calendar"],
+      "lastModified": "2024-11-02",
+      "wordCount": 340,
+      "keywords": ["schedule", "friday", "timing", "calendar", "sessions"]
+    },
+    {
+      "filename": "requirements.md",
+      "title": "Requirements",
+      "contextType": "requirements",
+      "description": "Technical requirements and equipment specifications",
+      "primaryUrl": "/requirements",
+      "relatedUrls": ["/programs", "/support", "/getting-started"],
+      "lastModified": "2024-11-02",
+      "wordCount": 370,
+      "keywords": ["requirements", "equipment", "software", "technical", "computer"]
+    },
+    {
+      "filename": "support.md",
+      "title": "Support",
+      "contextType": "support",
+      "description": "Technical support and troubleshooting guidance",
+      "primaryUrl": "/support",
+      "relatedUrls": ["/contact", "/help-center", "/parent-portal"],
+      "lastModified": "2024-11-02",
+      "wordCount": 410,
+      "keywords": ["support", "help", "technical", "troubleshooting", "assistance"]
+    },
+    {
+      "filename": "enrollment.md",
+      "title": "Enrollment",
+      "contextType": "enrollment",
+      "description": "Enrollment process and next steps for joining",
+      "primaryUrl": "/enroll",
+      "relatedUrls": ["/programs", "/schedule", "/getting-started"],
+      "lastModified": "2024-11-02",
+      "wordCount": 390,
+      "keywords": ["enrollment", "registration", "application", "onboarding", "start"]
+    },
+    {
+      "filename": "outcomes.md",
+      "title": "Outcomes",
+      "contextType": "outcomes",
+      "description": "Learning outcomes and career development paths",
+      "primaryUrl": "/outcomes",
+      "relatedUrls": ["/programs", "/projects", "/careers", "/portfolio"],
+      "lastModified": "2024-11-02",
+      "wordCount": 440,
+      "keywords": ["outcomes", "skills", "career", "portfolio", "college", "success"]
+    },
+    {
+      "filename": "faq.md",
+      "title": "Frequently Asked Questions",
+      "contextType": "faq",
+      "description": "Common questions and answers from parents and students",
+      "primaryUrl": "/faq",
+      "relatedUrls": ["/programs", "/support", "/contact", "/parent-resources"],
+      "lastModified": "2024-11-02",
+      "wordCount": 580,
+      "keywords": ["FAQ", "questions", "answers", "parents", "students", "common"]
+    }
+  ],
+  "statistics": {
+    "totalFiles": 10,
+    "totalWords": 4040,
+    "averageWordsPerFile": 404,
+    "contextTypes": [
+      "curriculum", "programs", "projects", "pricing", "schedule",
+      "requirements", "support", "enrollment", "outcomes", "faq"
+    ]
+  },
+  "maintenance": {
+    "reviewSchedule": "monthly",
+    "contentValidation": "required",
+    "lastValidation": "2024-11-02",
+    "nextReviewDue": "2024-12-02"
+  }
+}

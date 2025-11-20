@@ -7,6 +7,7 @@ import "./globals.css"
 import { Suspense } from "react"
 import { ChatWidget } from "@/components/chat"
 import { StructuredData, educationalOrganizationData, localBusinessData, faqData, courseData } from "@/components/seo/structured-data"
+import { ScrollProgress, ScrollProgressMobile } from "@/components/ui/scroll-progress"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -106,6 +107,8 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+        <ScrollProgress />
+        <ScrollProgressMobile />
         <Analytics />
         <SpeedInsights />
         <ChatWidget />

@@ -1,5 +1,6 @@
 /**
  * ChatInterface component for the main chat window
+ * Enhanced with documentation display and AI SDK backend
  */
 
 "use client"
@@ -12,9 +13,9 @@ import { MessageBubble } from './message-bubble'
 import { TypingIndicator } from './typing-indicator'
 import { ChatHeader } from './chat-header'
 import { ChatInput } from './chat-input'
+import { DocumentationResult } from './documentation-result'
 import { MessageCircle, ThumbsUp, ThumbsDown, RotateCcw } from 'lucide-react'
-import type { ChatRequest, ChatMessage, StreamingChunk } from '@/lib/chat'
-import { sendChatMessage } from '@/lib/utils/chat-client'
+import type { ChatMessage } from '@/lib/chat'
 import { detectMessageContext } from '@/lib/chat'
 import { cn } from '@/lib/utils'
 
@@ -36,10 +37,10 @@ export function ChatInterface({
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages)
   const [isLoading, setIsLoading] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
-  const [currentResponse, setCurrentResponse] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [showQuickActions, setShowQuickActions] = useState(true)
   const [sessionRated, setSessionRated] = useState(false)
+  const [input, setInput] = useState('')
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const abortControllerRef = useRef<AbortController | null>(null)
@@ -55,13 +56,8 @@ export function ChatInterface({
   }, [])
 
   useEffect(() => {
-    // Use smooth scroll for new messages, immediate for streaming
-    if (currentResponse) {
-      scrollToBottomImmediate()
-    } else {
-      scrollToBottom()
-    }
-  }, [messages, currentResponse, scrollToBottom, scrollToBottomImmediate])
+    scrollToBottom()
+  }, [messages, scrollToBottom])
 
   // Add welcome message if no messages
   useEffect(() => {
@@ -75,6 +71,9 @@ I can assist you with:
 🔧 Technical support and troubleshooting
 📚 Learning strategies and study tips
 💼 Program details and enrollment guidance
+📖 Access to our complete documentation
+
+I have access to all of Bespoke Academy's documentation and can search for specific information to help answer your questions accurately.
 
 What would you like to explore today?`,
         sender: 'assistant',
@@ -86,145 +85,6 @@ What would you like to explore today?`,
       setMessages([welcomeMessage])
     }
   }, [])
-
-  const processStreamingResponse = useCallback(async (stream: ReadableStream<Uint8Array>) => {
-    const reader = stream.getReader()
-    const decoder = new TextDecoder()
-    let fullResponse = ''
-    let buffer = ''
-    let assistantMessageCreated = false
-    let completionData: any = null
-
-    // Helper function to create assistant message (only called once)
-    const createAssistantMessage = (content: string, metadata?: any) => {
-      if (assistantMessageCreated || !content.trim()) {
-        return null // Prevent duplicate message creation
-      }
-
-      assistantMessageCreated = true
-      return {
-        id: `assistant_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
-        content: content.trim(),
-        sender: 'assistant' as const,
-        timestamp: new Date(),
-        metadata: {
-          context: detectMessageContext(messages[messages.length - 1]?.content || '').type,
-          ...metadata
-        }
-      }
-    }
-
-    try {
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-
-        // Decode the chunk and add to buffer
-        const chunk = decoder.decode(value, { stream: true })
-        buffer += chunk
-
-        // Process complete SSE messages from buffer
-        const lines = buffer.split('\n')
-        buffer = lines.pop() || '' // Keep the last incomplete line in buffer
-
-        for (const line of lines) {
-          const trimmedLine = line.trim()
-
-          // Skip empty lines and comments
-          if (!trimmedLine || trimmedLine.startsWith(':')) {
-            continue
-          }
-
-          if (trimmedLine.startsWith('data: ')) {
-            const dataStr = trimmedLine.slice(6)
-
-            // Check for the DONE marker
-            if (dataStr === '[DONE]') {
-              setIsTyping(false)
-
-              const assistantMessage = createAssistantMessage(fullResponse)
-              if (assistantMessage) {
-                setMessages(prev => [...prev, assistantMessage])
-                setShowQuickActions(false)
-              }
-
-              setCurrentResponse('')
-              return
-            }
-
-            try {
-              const data = JSON.parse(dataStr)
-
-              // Tool execution notifications are now handled server-side and not sent to client
-              // If any tool-related data unexpectedly reaches here, log it for debugging
-              if (data.type === 'tool_execution' || data.type === 'tool_execution_complete') {
-                console.warn('🔧 Unexpected tool notification reached client:', data)
-                continue
-              }
-
-              // Handle content chunks
-              if (data.content) {
-                fullResponse += data.content
-                setCurrentResponse(fullResponse)
-              }
-
-              // Handle completion signals (alternative to [DONE])
-              if (data.isComplete) {
-                setIsTyping(false)
-                completionData = data
-
-                const assistantMessage = createAssistantMessage(fullResponse, {
-                  model: data.metadata?.model,
-                  responseTime: data.metadata?.responseTime
-                })
-
-                if (assistantMessage) {
-                  setMessages(prev => [...prev, assistantMessage])
-                  setShowQuickActions(false)
-                }
-
-                setCurrentResponse('')
-
-                if (data.error) {
-                  // Handle detailed error information
-                  if (data.errorDetails) {
-                    setError(`${data.error} (${data.errorDetails.type})`)
-                    console.log('Detailed error info:', data.errorDetails)
-                  } else {
-                    setError(data.error)
-                  }
-                }
-              }
-            } catch (parseError) {
-              console.warn('Failed to parse SSE data:', dataStr, 'Error:', parseError)
-            }
-          }
-        }
-      }
-    } catch (error) {
-      console.error('Stream processing error:', error)
-      setError('Connection lost. Please try again.')
-      setIsTyping(false)
-      setCurrentResponse('')
-    } finally {
-      reader.releaseLock()
-
-      // Process any remaining content in buffer (fallback)
-      if (fullResponse.trim() && !assistantMessageCreated) {
-        const assistantMessage = createAssistantMessage(fullResponse, {
-          fallback: true,
-          ...completionData?.metadata
-        })
-
-        if (assistantMessage) {
-          setMessages(prev => [...prev, assistantMessage])
-          setShowQuickActions(false)
-        }
-      }
-      setCurrentResponse('')
-      setIsTyping(false)
-    }
-  }, [messages])
 
   const handleSendMessage = useCallback(async (message: string) => {
     if (isLoading) return
@@ -253,109 +113,158 @@ What would you like to explore today?`,
 
     try {
       // Prepare chat request
-      const chatRequest: ChatRequest = {
+      const chatRequest = {
         message,
         conversationHistory: messages,
-        context: detectMessageContext(message)
+        context: { type: detectMessageContext(message) }
       }
 
-      // Send message using client-safe function
-      const response = await sendChatMessage(chatRequest)
+      // Send message to API
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(chatRequest),
+        signal: abortControllerRef.current.signal
+      })
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
-
-        // Enhanced error handling with detailed information
-        let errorMessage = errorData.error || `HTTP ${response.status}: ${response.statusText}`
-
-        if (errorData.errorType && errorData.isRetryable !== undefined) {
-          console.log('API Error Details:', {
-            type: errorData.errorType,
-            isRetryable: errorData.isRetryable,
-            suggestedAction: errorData.suggestedAction,
-            requestId: errorData.requestId,
-            responseTime: errorData.responseTime
-          })
-
-          // Add retryability information to error message
-          if (errorData.isRetryable && errorData.suggestedAction) {
-            errorMessage += ` (${errorData.suggestedAction})`
-          }
-        }
-
-        throw new Error(errorMessage)
+        throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`)
       }
 
       if (!response.body) {
         throw new Error('No response body received')
       }
 
+      // Process streaming response (AI SDK format)
       await processStreamingResponse(response.body)
       onMessageSent?.(message)
 
     } catch (error) {
       console.error('Chat error:', error)
-
-      let errorMessage = 'Failed to send message. Please try again.'
-      let isRetryable = true
-
-      if (error instanceof Error) {
-        if (error.name === 'AbortError') {
-          errorMessage = 'Request was cancelled.'
-          isRetryable = false
-        } else if (error.message.includes('RATE_LIMIT') || error.message.includes('rate limit')) {
-          errorMessage = 'Too many requests. Please wait a moment before trying again.'
-          isRetryable = true
-        } else if (error.message.includes('NETWORK') || error.message.includes('network') || error.message.includes('fetch')) {
-          errorMessage = 'Network connection failed. Please check your internet connection.'
-          isRetryable = true
-        } else if (error.message.includes('TIMEOUT') || error.message.includes('timeout')) {
-          errorMessage = 'Request timed out. Please try again.'
-          isRetryable = true
-        } else if (error.message.includes('VALIDATION') || error.message.includes('validation')) {
-          errorMessage = 'Invalid request. Please check your message and try again.'
-          isRetryable = false
-        } else if (error.message.includes('AUTH') || error.message.includes('API key')) {
-          errorMessage = 'Service configuration error. Please contact support.'
-          isRetryable = false
-        } else {
-          // Use the error message if it contains more specific information
-          errorMessage = error.message
-          isRetryable = !error.message.includes('configuration') && !error.message.includes('authentication')
-        }
-      }
-
-      setError(errorMessage)
+      setError(error instanceof Error ? error.message : 'Failed to send message. Please try again.')
       setIsTyping(false)
-      setCurrentResponse('')
-
-      // Store retryability for potential future features
-      console.log('Error is retryable:', isRetryable)
     } finally {
       setIsLoading(false)
       abortControllerRef.current = null
     }
-  }, [isLoading, messages, processStreamingResponse, onMessageSent])
+  }, [isLoading, messages, onMessageSent])
 
-  const detectMessageContext = (message: string): ChatRequest['context'] => {
-    const lowerMessage = message.toLowerCase()
+  const processStreamingResponse = useCallback(async (stream: ReadableStream<Uint8Array>) => {
+    const reader = stream.getReader()
+    const decoder = new TextDecoder()
+    let buffer = ''
+    let currentAssistantMessage: ChatMessage | null = null
 
-    if (lowerMessage.includes('course') || lowerMessage.includes('program') || lowerMessage.includes('curriculum')) {
-      return { type: 'course-advising' }
+    try {
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        const chunk = decoder.decode(value, { stream: true })
+        buffer += chunk
+
+        const lines = buffer.split('\n')
+        buffer = lines.pop() || ''
+
+        for (const line of lines) {
+          const trimmedLine = line.trim()
+          if (!trimmedLine || trimmedLine.startsWith(':')) continue
+
+          if (trimmedLine.startsWith('data: ')) {
+            const dataStr = trimmedLine.slice(6)
+
+            if (dataStr === '[DONE]') {
+              setIsTyping(false)
+              if (currentAssistantMessage) {
+                setMessages(prev => [...prev, currentAssistantMessage as ChatMessage])
+              }
+              return
+            }
+
+            try {
+              const data = JSON.parse(dataStr)
+
+              // Handle AI SDK streaming format
+              if (data.type === 'text-delta') {
+                if (!currentAssistantMessage) {
+                  currentAssistantMessage = {
+                    id: `assistant_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
+                    content: data.delta,
+                    sender: 'assistant',
+                    timestamp: new Date(),
+                    metadata: {
+                      context: detectMessageContext(messages[messages.length - 1]?.content || '')
+                    }
+                  }
+                } else {
+                  currentAssistantMessage.content += data.delta
+                }
+
+                // Update the message in real-time
+                setMessages(prev => {
+                  const filtered = prev.filter(m => m.id !== currentAssistantMessage!.id)
+                  return [...filtered, currentAssistantMessage!]
+                })
+              }
+
+              // Handle tool calls and results
+              if (data.type === 'tool-input-start' || data.type === 'tool-input-available' || data.type === 'tool-output-available') {
+                // Don't create empty messages for tool events only
+                // Store tool data in the current message if it exists, or create a new one
+                if (!currentAssistantMessage) {
+                  currentAssistantMessage = {
+                    id: `assistant_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
+                    content: '', // Will be populated if there's actual text response
+                    sender: 'assistant',
+                    timestamp: new Date(),
+                    metadata: {
+                      context: detectMessageContext(messages[messages.length - 1]?.content || ''),
+                      toolData: data
+                    } as any
+                  }
+                } else {
+                  // Add tool data to existing message
+                  if (!currentAssistantMessage.metadata) {
+                    currentAssistantMessage.metadata = {
+                      context: detectMessageContext(messages[messages.length - 1]?.content || '')
+                    }
+                  }
+                  ;(currentAssistantMessage.metadata as any).toolData = data
+                }
+
+                // Don't update the UI for tool events alone - wait for actual content or completion
+                return
+              }
+
+              // Handle completion
+              if (data.type === 'finish') {
+                setIsTyping(false)
+                if (currentAssistantMessage) {
+                  // Only add the message if it has content or tool data
+                  if (currentAssistantMessage.content || (currentAssistantMessage.metadata as any)?.toolData) {
+                    setMessages(prev => [...prev, currentAssistantMessage as ChatMessage])
+                  }
+                }
+                return
+              }
+
+            } catch (parseError) {
+              console.warn('Failed to parse streaming data:', dataStr, parseError)
+            }
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Stream processing error:', error)
+      setError('Connection lost. Please try again.')
+      setIsTyping(false)
+    } finally {
+      reader.releaseLock()
     }
-
-    if (lowerMessage.includes('help') || lowerMessage.includes('problem') || lowerMessage.includes('error') ||
-        lowerMessage.includes('issue') || lowerMessage.includes('login') || lowerMessage.includes('access')) {
-      return { type: 'technical-support' }
-    }
-
-    if (lowerMessage.includes('learn') || lowerMessage.includes('study') || lowerMessage.includes('understand') ||
-        lowerMessage.includes('explain') || lowerMessage.includes('concept')) {
-      return { type: 'learning-assistance' }
-    }
-
-    return { type: 'general-inquiry' }
-  }
+  }, [messages])
 
   const handleQuickAction = useCallback((action: string) => {
     handleSendMessage(action)
@@ -379,7 +288,6 @@ What would you like to explore today?`,
 
   const clearChat = useCallback(() => {
     setMessages([])
-    setCurrentResponse('')
     setError(null)
     setShowQuickActions(true)
     setSessionRated(false)
@@ -410,7 +318,8 @@ What would you like to explore today?`,
       exit="exit"
       transition={{ duration: 0.2 }}
       className={cn(
-        "flex flex-col bg-background border border-border rounded-lg shadow-lg overflow-hidden",
+        "flex flex-col bg-zinc-900 border border-zinc-700 rounded-lg shadow-2xl overflow-hidden",
+        "ring-1 ring-primary/20",
         sizeClasses,
         className
       )}
@@ -424,51 +333,29 @@ What would you like to explore today?`,
 
       {/* Messages */}
       <div className="flex-1 overflow-hidden flex flex-col">
-        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4" role="log" aria-label="Chat messages" aria-live="polite" aria-atomic="false">
+        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-zinc-900 text-white" role="log" aria-label="Chat messages" aria-live="polite" aria-atomic="false"
+         style={{
+           backgroundImage: 'radial-gradient(circle at 20% 80%, rgba(120, 252, 214, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(120, 252, 214, 0.03) 0%, transparent 50%)'
+         }}>
           <AnimatePresence>
             {messages.map((message) => (
-              <MessageBubble
-                key={message.id}
-                message={message}
-                showTimestamp={false}
-              />
+              <div key={message.id}>
+                <MessageBubble
+                  message={message}
+                  showTimestamp={false}
+                />
+
+                {/* Display tool results if present in metadata */}
+                {(message.metadata as any)?.toolData && (
+                  <DocumentationResult
+                    toolResult={{ result: (message.metadata as any).toolData.output || (message.metadata as any).toolData }}
+                  />
+                )}
+              </div>
             ))}
 
-            {/* Current streaming response */}
-            {currentResponse && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex gap-3 max-w-full"
-                role="status"
-                aria-live="polite"
-                aria-label="AI assistant is responding"
-              >
-                <div className="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-full bg-surface text-surface-foreground">
-                  <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
-                    <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
-                  </svg>
-                </div>
-                <div className="flex-1">
-                  <div className="rounded-lg bg-muted text-muted-foreground px-4 py-2 rounded-bl-sm max-w-[400px] sm:max-w-[500px] lg:max-w-[600px]">
-                    <div className="flex items-start gap-2">
-                      <p className="text-sm leading-relaxed whitespace-pre-wrap break-words flex-1">
-                        {currentResponse}
-                      </p>
-                      <motion.div
-                        animate={{ opacity: [1, 0.5, 1] }}
-                        transition={{ duration: 1, repeat: Infinity }}
-                        className="w-2 h-4 bg-muted-foreground rounded-full mt-0.5"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Typing indicator */}
-            {isTyping && !currentResponse && (
+            {/* Loading indicator */}
+            {isTyping && (
               <div role="status" aria-live="polite" aria-label="AI assistant is typing">
                 <TypingIndicator />
               </div>
@@ -488,7 +375,13 @@ What would you like to explore today?`,
                   variant="outline"
                   size="sm"
                   onClick={() => handleQuickAction(action)}
-                  className="text-xs"
+                  className={cn(
+                    "text-xs border-zinc-600 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:border-primary/60",
+                    "hover:text-primary transition-all duration-200",
+                    "relative overflow-hidden group",
+                    "before:absolute before:inset-0 before:bg-gradient-to-r before:from-primary/10 before:to-transparent before:opacity-0 before:transition-opacity before:duration-200",
+                    "hover:before:opacity-100"
+                  )}
                 >
                   {action}
                 </Button>
@@ -501,9 +394,12 @@ What would you like to explore today?`,
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center gap-2 p-3 bg-destructive/10 border border-destructive/20 rounded-lg"
+              className={cn(
+                "flex items-center gap-2 p-3 rounded-lg",
+                "bg-red-950/50 border border-red-800/50 text-red-400"
+              )}
             >
-              <span className="text-sm text-destructive">{error}</span>
+              <span className="text-sm text-red-400">{error}</span>
               <Button
                 variant="outline"
                 size="sm"
@@ -521,9 +417,12 @@ What would you like to explore today?`,
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center gap-2 p-3 bg-muted rounded-lg"
+              className={cn(
+                "flex items-center gap-2 p-3 rounded-lg",
+                "bg-zinc-800 border border-zinc-700 text-zinc-300"
+              )}
             >
-              <span className="text-sm text-muted-foreground">Was this helpful?</span>
+              <span className="text-sm text-zinc-300">Was this helpful?</span>
               <div className="flex gap-1 ml-auto">
                 <Button
                   variant="ghost"
@@ -549,12 +448,15 @@ What would you like to explore today?`,
         </div>
 
         {/* Input */}
-        <div className="border-t border-border p-4">
-          <ChatInput
-            onSendMessage={handleSendMessage}
-            disabled={isLoading}
-            placeholder="Type your message..."
-          />
+        <div className="border-t border-zinc-700 bg-zinc-800/50 p-4 relative">
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
+          <div className="relative z-10">
+            <ChatInput
+              onSendMessage={handleSendMessage}
+              disabled={isLoading}
+              placeholder="Type your message..."
+            />
+          </div>
         </div>
       </div>
     </motion.div>

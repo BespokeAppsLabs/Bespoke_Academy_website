@@ -215,35 +215,38 @@ export function ChatWidget({
               onClick={handleToggleChat}
               size="lg"
               className={cn(
-                "relative h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-shadow",
-                "bg-primary text-primary-foreground hover:bg-primary/90"
+                "relative h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300",
+                "bg-gradient-to-br from-emerald-500 to-emerald-600 text-white hover:from-emerald-600 hover:to-emerald-700",
+                "border border-emerald-400/50 backdrop-blur-sm",
+                "hover:scale-105 hover:shadow-emerald-500/25 hover:shadow-2xl"
               )}
               aria-label="Open chat"
             >
-              <MessageCircle className="h-6 w-6" />
+              <MessageCircle className="h-6 w-6 stroke-white fill-white/10" strokeWidth="1.5" />
 
               {/* Unread count badge */}
               {unreadCount > 0 && (
                 <Badge
                   variant="destructive"
-                  className="absolute -top-1 -right-1 h-6 w-6 rounded-full p-0 flex items-center justify-center text-xs font-bold animate-bounce"
+                  className="absolute -top-1 -right-1 h-6 w-6 rounded-full p-0 flex items-center justify-center text-xs font-bold animate-bounce shadow-lg"
                 >
                   {unreadCount > 99 ? '99+' : unreadCount}
                 </Badge>
               )}
 
-              {/* Pulsing ring effect for new messages */}
+              {/* Enhanced pulsing ring effect for new messages */}
               {unreadCount > 0 && (
                 <motion.div
-                  className="absolute inset-0 rounded-full bg-primary/20"
+                  className="absolute inset-0 rounded-full bg-primary/30"
                   animate={{
-                    scale: [1, 1.5, 1.5],
-                    opacity: [0.7, 0, 0]
+                    scale: [1, 1.6, 1.6],
+                    opacity: [0.8, 0, 0]
                   }}
                   transition={{
-                    duration: 1.5,
+                    duration: 2,
                     repeat: Infinity,
-                    repeatDelay: 0.5
+                    repeatDelay: 0.5,
+                    ease: "easeOut"
                   }}
                 />
               )}
@@ -259,11 +262,14 @@ export function ChatWidget({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="flex items-center gap-2 bg-background border border-border rounded-lg shadow-lg px-3 py-2"
+            className={cn(
+              "flex items-center gap-2 bg-zinc-800 border border-zinc-700 rounded-lg shadow-lg px-3 py-2",
+              "hover:bg-zinc-750 transition-colors duration-200"
+            )}
           >
             <div className="flex items-center gap-2">
               <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-sm font-medium">Chat is active</span>
+              <span className="text-sm font-medium text-zinc-100">Chat is active</span>
             </div>
 
             <div className="flex items-center gap-1 ml-auto">

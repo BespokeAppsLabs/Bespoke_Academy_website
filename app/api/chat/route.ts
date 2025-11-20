@@ -1,11 +1,14 @@
 /**
  * Chat API route for Bespoke Academy chatbot
- * Enhanced with centralized configuration and detailed error handling
- * Handles streaming chat responses using Groq API
+ * Enhanced with AI SDK and local documentation search
+ * Handles streaming chat responses using AI SDK with Groq provider
  */
 
-import { NextRequest, NextResponse } from 'next/server'
-import { getGroqClient, testGroqConnection, getGroqConfigurationSummary } from '@/lib/groq'
+import { NextRequest } from 'next/server'
+import { groq } from '@ai-sdk/groq'
+import { streamText, tool } from 'ai'
+import { z } from 'zod'
+import { documentationService } from '@/lib/documentation'
 import type { ChatRequest } from '@/lib/chat'
 import { isValidMessage, isValidChatContext } from '@/lib/chat'
 import {
@@ -14,6 +17,8 @@ import {
   type GroqApiError,
   logGroqError
 } from '@/lib/errors/groq-errors'
+
+export const maxDuration = 30
 
 // Rate limiting (simple in-memory implementation for development)
 const rateLimiter = new Map<string, { count: number; resetTime: number }>()
@@ -100,42 +105,34 @@ export async function POST(request: NextRequest) {
   try {
     // Check rate limiting
     if (!checkRateLimit(ipAddress)) {
-      const rateLimitError = {
-        error: 'Too many requests. Please wait a moment before trying again.',
-        errorType: 'RATE_LIMIT_EXCEEDED',
-        isRetryable: true,
-        retryAfter: 60,
-        timestamp: new Date().toISOString(),
-        requestId
-      }
-      return NextResponse.json(rateLimitError, { status: 429 })
+      return Response.json(
+        {
+          error: 'Too many requests. Please wait a moment before trying again.',
+          errorType: 'RATE_LIMIT_EXCEEDED',
+          isRetryable: true,
+          retryAfter: 60,
+          timestamp: new Date().toISOString(),
+          requestId
+        },
+        { status: 429 }
+      )
     }
 
     // Parse and validate request
-    let body: any
-    try {
-      body = await request.json()
-    } catch (parseError) {
-      const validationError = {
-        error: 'Invalid JSON in request body',
-        errorType: 'VALIDATION_ERROR',
-        isRetryable: false,
-        timestamp: new Date().toISOString(),
-        requestId
-      }
-      return NextResponse.json(validationError, { status: 400 })
-    }
+    const body = await request.json()
 
     const validation = validateChatRequest(body)
     if (!validation.isValid) {
-      const validationError = {
-        error: validation.error,
-        errorType: 'VALIDATION_ERROR',
-        isRetryable: false,
-        timestamp: new Date().toISOString(),
-        requestId
-      }
-      return NextResponse.json(validationError, { status: 400 })
+      return Response.json(
+        {
+          error: validation.error,
+          errorType: 'VALIDATION_ERROR',
+          isRetryable: false,
+          timestamp: new Date().toISOString(),
+          requestId
+        },
+        { status: 400 }
+      )
     }
 
     const chatRequest: ChatRequest = validation.sanitized!
@@ -151,23 +148,108 @@ export async function POST(request: NextRequest) {
       historySize: chatRequest.conversationHistory.length
     })
 
-    // Get Groq client and send request
-    const groqClient = getGroqClient()
-
-    // Create streaming response
-    const stream = await groqClient.sendChatRequest(chatRequest)
-
-    return new Response(stream, {
-      headers: {
-        'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'X-Request-ID': requestId
+    // Convert messages to AI SDK format
+    const messages = [
+      {
+        role: 'system' as const,
+        content: `You are a helpful assistant for Bespoke Academy, an AI and robotics education platform.
+        You have access to the academy's documentation and can search for relevant information to answer questions.
+        Always try to provide accurate information from the documentation when available.
+        If you find relevant documentation, cite your sources and provide links to the full documents.`
+      },
+      ...chatRequest.conversationHistory
+        .filter(msg => msg.sender !== 'tool')
+        .map(msg => ({
+          role: msg.sender as 'user' | 'assistant',
+          content: msg.content
+        })),
+      {
+        role: 'user' as const,
+        content: chatRequest.message
       }
+    ]
+
+    // Get context suggestions
+    const contextSuggestions = await documentationService.getContextSuggestions(chatRequest.message)
+    const suggestedContext = contextSuggestions.length > 0 ? contextSuggestions[0] : chatRequest.context.type
+
+    // Create AI SDK streaming response with documentation tools
+    const result = await streamText({
+      model: groq('openai/gpt-oss-20b'),
+      messages,
+      temperature: 0.7,
+      tools: {
+        searchDocumentation: tool({
+          description: 'Search Bespoke Academy documentation for relevant information',
+          inputSchema: z.object({
+            query: z.string().describe('Search query to find in documentation'),
+            contextType: z.string().optional().describe('Optional context type to filter results'),
+            limit: z.number().default(5).describe('Maximum number of results to return')
+          }),
+          execute: async ({ query, contextType, limit }) => {
+            const searchResults = await documentationService.searchDocumentation(
+              query,
+              contextType || suggestedContext,
+              limit
+            )
+
+            return {
+              results: searchResults.map(result => ({
+                title: result.title,
+                filename: result.filename,
+                contextType: result.contextType,
+                snippet: result.snippet,
+                relevanceScore: result.relevanceScore,
+                primaryUrl: result.metadata.primaryUrl,
+                description: result.metadata.description,
+                keywords: result.metadata.keywords
+              })),
+              query,
+              totalResults: searchResults.length
+            }
+          }
+        }),
+
+        getDocumentByType: tool({
+          description: 'Get a specific document by its type (curriculum, pricing, etc.)',
+          inputSchema: z.object({
+            documentType: z.string().describe('The type of document to retrieve')
+          }),
+          execute: async ({ documentType }) => {
+            const document = await documentationService.getDocumentByType(documentType)
+
+            if (!document) {
+              return {
+                error: `Document of type '${documentType}' not found`,
+                availableTypes: await documentationService.getAvailableDocumentTypes()
+              }
+            }
+
+            return {
+              title: document.title,
+              filename: document.filename,
+              contextType: document.contextType,
+              content: document.content,
+              primaryUrl: document.metadata.primaryUrl,
+              description: document.metadata.description,
+              keywords: document.metadata.keywords,
+              wordCount: document.metadata.wordCount
+            }
+          }
+        }),
+
+        getAvailableDocumentTypes: tool({
+          description: 'Get all available document types with their descriptions',
+          inputSchema: z.object({}),
+          execute: async () => {
+            return await documentationService.getAvailableDocumentTypes()
+          }
+        })
+      },
+      toolChoice: 'auto'
     })
+
+    return result.toUIMessageStreamResponse()
 
   } catch (error) {
     const responseTime = Date.now() - startTime
@@ -226,7 +308,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Return detailed error response
-    const errorResponse = {
+    return Response.json({
       error: groqError.userFriendlyMessage,
       errorType: groqError.type,
       isRetryable: groqError.isRetryable,
@@ -240,15 +322,13 @@ export async function POST(request: NextRequest) {
         originalError: groqError.originalError,
         severity: groqError.severity
       })
-    }
-
-    return NextResponse.json(errorResponse, { status: statusCode })
+    }, { status: statusCode })
   }
 }
 
 // Handle OPTIONS requests for CORS
 export async function OPTIONS() {
-  return new NextResponse(null, {
+  return new Response(null, {
     status: 200,
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -263,55 +343,37 @@ export async function GET() {
   const requestId = `health_${Date.now()}`
 
   try {
-    const connectionResult = await testGroqConnection()
-
     let healthStatus = 'healthy'
     let issues: string[] = []
 
-    if (!connectionResult.connected) {
-      healthStatus = 'unhealthy'
-      issues.push(connectionResult.error?.userFriendlyMessage || 'Connection failed')
+    // Check if documentation service is available
+    const availableTypes = await documentationService.getAvailableDocumentTypes()
+    if (availableTypes.length === 0) {
+      healthStatus = 'degraded'
+      issues.push('Documentation service may not be fully loaded')
     }
-
-    // Get configuration summary
-    const configSummary = getGroqConfigurationSummary()
 
     // Check rate limiter
     const activeRequests = rateLimiter.size
 
-    return NextResponse.json({
+    return Response.json({
       status: healthStatus,
       timestamp: new Date().toISOString(),
       requestId,
       service: {
         name: 'Bespoke Academy Chat API',
-        version: '1.0.0',
-        environment: process.env.NODE_ENV || 'development'
+        version: '2.0.0',
+        environment: process.env.NODE_ENV || 'development',
+        sdk: 'AI SDK with Groq provider'
       },
-      groq: {
-        connected: connectionResult.connected,
-        availableModels: connectionResult.models || [],
-        currentModel: configSummary.model,
-        baseURL: configSummary.baseURL,
-        maxTokens: configSummary.maxTokens,
-        temperature: configSummary.temperature,
-        enableStreaming: configSummary.enableStreaming,
-        ...(connectionResult.error && {
-          error: {
-            type: connectionResult.error.type,
-            message: connectionResult.error.message,
-            severity: connectionResult.error.severity
-          }
-        })
+      documentation: {
+        availableDocuments: availableTypes.length,
+        documentTypes: availableTypes.map(t => t.type),
+        loaded: availableTypes.length > 0
       },
       rateLimiter: {
         activeRequests,
         configured: true
-      },
-      configuration: {
-        maxMessageLength: configSummary.maxMessageLength,
-        maxHistoryLength: configSummary.maxHistoryLength,
-        timeout: configSummary.timeout
       },
       issues: issues.length > 0 ? issues : undefined
     })
@@ -325,14 +387,15 @@ export async function GET() {
 
     logGroqError(groqError)
 
-    return NextResponse.json({
+    return Response.json({
       status: 'unhealthy',
       timestamp: new Date().toISOString(),
       requestId,
       service: {
         name: 'Bespoke Academy Chat API',
-        version: '1.0.0',
-        environment: process.env.NODE_ENV || 'development'
+        version: '2.0.0',
+        environment: process.env.NODE_ENV || 'development',
+        sdk: 'AI SDK with Groq provider'
       },
       error: {
         type: groqError.type,

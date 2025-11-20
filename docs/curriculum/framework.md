@@ -1,6 +1,5 @@
 # Bespoke Academy AI Robotics Curriculum Framework
 
-## Overview
 This framework is specifically designed for **Grades 8-11 students (ages 13-17)** with **no prior knowledge** of computers, programming, AI, or robotics. The curriculum transforms complete beginners into confident creators through a 40-week hands-on learning journey, meeting once weekly for 2+ hours on Fridays.
 
 ## Program Philosophy

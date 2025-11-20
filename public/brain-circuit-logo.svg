@@ -1,0 +1,121 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 280 60"
+  width="280"
+  height="60"
+  role="img"
+  aria-labelledby="brain-circuit-logo-title"
+>
+  <!-- Logo Title for Accessibility -->
+  <title id="brain-circuit-logo-title">Bespoke Academy - Brain Circuit AI Education Logo</title>
+
+  <!-- Definitions for gradients, styles, and effects -->
+  <defs>
+    <!-- Main Gradient -->
+    <linearGradient id="brainCircuitGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0080FF" />
+      <stop offset="60%" stop-color="#0077cc" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="logoShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000" flood-opacity="0.15" />
+    </filter>
+    <filter id="cpuGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+      <feMerge>
+        <feMergeNode in="coloredBlur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Styles -->
+    <style>
+      .brain-silhouette { fill: #fff; opacity: 0.9; }
+      .neural-pattern { stroke: #fff; stroke-width: 0.8; fill: none; opacity: 0.6; }
+      .circuit-lines { stroke: #fff; stroke-width: 1.2; fill: none; opacity: 0.8; }
+      .circuit-node { fill: #fff; opacity: 0.9; }
+      .cpu-dot { fill: #fff; opacity: 1; }
+      .interface-dot { fill: #fff; opacity: 0.8; }
+      .interface-line { stroke: #fff; stroke-width: 0.6; opacity: 0.5; stroke-dasharray: 2,2; }
+      .flow-arrow { stroke: #fff; stroke-width: 0.6; fill: none; opacity: 0.4; }
+      .wordmark-main {
+        font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        fill: #1a1a1a;
+      }
+      .wordmark-sub {
+        font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        fill: #10b981;
+        letter-spacing: 0.5em;
+      }
+    </style>
+  </defs>
+
+  <!-- Logo Mark Group: Brain + Circuit -->
+  <g id="logoMark">
+    <!-- Background circle with gradient -->
+    <circle cx="30" cy="30" r="24" fill="url(#brainCircuitGradient)" filter="url(#logoShadow)" />
+
+    <!-- Brain-Circuit Symbol -->
+    <g transform="translate(30, 30)">
+      <!-- Brain silhouette (left hemisphere) -->
+      <path
+        class="brain-silhouette"
+        d="M-12-8c-4 0-6 3-6 6s2 8 4 9c1 1 2 3 4 3s4-1 5-3c2-2 3-4 3-7s-1-5-3-6c-2 0-4 0-6 0z"
+      />
+
+      <!-- Brain neural pattern (simplified and combined) -->
+      <path
+        class="neural-pattern"
+        d="M-10-4c2 1 4 2 6 3s3 2 4 3M-11 0c2 1 4 2 6 3M-9 3c2 1 4 2 6 3"
+      />
+
+      <!-- Circuit pattern (right hemisphere) -->
+      <g id="circuitElements">
+        <!-- Main circuit lines (combined) -->
+        <path
+          class="circuit-lines"
+          d="M0-8h8v4h-4v4h8M0 0h8v4h4M0 8h8v-4"
+        />
+
+        <!-- Circuit nodes (CPU connection points) -->
+        <circle class="circuit-node" filter="url(#cpuGlow)" cx="8" cy="-4" r="1.5" />
+        <circle class="circuit-node" filter="url(#cpuGlow)" cx="4" cy="0" r="1.5" />
+        <circle class="circuit-node" filter="url(#cpuGlow)" cx="8" cy="4" r="1.5" />
+        <circle class="cpu-dot" cx="12" cy="0" r="1.8" />
+        <circle class="cpu-dot" cx="12" cy="4" r="1.8" />
+
+        <!-- CPU connection dots -->
+        <circle class="interface-dot" cx="0" cy="-8" r="1.2" />
+        <circle class="interface-dot" cx="0" cy="0" r="1.2" />
+        <circle class="interface-dot" cx="0" cy="8" r="1.2" />
+      </g>
+
+      <!-- Central dividing line (brain-circuit interface) -->
+      <line class="interface-line" x1="-1" y1="-10" x2="-1" y2="10" />
+
+      <!-- CPU center indicator -->
+      <circle cx="0" cy="0" r="2" fill="none" stroke="#fff" stroke-width="1" opacity="0.8" />
+
+      <!-- Data flow indicators (subtle arrows) -->
+      <path class="flow-arrow" d="M-15-6h2m-1-1l1 1-1 1" />
+      <path class="flow-arrow" d="M10 0h2m-1-1l1 1-1 1" />
+    </g>
+  </g>
+
+  <!-- Wordmark Text -->
+  <g id="wordmark">
+    <text class="wordmark-main" x="65" y="35">Bespoke</text>
+    <text class="wordmark-sub" x="65" y="48">Academy</text>
+  </g>
+
+  <!-- Subtle animated gradient overlay -->
+  <rect width="280" height="60" fill="url(#brainCircuitGradient)" opacity="0">
+    <animate attributeName="opacity" values="0;0.02;0" dur="5s" repeatCount="indefinite" />
+  </rect>
+</svg>
