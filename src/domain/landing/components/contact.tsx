@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -11,6 +12,26 @@ import { Mail, Send, UserCheck, MessageCircle, Calendar } from "lucide-react";
 import { site } from "@/config/site";
 
 export default function ContactSection() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      if (!res.ok) throw new Error();
+      form.reset();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  }
+
   const formVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -162,11 +183,15 @@ export default function ContactSection() {
               size="lg"
               className="p-8"
             >
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Honeypot, hidden from people */}
+                <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <motion.div variants={itemVariants}>
                     <Input
                       type="text"
+                      name="parentName" required
+                      aria-label="Parent/Guardian Name"
                       placeholder="Parent/Guardian Name"
                       className="bg-neutral-900/50 border-neutral-600 text-white placeholder-neutral-400 focus:border-primary-emerald-400 focus:ring-primary-emerald-400/20 h-12"
                     />
@@ -174,6 +199,8 @@ export default function ContactSection() {
                   <motion.div variants={itemVariants}>
                     <Input
                       type="email"
+                      name="email" required
+                      aria-label="Email Address"
                       placeholder="Email Address"
                       className="bg-neutral-900/50 border-neutral-600 text-white placeholder-neutral-400 focus:border-primary-emerald-400 focus:ring-primary-emerald-400/20 h-12"
                     />
@@ -181,6 +208,8 @@ export default function ContactSection() {
                   <motion.div variants={itemVariants}>
                     <Input
                       type="tel"
+                      name="phone"
+                      aria-label="Phone Number"
                       placeholder="Phone Number"
                       className="bg-neutral-900/50 border-neutral-600 text-white placeholder-neutral-400 focus:border-primary-emerald-400 focus:ring-primary-emerald-400/20 h-12"
                     />
@@ -188,6 +217,17 @@ export default function ContactSection() {
                   <motion.div variants={itemVariants}>
                     <Input
                       type="text"
+                      name="studentName"
+                      aria-label="Student's Name"
+                      placeholder="Student's Name"
+                      className="bg-neutral-900/50 border-neutral-600 text-white placeholder-neutral-400 focus:border-primary-emerald-400 focus:ring-primary-emerald-400/20 h-12"
+                    />
+                  </motion.div>
+                  <motion.div variants={itemVariants} className="md:col-span-2">
+                    <Input
+                      type="text"
+                      name="grade"
+                      aria-label="Student's Grade Level"
                       placeholder="Student's Grade Level"
                       className="bg-neutral-900/50 border-neutral-600 text-white placeholder-neutral-400 focus:border-primary-emerald-400 focus:ring-primary-emerald-400/20 h-12"
                     />
@@ -195,8 +235,8 @@ export default function ContactSection() {
                 </div>
 
                 <motion.div variants={itemVariants}>
-                  <Select>
-                    <SelectTrigger className="bg-neutral-900/50 border-neutral-600 text-white placeholder-neutral-400 focus:border-primary-emerald-400 focus:ring-primary-emerald-400/20 h-12">
+                  <Select name="intent" defaultValue="apply">
+                    <SelectTrigger aria-label="I would like to..." className="bg-neutral-900/50 border-neutral-600 text-white placeholder-neutral-400 focus:border-primary-emerald-400 focus:ring-primary-emerald-400/20 h-12">
                       <SelectValue placeholder="I would like to..." />
                     </SelectTrigger>
                     <SelectContent className="bg-neutral-800 border-neutral-600">
@@ -208,6 +248,8 @@ export default function ContactSection() {
 
                 <motion.div variants={itemVariants}>
                   <Textarea
+                    name="message"
+                    aria-label="Message"
                     placeholder="Tell us about your teen's interests and learning goals..."
                     className="bg-neutral-900/50 border-neutral-600 text-white placeholder-neutral-400 focus:border-primary-emerald-400 focus:ring-primary-emerald-400/20 min-h-[120px] resize-none"
                     rows={4}
@@ -220,12 +262,23 @@ export default function ContactSection() {
                       variant="bespoke-premium"
                       size="lg"
                       type="submit"
+                      disabled={status === "sending"}
                       className="font-semibold"
                     >
                       <Send className="w-5 h-5 mr-2" />
-                      Send Message
+                      {status === "sending" ? "Sending..." : "Send Message"}
                     </BespokeButton>
                   </div>
+                  <p role="status" aria-live="polite" className="mt-4 text-sm">
+                    {status === "sent" && (
+                      <span className="text-primary-emerald-400">Thank you. We&apos;ll be in touch soon.</span>
+                    )}
+                    {status === "error" && (
+                      <span className="text-red-400">
+                        Something went wrong. Please email {site.email} or WhatsApp {site.whatsapp.display}.
+                      </span>
+                    )}
+                  </p>
                 </motion.div>
 
               </form>

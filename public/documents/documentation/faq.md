@@ -54,7 +54,7 @@ A: R1,500 per month for 10 months. This includes all materials, equipment and in
 A: No, everything is included in the tuition - no hidden fees for materials, software, or equipment.
 
 **Q: Do you offer discounts?**
-A: Please ask us directly by email (info@bespoke.co.za) or WhatsApp (082 290 2428).
+A: Please ask us directly by email (info@bespokeapps.co.za) or WhatsApp (082 290 2428).
 
 ### Student Success
 

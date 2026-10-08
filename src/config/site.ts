@@ -4,7 +4,7 @@
 export const site = {
   name: "Bespoke Academy",
   url: "https://bespokeacademy.co.za",
-  email: "info@bespoke.co.za",
+  email: "info@bespokeapps.co.za",
   whatsapp: {
     display: "082 290 2428",
     href: "https://wa.me/27822902428",

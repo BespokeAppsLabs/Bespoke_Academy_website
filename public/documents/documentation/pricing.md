@@ -20,4 +20,4 @@ A: All instruction, equipment, materials and software for the 40 weeks.
 A: Not yet. Apply on the website and we will share payment details once the application is accepted.
 
 **Q: Do you offer discounts?**
-A: Please ask us directly by email (info@bespoke.co.za) or WhatsApp (082 290 2428).
+A: Please ask us directly by email (info@bespokeapps.co.za) or WhatsApp (082 290 2428).
