@@ -19,13 +19,13 @@ A: Our support team typically responds within 24 hours, with urgent issues addre
 A: We offer parent orientation, progress updates, and dedicated support channels for all family questions.
 
 **Q: Is help available outside of class times?**
-A: Yes, we provide support through multiple channels including email, phone, and our online help center.
+A: Yes. Reach us by email at info@bespoke.co.za or on WhatsApp at 082 290 2428.
 
 ## Detailed Information
 
 ### Support Channels
 - **Email Support**: Detailed assistance for complex issues
-- **Phone Support**: Immediate help for urgent problems
+- **WhatsApp**: 082 290 2428
 - **Online Help Center**: Self-service resources and tutorials
 - **Parent Portal**: Track progress and access resources
 - **Community Forum**: Connect with other families

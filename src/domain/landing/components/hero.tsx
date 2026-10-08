@@ -121,7 +121,7 @@ export default function Hero() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.7 }}
               >
-                40-Week AI Robotics Curriculum • Perfect for Ages 13-17 • Parent-Approved Learning
+                40-Week AI Robotics Curriculum • Ages 13-17 • Applications Open for 2027
               </motion.p>
 
               <motion.div
@@ -131,6 +131,7 @@ export default function Hero() {
                 transition={{ delay: 1.8 }}
               >
                 <BespokeButton
+                  href="/#contact"
                   variant="bespoke-primary"
                   size="xl"
                   className="font-semibold"
@@ -140,10 +141,11 @@ export default function Hero() {
                     </svg>
                   }
                 >
-                  Start Creating with AI
+                  Apply for 2027
                 </BespokeButton>
 
                 <BespokeButton
+                  href="/courses"
                   variant="bespoke-secondary"
                   size="xl"
                   className="font-semibold border-2 border-zinc-600 hover:border-zinc-500"

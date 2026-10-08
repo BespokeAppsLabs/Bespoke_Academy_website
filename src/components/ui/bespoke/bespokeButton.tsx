@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
@@ -57,6 +58,8 @@ export interface BespokeButtonProps
   loading?: boolean;
   animation?: "none" | "scale" | "glow" | "bounce";
   fullWidth?: boolean;
+  /** Renders a Next.js Link instead of a button. */
+  href?: string;
 }
 
 const BespokeButton = React.forwardRef<HTMLButtonElement, BespokeButtonProps>(
@@ -69,11 +72,13 @@ const BespokeButton = React.forwardRef<HTMLButtonElement, BespokeButtonProps>(
     loading = false,
     animation,
     fullWidth = false,
+    href,
     children,
     disabled,
     ...props
   }, ref) => {
-    const Comp = asChild ? Slot : "button";
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Comp: any = href ? Link : asChild ? Slot : "button";
 
     const buttonVariants = bespokeButtonVariants({ variant, size, animation, loading });
 
@@ -87,7 +92,8 @@ const BespokeButton = React.forwardRef<HTMLButtonElement, BespokeButtonProps>(
         <Comp
           className={cn(buttonVariants, className)}
           ref={ref}
-          disabled={disabled || loading}
+          disabled={href ? undefined : disabled || loading}
+          href={href}
           {...props}
         >
           {/* Shimmer effect for premium variant */}

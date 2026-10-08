@@ -210,10 +210,10 @@ function AboutUsSection() {
             {/* Key Stats */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 mb-8">
               {[
-                { number: "500+", label: "Student Graduates" },
-                { number: "95%", label: "Parent Satisfaction" },
                 { number: "40", label: "Week Program" },
-                { number: "6:1", label: "Student-Teacher Ratio" }
+                { number: "Fri", label: "Weekly Sessions" },
+                { number: "8–11", label: "School Grades" },
+                { number: "None", label: "Experience Needed" }
               ].map((stat, i) => (
                 <motion.div
                   key={i}
@@ -233,36 +233,6 @@ function AboutUsSection() {
               ))}
             </div>
 
-            {/* Parent Testimonial Card */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
-              <BespokeCard
-                variant="testimonial-card"
-                className="bg-zinc-50 p-6"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold">
-                    SK
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-zinc-700 italic mb-2 text-sm md:text-base">
-                      "Bespoke Academy transformed my daughter's confidence in technology. She went from
-                      being intimidated by coding to building her own AI projects. The Friday schedule
-                      works perfectly for our family."
-                    </p>
-                    <div>
-                      <div className="font-semibold text-zinc-900">Sarah Kim</div>
-                      <div className="text-sm text-zinc-600">Parent of Grade 9 Student</div>
-                    </div>
-                  </div>
-                </div>
-              </BespokeCard>
-            </motion.div>
           </motion.div>
         </div>
       </div>

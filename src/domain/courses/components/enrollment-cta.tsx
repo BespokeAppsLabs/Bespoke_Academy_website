@@ -1,6 +1,7 @@
 "use client";
 
 import { BespokeButton, BespokeAnimation, BespokeCard } from "@/components/ui/bespoke";
+import { site } from "@/config/site";
 
 export default function EnrollmentCTA() {
   return (
@@ -16,7 +17,7 @@ export default function EnrollmentCTA() {
               Ready to Transform Your Teen's Future?
             </h2>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Join hundreds of Grades 8-11 students discovering the exciting world of AI & robotics
+              Applications for the {site.intakeYear} intake are open for Grades 8-11 learners
             </p>
           </BespokeAnimation>
 
@@ -56,13 +57,13 @@ export default function EnrollmentCTA() {
                 </div>
                 <div className="text-center">
                   <div className="text-3xl mb-2">👥</div>
-                  <h4 className="font-semibold mb-1">Expert Mentors</h4>
-                  <p className="text-sm text-blue-100">STEM educators</p>
+                  <h4 className="font-semibold mb-1">Hands-On</h4>
+                  <p className="text-sm text-blue-100">Real hardware every week</p>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl mb-2">👨‍👩‍👧‍👦</div>
                   <h4 className="font-semibold mb-1">Parent Updates</h4>
-                  <p className="text-sm text-blue-100">Weekly progress reports</p>
+                  <p className="text-sm text-blue-100">Regular progress updates</p>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl mb-2">🏆</div>
@@ -75,11 +76,11 @@ export default function EnrollmentCTA() {
 
           <BespokeAnimation preset="slide-in-up" delay={0.6}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <BespokeButton variant="bespoke-primary" size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
-                Enroll Your Teen
+              <BespokeButton href="/#contact" variant="bespoke-primary" size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
+                Apply for {site.intakeYear}
               </BespokeButton>
-              <BespokeButton variant="bespoke-outline" size="lg" className="border-white text-white hover:bg-white hover:text-blue-600">
-                Parent Information Session
+              <BespokeButton href={site.whatsapp.href} variant="bespoke-outline" size="lg" className="border-white text-white hover:bg-white hover:text-blue-600">
+                WhatsApp Us
               </BespokeButton>
             </div>
           </BespokeAnimation>
@@ -88,9 +89,8 @@ export default function EnrollmentCTA() {
             <div className="text-blue-100">
               <p className="mb-2 font-medium">Questions about our program?</p>
               <div className="flex flex-wrap justify-center gap-6 text-sm">
-                <span>📧 info@bespoke-academy.com</span>
-                <span>📱 +1 (555) 987-6543</span>
-                <span>💬 Schedule a call with us</span>
+                <a href={`mailto:${site.email}`} className="hover:text-white">📧 {site.email}</a>
+                <a href={site.whatsapp.href} className="hover:text-white">💬 {site.whatsapp.display}</a>
               </div>
             </div>
           </BespokeAnimation>

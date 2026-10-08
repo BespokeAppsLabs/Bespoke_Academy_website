@@ -6,7 +6,7 @@ const values = [
   {
     icon: "🎯",
     title: "Personalization",
-    description: "Every learning journey is tailored to individual goals, skills, and pace through AI-driven adaptation."
+    description: "Small groups mean each learner gets attention at their own pace, from first click to first robot."
   },
   {
     icon: "🚀",
@@ -21,7 +21,7 @@ const values = [
   {
     icon: "📊",
     title: "Results-Driven",
-    description: "Our focus is on real-world outcomes and career advancement, not just completion certificates."
+    description: "Every phase ends in something real that learners built themselves, not just a certificate."
   },
   {
     icon: "🌍",

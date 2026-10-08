@@ -17,7 +17,6 @@ import {
   AcademicCapIcon,
   BookOpenIcon,
   InformationCircleIcon,
-  ChartBarIcon,
   Bars3Icon,
   XMarkIcon,
   SparklesIcon,
@@ -62,12 +61,6 @@ const defaultNavItems: NavItem[] = [
     href: "/about",
     icon: InformationCircleIcon,
     description: "Our mission and values"
-  },
-  {
-    name: "Dashboard",
-    href: "/dashboard",
-    icon: ChartBarIcon,
-    description: "Track your progress"
   }
 ];
 
@@ -244,19 +237,13 @@ export function BespokeTopNav({
           {ctaButtons && (
             <div className="flex items-center space-x-3 flex-shrink-0">
               <BespokeButton
-                variant="bespoke-ghost"
-                size="sm"
-                className="hidden lg:flex"
-              >
-                Login
-              </BespokeButton>
-              <BespokeButton
+                href="/#contact"
                 variant="bespoke-primary"
                 size="sm"
                 icon={<SparklesIcon className="w-4 h-4" />}
                 animation="glow"
               >
-                Enroll Now
+                Apply for 2027
               </BespokeButton>
             </div>
           )}
@@ -379,21 +366,14 @@ export function BespokeTopNav({
                 {ctaButtons && (
                   <div className="mt-6 space-y-3">
                     <BespokeButton
-                      variant="bespoke-outline"
-                      size="lg"
-                      fullWidth
-                      className="w-full"
-                    >
-                      Login
-                    </BespokeButton>
-                    <BespokeButton
+                      href="/#contact"
                       variant="bespoke-primary"
                       size="lg"
                       fullWidth
                       icon={<SparklesIcon className="w-4 h-4" />}
                       animation="glow"
                     >
-                      Enroll Now
+                      Apply for 2027
                     </BespokeButton>
                   </div>
                 )}

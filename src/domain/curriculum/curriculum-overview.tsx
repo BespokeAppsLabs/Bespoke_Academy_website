@@ -40,7 +40,7 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
         },
         resources: {
           weeklyProjects: ['8 hands-on projects', 'Step-by-step guides', 'Video tutorials'],
-          support: ['Live Friday sessions', 'AI-powered learning assistant', 'Instructor office hours']
+          support: ['Live Friday sessions', 'AI-powered learning assistant']
         }
       },
       {
@@ -96,7 +96,7 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
         },
         resources: {
           weeklyProjects: ['12 AI-powered projects', 'Model training exercises', 'Real-world AI applications'],
-          support: ['AI tool workshops', 'Ethics discussions', 'Industry expert sessions']
+          support: ['AI tool workshops', 'Ethics discussions', 'Guided AI projects']
         }
       },
       {
@@ -124,7 +124,7 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
         },
         resources: {
           weeklyProjects: ['Capstone project development', 'Portfolio creation', 'Showcase preparation'],
-          support: ['Industry mentorship', 'Portfolio reviews', 'Career guidance']
+          support: ['Portfolio reviews', 'Project presentations', 'Study-path guidance']
         }
       }
     ],

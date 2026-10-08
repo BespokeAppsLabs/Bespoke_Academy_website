@@ -1,57 +1,23 @@
 # Pricing
 
 ## Overview
-Bespoke Academy offers flexible pricing from R1 to R10 000 options to make our AI and Robotics education accessible to families. We provide various payment plans and financial assistance to ensure cost doesn't become a barrier to quality education.
+The Bespoke Academy AI & Robotics programme costs R1,500 per month for 10 months (R15,000 in total) for the full 40-week programme. Families outside South Africa see the fee in US dollars (US$85 per month).
 
 ## Key Information
-- Comprehensive 40-week program tuition
-- Flexible payment plans available
-- All materials and equipment included
-- No hidden fees or surprise costs
-- Financial assistance options
-- Value-based education investment
+- R1,500 per month, 10 monthly payments
+- All equipment, materials and software are included
+- No payment is taken on the website
+- Payment details are shared once an application is accepted
 
 ## Common Questions
-**Q: What is included in the tuition?**
-A: Tuition covers all instruction, materials, equipment usage, software licenses, and project supplies for the entire 40-week program.
+**Q: How much does the programme cost?**
+A: R1,500 per month for 10 months, covering the full 40-week programme.
 
-**Q: Do you offer payment plans?**
-A: Yes, we offer several flexible payment options including monthly, quarterly, and semester-based plans to fit your budget.
+**Q: What is included?**
+A: All instruction, equipment, materials and software for the 40 weeks.
 
-**Q: Are there any additional costs I should know about?**
-A: No, everything is included in the tuition. There are no hidden fees for materials, software, or equipment.
+**Q: Can I pay online?**
+A: Not yet. Apply on the website and we will share payment details once the application is accepted.
 
-## Detailed Information
-
-### Tuition Structure
-- Full 40-week program coverage
-- All instructional materials included
-- Equipment and software access
-- Project supplies and components
-- Portfolio development support
-- Career guidance services
-
-### Payment Options
-- **Full Payment**: Single payment with discount
-- **Semester Plans**: 4 payments over the program
-- **Monthly Plans**: 10 equal monthly payments
-- **Custom Plans**: Tailored to family needs
-
-### Financial Assistance
-- Need-based scholarships available
-- Merit-based awards
-- Family discounts for multiple students
-- Community partnership programs
-- Flexible payment arrangements
-
-### Value Proposition
-Our program provides exceptional value through:
-- Small class sizes and personalized attention
-- Expert instructors with industry experience
-- Comprehensive curriculum covering AI and robotics
-- Portfolio development and career preparation
-- Long-term skill development and opportunities
-
-## Website Integration
-Primary URL: /pricing
-Related URLs: /enroll, /programs, /financial-aid
+**Q: Do you offer discounts?**
+A: Please ask us directly by email (info@bespoke.co.za) or WhatsApp (082 290 2428).

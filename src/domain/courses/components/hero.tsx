@@ -25,11 +25,11 @@ export default function Hero() {
             and transform from curious beginner to confident creator.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <BespokeButton variant="bespoke-primary" size="lg">
+            <BespokeButton href="/curriculum" variant="bespoke-primary" size="lg">
               View Curriculum
             </BespokeButton>
-            <BespokeButton variant="bespoke-outline" size="lg">
-              Parent Information
+            <BespokeButton href="#fees" variant="bespoke-outline" size="lg">
+              Fees & Applying
             </BespokeButton>
           </div>
         </BespokeAnimation>

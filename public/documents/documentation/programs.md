@@ -6,7 +6,7 @@ Bespoke Academy offers specialized AI and Robotics programs designed to prepare 
 ## Key Information
 - Grade 8-11 focused curriculum
 - Small class sizes for personalized attention
-- Expert instructors with industry experience
+- Hands-on, project-based learning
 - Project-based learning methodology
 - Career preparation and portfolio development
 - Ongoing student support and guidance
@@ -19,7 +19,7 @@ A: Our program combines cutting-edge AI and robotics education with personalized
 A: We maintain small class sizes to ensure individualized attention and effective learning.
 
 **Q: Are the instructors qualified?**
-A: Yes, our instructors have extensive industry experience in AI, robotics, and education.
+A: Sessions are run by Bespoke Applications Labs, a South African software and AI studio.
 
 ## Detailed Information
 
@@ -28,7 +28,7 @@ We believe in learning by doing. Our programs emphasize hands-on projects, colla
 
 ### Program Structure
 - Progressive skill development across four phases
-- Weekly interactive sessions with expert instructors
+- Weekly supervised Friday sessions
 - Peer collaboration and team projects
 - Individual portfolio development
 - Regular progress assessments and feedback

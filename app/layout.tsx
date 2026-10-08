@@ -6,7 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css"
 import { Suspense } from "react"
 import { ChatWidget } from "@/components/chat"
-import { StructuredData, educationalOrganizationData, localBusinessData, faqData, courseData } from "@/components/seo/structured-data"
+import { StructuredData, educationalOrganizationData, courseData } from "@/components/seo/structured-data"
 import { ScrollProgress, ScrollProgressMobile } from "@/components/ui/scroll-progress"
 
 const inter = Inter({
@@ -18,7 +18,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Bespoke Academy - AI Robotics Program for Grades 8-11 | Lephalale Limpopo STEM Education",
   description:
-    "Transform your child's future with our 40-week AI Robotics curriculum for grades 8-11 in Lephalale, Limpopo. Hands-on learning with all equipment included. From beginner to technology creator. No prior experience needed. Enroll today!",
+    "Transform your child's future with our 40-week AI Robotics curriculum for grades 8-11 in Lephalale, Limpopo. Hands-on learning with all equipment included. From beginner to technology creator. No prior experience needed. Applications open for 2027.",
   keywords: [
     "AI robotics curriculum grades 8-11",
     "STEM education Limpopo",
@@ -48,10 +48,6 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://bespokeacademy.co.za"),
   alternates: {
     canonical: "/",
-    languages: {
-      "en-US": "/en-US",
-      "en-ZA": "/en-ZA",
-    },
   },
   openGraph: {
     type: "website",
@@ -86,10 +82,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "google-site-verification-code-here",
-    yandex: "yandex-verification-code-here",
-  },
 }
 
 export default function RootLayout({
@@ -101,8 +93,6 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <head>
         <StructuredData data={educationalOrganizationData} />
-        <StructuredData data={localBusinessData} />
-        <StructuredData data={faqData} />
         <StructuredData data={courseData} />
       </head>
       <body className="font-sans antialiased">

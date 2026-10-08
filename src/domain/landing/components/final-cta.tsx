@@ -5,8 +5,6 @@ import { BespokeButton } from "@/components/ui/bespoke/bespokeButton";
 import { BespokeCard } from "@/components/ui/bespoke/bespokeCard";
 import { ParallelLinesBackground } from "@/components/ui/parallel-lines-background";
 import {
-  Star,
-  Shield,
   ArrowRight
 } from "lucide-react";
 
@@ -35,44 +33,32 @@ export default function FinalCTA() {
             </h2>
 
             <p className="text-xl text-zinc-600 mb-8 leading-relaxed">
-              Join thousands of teens (Grades 8-11) mastering AI and Robotics through our comprehensive
-              40-week curriculum. Build real projects, develop critical thinking skills, and prepare for
+              Applications are open for the 2027 intake. Our 40-week curriculum takes Grades 8-11 learners
+              from complete beginner to building AI-powered robots. Build real projects, develop critical thinking skills, and prepare for
               the technology-driven future.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <BespokeButton
+                href="/#contact"
                 variant="bespoke-primary"
                 size="lg"
                 icon={<ArrowRight className="w-5 h-5" />}
                 animation="scale"
               >
-                Enroll Now
+                Apply for 2027
               </BespokeButton>
 
               <BespokeButton
+                href="/#contact"
                 variant="bespoke-outline"
                 size="lg"
                 animation="scale"
               >
-                Parent Consultation
+                Ask a Question
               </BespokeButton>
             </div>
 
-            {/* Trust Indicators */}
-            <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
-              <div className="flex items-center gap-2">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-500 fill-current" />
-                ))}
-                <span className="text-zinc-700 font-medium ml-1">4.9/5 Parent Rating</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Shield className="w-5 h-5 text-emerald-500" />
-                <span className="text-zinc-700 font-medium">30-Day Satisfaction Guarantee</span>
-              </div>
-            </div>
           </motion.div>
 
           {/* Right Content - Feature Cards */}
@@ -178,34 +164,34 @@ export default function FinalCTA() {
                 <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
                   <img
                     src="/stack/arduino-1.svg"
-                    alt="Expert Instructors"
+                    alt=""
                     className="w-10 h-10 object-contain"
                   />
                 </div>
-                <h4 className="font-semibold text-zinc-900 mb-2">Expert Instructors</h4>
-                <p className="text-sm text-zinc-600">University-educated mentors with real AI/Robotics industry experience</p>
+                <h4 className="font-semibold text-zinc-900 mb-2">Hands-On Hardware</h4>
+                <p className="text-sm text-zinc-600">Learners build with real electronics, sensors and microcontrollers every week</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
                   <img
                     src="/stack/visual-studio-code-1-1.svg"
-                    alt="Proven Results"
+                    alt=""
                     className="w-10 h-10 object-contain"
                   />
                 </div>
-                <h4 className="font-semibold text-zinc-900 mb-2">Proven Results</h4>
-                <p className="text-sm text-zinc-600">95% college acceptance rate for tech programs and competition wins</p>
+                <h4 className="font-semibold text-zinc-900 mb-2">Portfolio of Real Projects</h4>
+                <p className="text-sm text-zinc-600">Every phase ends in a project learners can show schools and future employers</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
                   <img
                     src="/stack/hostinger.svg"
-                    alt="Safe Learning Environment"
+                    alt=""
                     className="w-10 h-10 object-contain"
                   />
                 </div>
                 <h4 className="font-semibold text-zinc-900 mb-2">Safe Learning Environment</h4>
-                <p className="text-sm text-zinc-600">Parent portal access, progress tracking, and dedicated support</p>
+                <p className="text-sm text-zinc-600">Small, supervised Friday sessions with progress updates for parents</p>
               </div>
             </div>
           </BespokeCard>

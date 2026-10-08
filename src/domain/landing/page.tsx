@@ -7,7 +7,6 @@ import {
   Features,
   LogoCloud,
   StickyScroll,
-  Stats,
   Contact,
   FinalCTA
 } from './components';
@@ -22,7 +21,6 @@ export default function LandingPage() {
         <Features />
         <LogoCloud />
         <StickyScroll />
-        <Stats />
         <Contact />
         <FinalCTA />
       </main>

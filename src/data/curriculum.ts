@@ -602,10 +602,9 @@ export const phase4Data: ModuleContent = {
       'Portfolio development resources'
     ],
     supportSystems: [
-      'Industry mentor connections',
-      'College application guidance',
-      'Innovation showcase opportunities',
-      'Career placement assistance'
+      'Portfolio and presentation guidance',
+      'Subject-choice and study-path guidance',
+      'Project showcase for families'
     ]
   }
 }
