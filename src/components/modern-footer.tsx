@@ -1,8 +1,9 @@
 "use client"
 
 import Link from "next/link"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
+import { motion } from "motion/react"
+import { BespokeButton } from "@/components/ui/bespoke/bespokeButton"
+import { Magnetic } from "@/components/ui/magnetic"
 import { LogoStacked } from "@/components/ui/logo"
 import { Mail, MessageCircle, ArrowRight, ExternalLink } from "lucide-react"
 import { site } from "@/config/site"
@@ -185,19 +186,18 @@ export function ModernFooter() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-center"
           >
-            <div className="bg-gradient-to-r from-primary-emerald-500/20 to-primary-emerald-600/20 rounded-xl p-8 border border-primary-emerald-500/30 max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-primary-emerald-500/15 via-gold-500/10 to-primary-emerald-600/15 rounded-xl p-8 border border-gold-500/30 max-w-4xl mx-auto">
               <h4 className="text-2xl font-bold text-white mb-4">
                 Applications for {site.intakeYear} are open
               </h4>
               <p className="text-neutral-300 mb-6 max-w-2xl mx-auto">
                 Places are limited. Apply now and we&apos;ll be in touch.
               </p>
-              <Button asChild className="bg-primary-emerald-500 hover:bg-primary-emerald-600 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center gap-2 mx-auto">
-                <Link href="/#contact">
+              <Magnetic>
+                <BespokeButton href="/#contact" variant="bespoke-primary" size="lg" icon={<ArrowRight className="w-4 h-4" />}>
                   Apply for {site.intakeYear}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </Button>
+                </BespokeButton>
+              </Magnetic>
             </div>
           </motion.div>
         </div>

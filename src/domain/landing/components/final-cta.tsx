@@ -1,12 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { BespokeButton } from "@/components/ui/bespoke/bespokeButton";
 import { BespokeCard } from "@/components/ui/bespoke/bespokeCard";
+import { Magnetic } from "@/components/ui/magnetic";
+import { StaggerContainer } from "@/components/ui/bespoke/bespokeAnimation";
 import { ParallelLinesBackground } from "@/components/ui/parallel-lines-background";
 import {
   ArrowRight
 } from "lucide-react";
+import { GoldUnderline } from "@/components/ui/gold-underline";
 
 export default function FinalCTA() {
   return (
@@ -23,13 +26,13 @@ export default function FinalCTA() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-emerald-500 text-sm font-semibold tracking-wider uppercase">
+            <span className="text-gold-700 text-sm font-semibold tracking-wider uppercase">
               Ready to Build Your Future?
             </span>
 
             <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-zinc-900">
               Start Your AI & Robotics
-              <span className="text-emerald-500 block">Journey Today.</span>
+              <span className="text-emerald-500 block"><GoldUnderline>Journey Today.</GoldUnderline></span>
             </h2>
 
             <p className="text-xl text-zinc-600 mb-8 leading-relaxed">
@@ -39,6 +42,7 @@ export default function FinalCTA() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
+              <Magnetic>
               <BespokeButton
                 href="/#contact"
                 variant="bespoke-primary"
@@ -48,6 +52,7 @@ export default function FinalCTA() {
               >
                 Apply for 2027
               </BespokeButton>
+              </Magnetic>
 
               <BespokeButton
                 href="/#contact"
@@ -62,7 +67,7 @@ export default function FinalCTA() {
           </motion.div>
 
           {/* Right Content - Feature Cards */}
-          <div className="space-y-6">
+          <StaggerContainer className="space-y-6" staggerDelay={0.12}>
             <BespokeCard
               variant="premium-card"
               animation="float"
@@ -140,7 +145,7 @@ export default function FinalCTA() {
                 </div>
               </div>
             </BespokeCard>
-          </div>
+          </StaggerContainer>
         </div>
 
         {/* Bottom Stats/Features */}

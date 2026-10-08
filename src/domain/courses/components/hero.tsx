@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { BespokeAnimation, BespokeButton } from "@/components/ui/bespoke";
+import { GoldUnderline } from "@/components/ui/gold-underline";
 
 export default function Hero() {
   return (
@@ -18,7 +19,7 @@ export default function Hero() {
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Find Your AI & <span className="text-emerald-600">Robotics Path</span>
+            Find Your AI & <span className="text-emerald-600"><GoldUnderline>Robotics Path</GoldUnderline></span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8">
             No experience required! Join our 40-week structured curriculum with hands-on Friday sessions

@@ -7,7 +7,8 @@ import "./globals.css"
 import { Suspense } from "react"
 import { ChatWidget } from "@/components/chat"
 import { StructuredData, educationalOrganizationData, courseData } from "@/components/seo/structured-data"
-import { ScrollProgress, ScrollProgressMobile } from "@/components/ui/scroll-progress"
+import { ScrollProgress } from "@/components/ui/scroll-progress"
+import { MotionProvider } from "@/lib/motion"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -90,15 +91,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} data-scroll-behavior="smooth">
       <head>
         <StructuredData data={educationalOrganizationData} />
         <StructuredData data={courseData} />
       </head>
       <body className="font-sans antialiased">
-        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
-        <ScrollProgress />
-        <ScrollProgressMobile />
+        <MotionProvider>
+          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+          <ScrollProgress />
+        </MotionProvider>
         <Analytics />
         <SpeedInsights />
         <ChatWidget />

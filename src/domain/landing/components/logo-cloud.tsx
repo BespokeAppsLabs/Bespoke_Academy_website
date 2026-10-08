@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { BespokeCard } from "@/components/ui/bespoke/bespokeCard";
 import { BespokeButton } from "@/components/ui/bespoke/bespokeButton";
@@ -88,7 +88,7 @@ export default function LogoCloudSection() {
           transition={{ duration: 0.6 }}
         >
           <motion.span
-            className="text-emerald-500 text-sm font-semibold tracking-wider uppercase"
+            className="text-gold-400 text-sm font-semibold tracking-wider uppercase"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

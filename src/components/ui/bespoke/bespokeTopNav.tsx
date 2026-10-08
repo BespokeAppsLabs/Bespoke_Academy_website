@@ -9,6 +9,7 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "motion/react";
+import { spring } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/ui/logo";
 import { BespokeButton } from "./bespokeButton";
@@ -72,12 +73,14 @@ export function BespokeTopNav({
   items = defaultNavItems
 }: BespokeTopNavProps) {
   const [isVisible, setIsVisible] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { scrollY } = useScroll();
 
   // Handle scroll-based visibility
   useMotionValueEvent(scrollY, "change", (latest) => {
+    setScrolled(latest > 24);
     const previous = scrollY.getPrevious();
     if (previous !== undefined) {
       const direction = latest > previous ? "down" : "up";
@@ -115,17 +118,17 @@ export function BespokeTopNav({
             y: isVisible ? 0 : -100,
           }}
           exit={{ opacity: 0, y: -100 }}
-          transition={{
-            duration: 0.3,
-            ease: "easeInOut"
-          }}
+          transition={spring}
           className={cn(
-            "fixed top-4 left-1/2 transform -translate-x-1/2 z-50",
-            "backdrop-blur-xl bg-emerald-800/60 dark:bg-emerald-600/10",
-            "border border-white/20 dark:border-neutral-700/20",
-            "rounded-full shadow-2xl shadow-black/10",
+            "fixed left-1/2 transform -translate-x-1/2 z-50",
+            "border dark:border-neutral-700/20 rounded-full",
+            "transition-[top,padding,background-color,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            // Condenses once the page scrolls: tighter, darker glass, gold hairline
+            scrolled
+              ? "top-2 py-2 backdrop-blur-2xl bg-zinc-900/75 border-gold-500/30 shadow-2xl shadow-black/30"
+              : "top-4 py-3 backdrop-blur-xl bg-emerald-800/60 border-white/20 shadow-2xl shadow-black/10",
             // Layout
-            "flex items-center justify-between gap-4 px-6 py-3",
+            "flex items-center justify-between gap-4 px-6",
             "min-h-16 lg:w-3/5 mx-4",
             // Responsive
             "hidden md:flex",
@@ -183,11 +186,11 @@ export function BespokeTopNav({
                       // Base styles
                       "relative flex items-center space-x-2 px-4 py-2 rounded-full",
                       "text-sm font-medium transition-all duration-200",
-                      "hover:scale-105 active:scale-95",
+                      "active:scale-95",
 
                       // Active state
                       active
-                        ? "bg-primary-emerald-500 text-black shadow-lg"
+                        ? "bg-gold-500 text-zinc-950 shadow-lg shadow-gold-500/30"
                         : "text-white hover:text-neutral-200",
 
                       // Hover state for non-active items
@@ -209,7 +212,7 @@ export function BespokeTopNav({
                     {/* Active indicator */}
                     {active && (
                       <motion.div
-                        className="absolute inset-0 rounded-full bg-primary-emerald-500/20 -z-10"
+                        className="absolute inset-0 rounded-full bg-gold-500/20 -z-10"
                         layoutId="activeTab"
                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                       />
@@ -342,7 +345,7 @@ export function BespokeTopNav({
                           "flex items-center space-x-3 w-full px-4 py-3 rounded-xl",
                           "transition-all duration-200 font-medium",
                           active
-                            ? "bg-primary-emerald-500 text-black shadow-lg"
+                            ? "bg-gold-500 text-zinc-950 shadow-lg shadow-gold-500/30"
                             : "text-neutral-900 hover:bg-neutral-100"
                         )}
                         onClick={() => setMobileMenuOpen(false)}

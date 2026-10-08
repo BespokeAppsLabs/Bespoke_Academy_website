@@ -7,9 +7,7 @@ export { BespokeBadge, bespokeBadgeVariants, BespokeBadgeCollection } from './be
 export {
   BespokeAnimation,
   bespokeAnimationPresets,
-  StaggerContainer,
-  ScrollAnimation,
-  AnimatedCounter
+  StaggerContainer
 } from './bespokeAnimation';
 export { BespokeTopNav } from './bespokeTopNav';
 
@@ -20,8 +18,6 @@ export type { BespokeBadgeProps, BadgeCollectionProps } from './bespokeBadge';
 export type {
   BespokeAnimationProps,
   StaggerContainerProps,
-  ScrollAnimationProps,
-  AnimatedCounterProps,
   AnimationPreset
 } from './bespokeAnimation';
 export type { BespokeTopNavProps, NavItem } from './bespokeTopNav';

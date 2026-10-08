@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from "motion/react";
 import { BespokeCard } from '@/components/ui/bespoke/bespokeCard';
 import { BespokeButton } from '@/components/ui/bespoke/bespokeButton';
 import AutoScrollingCarousel from '@/components/ui/auto-scrolling-carousel';
@@ -23,6 +23,7 @@ import {
   Puzzle,
   Microscope
 } from 'lucide-react';
+import { GoldUnderline } from "@/components/ui/gold-underline";
 
 const solutions = [
   {
@@ -70,72 +71,31 @@ const solutions = [
 ];
 
 export default function StickyScroll() {
-  const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-
-      const container = containerRef.current;
-      const rect = container.getBoundingClientRect();
-      const containerHeight = container.offsetHeight;
-      const windowHeight = window.innerHeight;
-
-      // Calculate scroll progress (0 to 1)
-      let progress = 0;
-
-      // When container top is at viewport bottom, progress = 0
-      // When container bottom is at viewport top, progress = 1
-      if (rect.top < windowHeight && rect.bottom > 0) {
-        const totalScrollDistance = containerHeight + windowHeight;
-        const scrolledDistance = windowHeight - rect.top;
-        progress = Math.min(1, Math.max(0, scrolledDistance / totalScrollDistance));
-      } else if (rect.bottom <= 0) {
-        // Container has been fully scrolled past
-        progress = 1;
-      }
-
-      setScrollProgress(progress);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // 0 when the section pins, 1 when the second panel fully covers the first.
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
+  const backScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const backDim = useTransform(scrollYProgress, [0, 1], [0, 0.55]);
+  const backRadius = useTransform(scrollYProgress, [0, 1], [0, 32]);
+  const frontRadius = useTransform(scrollYProgress, [0, 1], [40, 0]);
 
   return (
     <div ref={containerRef} className="relative min-h-[200vh] w-full md:h-[200vh]">
-      {/* Progress Indicator - Hidden on mobile */}
-      <motion.div
-        className="fixed bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 z-50 bg-black/20 backdrop-blur-sm rounded-full px-3 py-2 md:px-4 md:py-2 border border-white/20 md:block hidden"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.0 }}
-      >
-        <div className="flex items-center gap-2">
-          <div className="w-24 md:w-32 h-1 bg-white/20 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-emerald-500 origin-left"
-              style={{ scaleX: scrollProgress }}
-            />
-          </div>
-          <span className="text-white text-xs font-medium">
-            {Math.round(scrollProgress * 100)}%
-          </span>
-        </div>
-      </motion.div>
-
-      {/* Panel 1: About Us */}
-      <div className="h-screen w-full md:min-h-screen sticky top-0">
-        <AboutUsSection />
+      {/* Panel 1: About Us - recedes as panel 2 slides over it */}
+      <div className="h-screen w-full md:min-h-screen sticky top-0 overflow-hidden bg-zinc-900">
+        <motion.div className="h-full w-full origin-top overflow-hidden" style={{ scale: backScale, borderRadius: backRadius }}>
+          <AboutUsSection />
+          <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-zinc-950" style={{ opacity: backDim }} />
+        </motion.div>
       </div>
 
       {/* Panel 2: Solutions */}
-      <div className="h-screen w-full md:min-h-screen sticky top-0">
+      <motion.div
+        className="h-screen w-full md:min-h-screen sticky top-0 overflow-hidden shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.5)]"
+        style={{ borderTopLeftRadius: frontRadius, borderTopRightRadius: frontRadius }}
+      >
         <SolutionsSection />
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -188,13 +148,13 @@ function AboutUsSection() {
             transition={{ duration: 0.6 }}
             className="w-full"
           >
-            <span className="text-emerald-500 text-sm font-semibold tracking-wider uppercase">
+            <span className="text-gold-700 text-sm font-semibold tracking-wider uppercase">
               About Bespoke Academy
             </span>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-6 text-zinc-900">
               Empowering Young Adults Through
-              <span className="text-emerald-500 block">Web Technologies .</span>
+              <span className="text-emerald-500 block"><GoldUnderline>Web Technologies .</GoldUnderline></span>
             </h2>
 
             <p className="text-lg md:text-xl text-zinc-600 mb-6 leading-relaxed">
@@ -255,12 +215,12 @@ function SolutionsSection() {
           transition={{ duration: 0.6 }}
           className="mb-8 md:mb-12"
         >
-          <span className="text-emerald-400 text-sm font-semibold tracking-wider uppercase">
+          <span className="text-gold-400 text-sm font-semibold tracking-wider uppercase">
             Learning Pathways
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 text-white">
             Master AI & Robotics
-            <span className="text-emerald-400 block">Through Hands-On Projects.</span>
+            <span className="text-emerald-400 block"><GoldUnderline>Through Hands-On Projects.</GoldUnderline></span>
           </h2>
           <p className="text-zinc-300 mt-4 max-w-3xl text-base md:text-lg">
             Our 40-week curriculum takes students from coding basics to advanced AI applications.
@@ -290,7 +250,7 @@ function SolutionsSection() {
                   transition={{
                     duration: 0.5,
                     delay: index * 0.08,
-                    ease: "easeInOut"
+                    ease: [0.16, 1, 0.3, 1]
                   }}
                   className="h-full"
                 >
@@ -298,8 +258,8 @@ function SolutionsSection() {
                     variant="glass-card"
                     className={`
                       bg-zinc-800/90 backdrop-blur-sm border-zinc-700 text-white p-6 h-full
-                      transition-all duration-300 hover:bg-zinc-750/90 hover:border-emerald-600
-                      hover:shadow-2xl hover:shadow-emerald-500/20
+                      transition-all duration-300 hover:bg-zinc-750/90 hover:border-gold-500/60
+                      hover:shadow-2xl hover:shadow-gold-500/20
                       group cursor-pointer
                     `}
                     style={{

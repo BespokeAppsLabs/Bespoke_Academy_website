@@ -1,6 +1,7 @@
 "use client";
 
 import { BespokeCard, BespokeAnimation } from "@/components/ui/bespoke";
+import { GoldUnderline } from "@/components/ui/gold-underline";
 
 const values = [
   {
@@ -42,7 +43,7 @@ export default function Values() {
         <div className="text-center mb-16">
           <BespokeAnimation preset="slide-in-up">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our <span className="text-emerald-600">Values</span>
+              Our <span className="text-emerald-600"><GoldUnderline>Values</GoldUnderline></span>
           </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               These principles guide everything we do, from curriculum design to student support

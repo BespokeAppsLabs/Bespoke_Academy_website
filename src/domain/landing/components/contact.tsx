@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +10,8 @@ import { BespokeButton } from "@/components/ui/bespoke/bespokeButton";
 import { ParallelLinesBackground } from "@/components/ui/parallel-lines-background";
 import { Mail, Send, UserCheck, MessageCircle, Calendar } from "lucide-react";
 import { site } from "@/config/site";
+import { ease } from "@/lib/motion";
+import { GoldUnderline } from "@/components/ui/gold-underline";
 
 export default function ContactSection() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -70,7 +72,7 @@ export default function ContactSection() {
           transition={{ duration: 0.8 }}
         >
           <motion.span
-            className="text-primary-emerald-400 text-sm font-semibold tracking-wider uppercase"
+            className="text-gold-400 text-sm font-semibold tracking-wider uppercase"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -87,7 +89,7 @@ export default function ContactSection() {
             transition={{ delay: 0.3 }}
           >
             Shape Your Teen's
-            <span className="text-primary-emerald-400 block">AI Future.</span>
+            <span className="text-primary-emerald-400 block"><GoldUnderline>AI Future.</GoldUnderline></span>
           </motion.h2>
 
           <motion.p
@@ -263,7 +265,7 @@ export default function ContactSection() {
                       size="lg"
                       type="submit"
                       disabled={status === "sending"}
-                      className="font-semibold"
+                      className={`font-semibold transition-[opacity,transform] duration-300 ${status === "sending" ? "opacity-70 scale-[0.98]" : ""}`}
                     >
                       <Send className="w-5 h-5 mr-2" />
                       {status === "sending" ? "Sending..." : "Send Message"}
@@ -271,12 +273,30 @@ export default function ContactSection() {
                   </div>
                   <p role="status" aria-live="polite" className="mt-4 text-sm">
                     {status === "sent" && (
-                      <span className="text-primary-emerald-400">Thank you. We&apos;ll be in touch soon.</span>
+                      <motion.span
+                        className="inline-flex items-center gap-3 text-gold-300"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                      >
+                        <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden="true">
+                          <motion.circle
+                            cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"
+                            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}
+                            transition={{ duration: 0.6, ease: ease.outExpo }}
+                          />
+                          <motion.path
+                            d="M7.5 12.5l3 3 6-6.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}
+                            transition={{ duration: 0.5, delay: 0.35, ease: ease.outExpo }}
+                          />
+                        </svg>
+                        Thank you. We&apos;ll be in touch soon.
+                      </motion.span>
                     )}
                     {status === "error" && (
-                      <span className="text-red-400">
+                      <motion.span className="inline-block text-red-400" initial={{ x: -6 }} animate={{ x: [6, -4, 2, 0] }} transition={{ duration: 0.4 }}>
                         Something went wrong. Please email {site.email} or WhatsApp {site.whatsapp.display}.
-                      </span>
+                      </motion.span>
                     )}
                   </p>
                 </motion.div>
