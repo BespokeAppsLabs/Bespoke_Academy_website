@@ -38,7 +38,7 @@ const values = [
 
 export default function Values() {
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <BespokeAnimation preset="slide-in-up">
@@ -58,7 +58,7 @@ export default function Values() {
               preset="slide-in-up"
               delay={index * 0.1}
             >
-              <BespokeCard variant="feature-card" className="h-full group hover:shadow-xl transition-all duration-300">
+              <BespokeCard variant="course-card" className="h-full group hover:shadow-xl transition-all duration-300">
                 <div className="p-6">
                   <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
                     {value.icon}

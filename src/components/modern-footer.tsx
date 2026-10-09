@@ -16,18 +16,18 @@ export function ModernFooter() {
       { name: "About", href: "/about" },
       { name: "Curriculum", href: "/curriculum" },
       { name: "Programme & Fees", href: "/courses" },
-      { name: "Apply for 2027", href: "/#contact" }
+      { name: "Apply now", href: "/#contact" }
     ],
     programs: [
-      { name: "Phase 1: Digital Foundations", href: "/curriculum/module-1" },
-      { name: "Phase 2: Electronics & Robotics", href: "/curriculum/module-2" },
-      { name: "Phase 3: AI Concepts & Tools", href: "/curriculum/module-3" },
-      { name: "Phase 4: AI-Robotics Projects", href: "/curriculum/module-4" }
+      { name: "Engineering Stream", href: "/curriculum" },
+      { name: "Media Stream", href: "/curriculum" },
+      { name: "Fees & Tiers", href: "/courses#fees" },
+      { name: "Laptop Requirements", href: "/courses#laptop" }
     ]
   }
 
   return (
-    <footer className="bg-neutral-900 text-white">
+    <footer className="bg-zinc-50 text-zinc-900 border-t border-zinc-200">
       <div className="container mx-auto px-6">
         {/* Main Footer Content - 3 Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8 lg:gap-12 py-16 w-full">
@@ -45,14 +45,14 @@ export function ModernFooter() {
                 <LogoStacked size="lg" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Bespoke Academy</h3>
-                <p className="text-sm text-primary-emerald-400">AI & Robotics for Grades 8–11</p>
+                <h3 className="text-xl font-bold text-zinc-900">Bespoke Academy</h3>
+                <p className="text-sm text-primary-emerald-600">AI Engineering & Media for Grades 8–11</p>
               </div>
             </div>
 
-            <p className="text-neutral-300 leading-relaxed max-w-sm">
-              A {site.program.weeks}-week, hands-on AI and robotics programme for {site.program.grades} learners.
-              Applications for the {site.intakeYear} intake are open.
+            <p className="text-zinc-600 leading-relaxed max-w-sm">
+              A hands-on AI programme for {site.program.grades} learners in {site.program.location}, with Engineering and Media streams.
+              Applications are open. {site.program.start}.
             </p>
           </motion.div>
 
@@ -64,15 +64,15 @@ export function ModernFooter() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="space-y-6"
           >
-            <h4 className="text-lg font-semibold text-white mb-4">Academy</h4>
+            <h4 className="text-lg font-semibold text-zinc-900 mb-4">Academy</h4>
             <ul className="space-y-3">
               {footerLinks.academy.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-neutral-300 hover:text-primary-emerald-400 transition-colors duration-300 flex items-center gap-2 group"
+                    className="text-sm text-zinc-600 hover:text-primary-emerald-600 transition-colors duration-300 flex items-center gap-2 group"
                   >
-                    <span className="w-1 h-1 bg-primary-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="w-1 h-1 bg-primary-emerald-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                     {link.name}
                   </Link>
                 </li>
@@ -88,15 +88,15 @@ export function ModernFooter() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-6"
           >
-            <h4 className="text-lg font-semibold text-white mb-4">Programs</h4>
+            <h4 className="text-lg font-semibold text-zinc-900 mb-4">Programs</h4>
             <ul className="space-y-3">
               {footerLinks.programs.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-neutral-300 hover:text-primary-emerald-400 transition-colors duration-300 flex items-center gap-2 group"
+                    className="text-sm text-zinc-600 hover:text-primary-emerald-600 transition-colors duration-300 flex items-center gap-2 group"
                   >
-                    <span className="w-1 h-1 bg-primary-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="w-1 h-1 bg-primary-emerald-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                     {link.name}
                   </Link>
                 </li>
@@ -114,24 +114,24 @@ export function ModernFooter() {
           >
             {/* Contact Information */}
             <div>
-              <h4 className="text-lg font-semibold text-white mb-4">Get in Touch</h4>
+              <h4 className="text-lg font-semibold text-zinc-900 mb-4">Get in Touch</h4>
               <div className="space-y-3">
                 <a href={`mailto:${site.email}`} className="flex items-center gap-3 group">
-                  <div className="w-8 h-8 bg-primary-emerald-500/20 rounded-lg flex items-center justify-center shrink-0">
-                    <Mail className="w-4 h-4 text-primary-emerald-400" />
+                  <div className="w-8 h-8 bg-primary-emerald-50 rounded-lg flex items-center justify-center shrink-0">
+                    <Mail className="w-4 h-4 text-primary-emerald-600" />
                   </div>
                   <div>
-                    <div className="text-xs font-medium text-white">Email</div>
-                    <div className="text-sm text-neutral-300 group-hover:text-primary-emerald-400">{site.email}</div>
+                    <div className="text-xs font-medium text-zinc-900">Email</div>
+                    <div className="text-sm text-zinc-600 group-hover:text-primary-emerald-600">{site.email}</div>
                   </div>
                 </a>
                 <a href={site.whatsapp.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
-                  <div className="w-8 h-8 bg-primary-emerald-500/20 rounded-lg flex items-center justify-center shrink-0">
-                    <MessageCircle className="w-4 h-4 text-primary-emerald-400" />
+                  <div className="w-8 h-8 bg-primary-emerald-50 rounded-lg flex items-center justify-center shrink-0">
+                    <MessageCircle className="w-4 h-4 text-primary-emerald-600" />
                   </div>
                   <div>
-                    <div className="text-xs font-medium text-white">WhatsApp</div>
-                    <div className="text-sm text-neutral-300 group-hover:text-primary-emerald-400">{site.whatsapp.display}</div>
+                    <div className="text-xs font-medium text-zinc-900">WhatsApp</div>
+                    <div className="text-sm text-zinc-600 group-hover:text-primary-emerald-600">{site.whatsapp.display}</div>
                   </div>
                 </a>
               </div>
@@ -139,7 +139,7 @@ export function ModernFooter() {
 
             {/* Social Links */}
             <div>
-              <h4 className="text-lg font-semibold text-white mb-4">Follow Bespoke Apps</h4>
+              <h4 className="text-lg font-semibold text-zinc-900 mb-4">Follow Bespoke Apps</h4>
               <div className="flex flex-wrap gap-3">
                 {site.socials.map((social) => (
                   <a
@@ -147,7 +147,7 @@ export function ModernFooter() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 h-9 rounded-lg bg-neutral-800 border border-neutral-700 flex items-center text-sm hover:bg-primary-emerald-500 hover:border-primary-emerald-500 transition-colors"
+                    className="px-3 h-9 rounded-lg bg-white border border-zinc-200 flex items-center text-sm hover:bg-primary-emerald-500 hover:border-primary-emerald-500 hover:text-white transition-colors"
                   >
                     {social.label}
                   </a>
@@ -157,7 +157,7 @@ export function ModernFooter() {
 
             {/* Related sites */}
             <div>
-              <h4 className="text-lg font-semibold text-white mb-4">Also by Bespoke</h4>
+              <h4 className="text-lg font-semibold text-zinc-900 mb-4">Also by Bespoke</h4>
               <ul className="space-y-3">
                 {site.related.map((link) => (
                   <li key={link.href}>
@@ -165,7 +165,7 @@ export function ModernFooter() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-neutral-300 hover:text-primary-emerald-400 transition-colors inline-flex items-center gap-2"
+                      className="text-sm text-zinc-600 hover:text-primary-emerald-600 transition-colors inline-flex items-center gap-2"
                     >
                       {link.label}
                       <ExternalLink className="w-3 h-3" />
@@ -178,7 +178,7 @@ export function ModernFooter() {
         </div>
 
         {/* CTA Section */}
-        <div className="border-t border-neutral-800 py-12">
+        <div className="border-t border-zinc-200 py-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -186,16 +186,16 @@ export function ModernFooter() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-center"
           >
-            <div className="bg-gradient-to-r from-primary-emerald-500/15 via-gold-500/10 to-primary-emerald-600/15 rounded-xl p-8 border border-gold-500/30 max-w-4xl mx-auto">
-              <h4 className="text-2xl font-bold text-white mb-4">
-                Applications for {site.intakeYear} are open
+            <div className="bg-gradient-to-r from-primary-emerald-50 via-gold-50 to-primary-emerald-50 rounded-xl p-8 border border-gold-500/30 max-w-4xl mx-auto">
+              <h4 className="text-2xl font-bold text-zinc-900 mb-4">
+                Applications are open
               </h4>
-              <p className="text-neutral-300 mb-6 max-w-2xl mx-auto">
+              <p className="text-zinc-600 mb-6 max-w-2xl mx-auto">
                 Places are limited. Apply now and we&apos;ll be in touch.
               </p>
               <Magnetic>
                 <BespokeButton href="/#contact" variant="bespoke-primary" size="lg" icon={<ArrowRight className="w-4 h-4" />}>
-                  Apply for {site.intakeYear}
+                  Apply now
                 </BespokeButton>
               </Magnetic>
             </div>
@@ -203,9 +203,9 @@ export function ModernFooter() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-neutral-800 py-8">
+        <div className="border-t border-zinc-200 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-sm text-neutral-400">
+            <p className="text-sm text-zinc-500">
               © {currentYear} Bespoke Academy. All rights reserved.
             </p>
 

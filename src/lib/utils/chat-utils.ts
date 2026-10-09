@@ -186,7 +186,7 @@ export function generateConciseResponse(toolResult: any): string {
         break
 
       case 'schedule':
-        const scheduleMatch = content.match(/Friday|weekly|week|sessions|2\+ hours/gi)
+        const scheduleMatch = content.match(/Weekend|weekly|week|sessions|2\+ hours/gi)
         if (scheduleMatch) {
           response += ` Classes meet ${scheduleMatch[0]}.`
           console.log('📅 Added schedule info:', scheduleMatch[0])

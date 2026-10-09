@@ -1,20 +1,20 @@
 # Outcomes
 
 ## Overview
-By the end of the 40-week programme, learners have moved from complete beginner to building AI-powered robotics projects of their own.
+Students move from complete beginner to building their own projects. Engineering students finish able to build AI-powered devices and robots; Media students finish able to make AI images, video, motion graphics and 3D, with their own code behind them.
 
 ## Key Information
-- Confidence with computers, programming and digital tools
-- Practical electronics and robotics skills
-- An understanding of AI concepts and responsible use of AI tools
-- A portfolio of real projects, one from each phase
+- Both streams: Python, Git and GitHub, and responsible use of AI tools
+- Engineering: electronics, microcontrollers, IoT, AI models and (on High) robotics
+- Media: image recreation and generation, consistent characters, video, motion graphics and Blender 3D
+- A portfolio of real projects and a final project shown at demo day
 
 ## Common Questions
 **Q: What will my child be able to do after the programme?**
-A: Build and program simple robots, use AI tools responsibly, and present a portfolio of projects they built themselves.
+A: Engineering: build and program connected devices and, on High, robots. Media: plan and produce a short piece with a consistent character, video, motion graphics and 3D. Both: explain their own code and present their work.
 
 **Q: Does the programme help with school subject choices or applications?**
 A: The project portfolio gives learners concrete work to show schools, bursary programmes and future employers.
 
 **Q: What skills are covered?**
-A: Programming, electronics, AI fundamentals, robotics, problem-solving and project presentation.
+A: Programming, AI, problem-solving and presentation in both streams, plus electronics and robotics in Engineering or visual storytelling and 3D in Media.

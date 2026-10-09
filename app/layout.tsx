@@ -5,7 +5,8 @@ import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css"
 import { Suspense } from "react"
-import { ChatWidget } from "@/components/chat"
+import { Send } from "lucide-react"
+import { site } from "@/config/site"
 import { StructuredData, educationalOrganizationData, courseData } from "@/components/seo/structured-data"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
 import { MotionProvider } from "@/lib/motion"
@@ -17,13 +18,22 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Bespoke Academy - AI Robotics Program for Grades 8-11 | Lephalale Limpopo STEM Education",
+  title: {
+    default: "Bespoke Academy | Weekend AI, Coding & Robotics Classes in Lephalale",
+    template: "%s | Bespoke Academy Lephalale",
+  },
   description:
-    "Transform your child's future with our 40-week AI Robotics curriculum for grades 8-11 in Lephalale, Limpopo. Hands-on learning with all equipment included. From beginner to technology creator. No prior experience needed. Applications open for 2027.",
+    "Weekend AI, coding, robotics and digital media classes for Grades 8-11 in Lephalale, Limpopo. Engineering and Media streams, from R500 a month, join any month. No experience needed.",
   keywords: [
+    "weekend coding classes Lephalale",
+    "robotics classes Lephalale",
+    "AI classes for teens Lephalale",
+    "coding classes Ellisras",
+    "STEM classes Onverwacht",
+    "computer classes Marapong",
+    "Saturday classes for high school learners Lephalale",
     "AI robotics curriculum grades 8-11",
     "STEM education Limpopo",
-    "robotics classes Lephalale",
     "AI learning program high school",
     "technology education Lephalale",
     "coding classes for beginners Limpopo",
@@ -31,7 +41,8 @@ export const metadata: Metadata = {
     "AI tools for students South Africa",
     "project-based learning technology",
     "future skills education Waterberg",
-    "40-week AI program Lephalale",
+    "monthly AI programme Lephalale",
+    "AI media and Blender classes for teens",
     "robotics courses for teens",
     "STEM education South Africa",
     "artificial intelligence training",
@@ -47,29 +58,27 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL("https://bespokeacademy.co.za"),
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_ZA",
     url: "https://bespokeacademy.co.za",
-    title: "Bespoke Academy - AI Robotics Education for Grades 8-11 | Lephalale, Limpopo",
-    description: "Transform your child's future with our 40-week AI Robotics curriculum. Hands-on learning with all equipment included. No prior experience needed.",
+    title: "Bespoke Academy | Weekend AI, Coding & Robotics Classes in Lephalale",
+    description: "Weekend AI, coding, robotics and digital media classes for Grades 8-11 in Lephalale, Limpopo. Join any month. No experience needed.",
     siteName: "Bespoke Academy",
     images: [
       {
         url: "/images/ai-robotics-hero.jpg",
         width: 1200,
         height: 630,
-        alt: "Bespoke Academy AI Robotics Education",
+        alt: "Bespoke Academy weekend AI and robotics classes in Lephalale",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bespoke Academy - AI Robotics Education | Lephalale, Limpopo",
-    description: "40-week AI Robotics curriculum for grades 8-11. Transform beginners into technology creators.",
+    title: "Bespoke Academy | Weekend AI & Robotics Classes in Lephalale",
+    description: "Weekend AI Engineering and Media classes for Grades 8-11 in Lephalale, Limpopo.",
     images: ["/images/ai-robotics-hero.jpg"],
   },
   robots: {
@@ -103,7 +112,16 @@ export default function RootLayout({
         </MotionProvider>
         <Analytics />
         <SpeedInsights />
-        <ChatWidget />
+        {/* ponytail: AI chat widget switched off until it works; src/components/chat is kept for when it returns */}
+        <a
+          href={`${site.whatsapp.href}?text=${encodeURIComponent("Hi, I have a question about Bespoke Academy.")}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-4 right-4 z-50 inline-flex h-12 min-w-12 items-center justify-center gap-2 rounded-full bg-[#25D366] px-3 sm:px-5 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-[#1ebe5a]"
+        >
+          <Send className="h-5 w-5" />
+          <span className="sr-only sm:not-sr-only">Send message on WhatsApp</span>
+        </a>
       </body>
     </html>
   )

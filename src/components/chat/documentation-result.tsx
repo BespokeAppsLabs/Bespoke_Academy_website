@@ -63,13 +63,13 @@ export function DocumentationResult({
           className
         )}
       >
-        <div className="flex h-6 w-6 shrink-0 select-none items-center justify-center rounded-full bg-blue-500/20 text-blue-400 border border-blue-400/30">
+        <div className="flex h-6 w-6 shrink-0 select-none items-center justify-center rounded-full bg-blue-500/20 text-blue-600 border border-blue-400/30">
           <Search className="h-3 w-3" />
         </div>
         <div className="flex-1">
           <div className={cn(
             "rounded-lg px-3 py-2 max-w-[600px]",
-            "bg-blue-950/20 border border-blue-800/30 text-blue-300",
+            "bg-blue-50 border border-blue-200 text-blue-700",
             "text-xs font-mono"
           )}>
             <div className="flex items-center gap-2">
@@ -103,15 +103,15 @@ export function DocumentationResult({
             className
           )}
         >
-          <div className="flex h-6 w-6 shrink-0 select-none items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-400/30">
+          <div className="flex h-6 w-6 shrink-0 select-none items-center justify-center rounded-full bg-emerald-500/20 text-emerald-600 border border-emerald-400/30">
             <BookOpen className="h-3 w-3" />
           </div>
           <div className="flex-1 space-y-3">
             <div className={cn(
               "rounded-lg px-3 py-2 max-w-[600px]",
-              "bg-emerald-950/20 border border-emerald-800/30"
+              "bg-emerald-50 border border-emerald-200"
             )}>
-              <div className="flex items-center gap-2 text-emerald-300 text-xs">
+              <div className="flex items-center gap-2 text-emerald-700 text-xs">
                 <BookOpen className="h-3 w-3" />
                 <span className="font-medium">
                   Found {result.totalResults} document{result.totalResults !== 1 ? 's' : ''} for "{result.query}"
@@ -125,8 +125,8 @@ export function DocumentationResult({
                 <Card
                   key={index}
                   className={cn(
-                    "bg-zinc-800/50 border-zinc-700 text-zinc-100 p-3",
-                    "hover:bg-zinc-800 hover:border-zinc-600 transition-colors"
+                    "bg-zinc-50 border-zinc-200 text-zinc-900 p-3",
+                    "hover:bg-zinc-100 hover:border-zinc-300 transition-colors"
                   )}
                 >
                   <div className="space-y-2">
@@ -134,19 +134,19 @@ export function DocumentationResult({
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <FileText className="h-4 w-4 text-emerald-400" />
-                          <h4 className="font-medium text-emerald-400">{searchResult.title}</h4>
-                          <Badge variant="outline" className="text-xs border-zinc-600 text-zinc-400">
+                          <FileText className="h-4 w-4 text-emerald-600" />
+                          <h4 className="font-medium text-emerald-600">{searchResult.title}</h4>
+                          <Badge variant="outline" className="text-xs border-zinc-300 text-zinc-500">
                             {searchResult.contextType}
                           </Badge>
                         </div>
-                        <p className="text-xs text-zinc-400">{searchResult.description}</p>
+                        <p className="text-xs text-zinc-500">{searchResult.description}</p>
                       </div>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => toggleResult(index)}
-                        className="h-6 w-6 p-0 text-zinc-400 hover:text-white"
+                        className="h-6 w-6 p-0 text-zinc-500 hover:text-zinc-900"
                       >
                         {expandedResults.has(index) ? (
                           <ChevronUp className="h-3 w-3" />
@@ -157,7 +157,7 @@ export function DocumentationResult({
                     </div>
 
                     {/* Snippet */}
-                    <div className="text-sm text-zinc-200 leading-relaxed">
+                    <div className="text-sm text-zinc-800 leading-relaxed">
                       <p className="line-clamp-2">{searchResult.snippet}</p>
                     </div>
 
@@ -166,7 +166,7 @@ export function DocumentationResult({
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
-                        className="space-y-2 pt-2 border-t border-zinc-700"
+                        className="space-y-2 pt-2 border-t border-zinc-200"
                       >
                         {/* Keywords */}
                         <div className="flex flex-wrap gap-1">
@@ -174,7 +174,7 @@ export function DocumentationResult({
                             <Badge
                               key={kidx}
                               variant="secondary"
-                              className="text-xs bg-zinc-700 text-zinc-300"
+                              className="text-xs bg-zinc-100 text-zinc-600"
                             >
                               {keyword}
                             </Badge>
@@ -187,7 +187,7 @@ export function DocumentationResult({
                             variant="outline"
                             size="sm"
                             asChild
-                            className="h-7 text-xs border-zinc-600 hover:bg-zinc-700"
+                            className="h-7 text-xs border-zinc-300 hover:bg-zinc-200"
                           >
                             <a
                               href={searchResult.primaryUrl}
@@ -225,14 +225,14 @@ export function DocumentationResult({
             className
           )}
         >
-          <div className="flex h-6 w-6 shrink-0 select-none items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-400/30">
+          <div className="flex h-6 w-6 shrink-0 select-none items-center justify-center rounded-full bg-emerald-500/20 text-emerald-600 border border-emerald-400/30">
             <FileText className="h-3 w-3" />
           </div>
           <div className="flex-1">
             <Card
               className={cn(
-                "bg-zinc-800/50 border-zinc-700 text-zinc-100 p-4",
-                "hover:bg-zinc-800 hover:border-zinc-600 transition-colors"
+                "bg-zinc-50 border-zinc-200 text-zinc-900 p-4",
+                "hover:bg-zinc-100 hover:border-zinc-300 transition-colors"
               )}
             >
               <div className="space-y-3">
@@ -240,19 +240,19 @@ export function DocumentationResult({
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <FileText className="h-4 w-4 text-emerald-400" />
-                      <h4 className="font-medium text-emerald-400">{result.title}</h4>
-                      <Badge variant="outline" className="text-xs border-zinc-600 text-zinc-400">
+                      <FileText className="h-4 w-4 text-emerald-600" />
+                      <h4 className="font-medium text-emerald-600">{result.title}</h4>
+                      <Badge variant="outline" className="text-xs border-zinc-300 text-zinc-500">
                         {result.contextType}
                       </Badge>
                     </div>
-                    <p className="text-xs text-zinc-400">{result.description}</p>
+                    <p className="text-xs text-zinc-500">{result.description}</p>
                   </div>
                   <Button
                     variant="outline"
                     size="sm"
                     asChild
-                    className="h-7 text-xs border-zinc-600 hover:bg-zinc-700"
+                    className="h-7 text-xs border-zinc-300 hover:bg-zinc-200"
                   >
                     <a
                       href={result.primaryUrl}
@@ -267,7 +267,7 @@ export function DocumentationResult({
                 </div>
 
                 {/* Content preview */}
-                <div className="text-sm text-zinc-200 leading-relaxed max-h-40 overflow-y-auto">
+                <div className="text-sm text-zinc-800 leading-relaxed max-h-40 overflow-y-auto">
                   <p>{result.content.substring(0, 500)}{result.content.length > 500 ? '...' : ''}</p>
                 </div>
 
@@ -277,7 +277,7 @@ export function DocumentationResult({
                     <Badge
                       key={index}
                       variant="secondary"
-                      className="text-xs bg-zinc-700 text-zinc-300"
+                      className="text-xs bg-zinc-100 text-zinc-600"
                     >
                       {keyword}
                     </Badge>
@@ -307,7 +307,7 @@ export function DocumentationResult({
           <div className="flex-1">
             <div className={cn(
               "rounded-lg px-3 py-2 max-w-[600px]",
-              "bg-red-950/20 border border-red-800/30 text-red-300",
+              "bg-red-50 border border-red-200 text-red-700",
               "text-xs"
             )}>
               <span>{result.error}</span>
@@ -344,13 +344,13 @@ export function DocumentationResult({
             className
           )}
         >
-          <div className="flex h-6 w-6 shrink-0 select-none items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-400/30">
+          <div className="flex h-6 w-6 shrink-0 select-none items-center justify-center rounded-full bg-emerald-500/20 text-emerald-600 border border-emerald-400/30">
             <BookOpen className="h-3 w-3" />
           </div>
           <div className="flex-1">
             <div className={cn(
               "rounded-lg px-3 py-2 max-w-[600px]",
-              "bg-emerald-950/20 border border-emerald-800/30 text-emerald-300",
+              "bg-emerald-50 border border-emerald-200 text-emerald-700",
               "text-xs"
             )}>
               <div className="font-medium mb-2">Available Documents:</div>
@@ -360,7 +360,7 @@ export function DocumentationResult({
                     <div className="w-2 h-2 rounded-full bg-emerald-400" />
                     <div>
                       <span className="font-medium">{doc.title}</span>
-                      <span className="text-emerald-400/70 ml-2">({doc.type})</span>
+                      <span className="text-emerald-600/70 ml-2">({doc.type})</span>
                     </div>
                   </div>
                 ))}
@@ -381,13 +381,13 @@ export function DocumentationResult({
           className
         )}
       >
-        <div className="flex h-6 w-6 shrink-0 select-none items-center justify-center rounded-full bg-zinc-500/20 text-zinc-400 border border-zinc-400/30">
+        <div className="flex h-6 w-6 shrink-0 select-none items-center justify-center rounded-full bg-zinc-200/60 text-zinc-500 border border-zinc-400/30">
           <BookOpen className="h-3 w-3" />
         </div>
         <div className="flex-1">
           <div className={cn(
             "rounded-lg px-3 py-2 max-w-[600px]",
-            "bg-zinc-800/50 border border-zinc-700 text-zinc-300",
+            "bg-zinc-50 border border-zinc-200 text-zinc-600",
             "text-xs font-mono"
           )}>
             <pre className="whitespace-pre-wrap">

@@ -99,7 +99,7 @@ const BespokeButton = React.forwardRef<HTMLButtonElement, BespokeButtonProps>(
         >
           {/* Shimmer effect for premium variant */}
           {variant === "bespoke-premium" && (
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold-200/40 to-transparent -skew-x-12 animate-shimmer" />
             </div>
           )}

@@ -1,11 +1,11 @@
 # Schedule
 
 ## Overview
-Bespoke Academy's program is designed to accommodate students' busy schedules while providing comprehensive education. Our regular weekly sessions ensure consistent progress and skill development.
+Classes meet every weekend for 2+ hours. Students join any month and work through units at their own pace in mixed-level classes. Each session starts with a 20-minute group talk, then students work on their own unit, seated by level.
 
 ## Key Information
-- Weekly Friday sessions (2+ hours each)
-- After-school timing to avoid conflicts
+- Weekly weekend sessions (2+ hours each)
+- Weekend timing, so classes never clash with school
 - Academic calendar alignment
 - Holiday and break considerations
 - Make-up class options available
@@ -13,7 +13,7 @@ Bespoke Academy's program is designed to accommodate students' busy schedules wh
 
 ## Common Questions
 **Q: What time are the classes held?**
-A: Classes are held on Friday afternoons/evenings, specifically timed to avoid conflicts with regular school schedules.
+A: Classes are held on weekends, so they never clash with school.
 
 **Q: What happens during school holidays?**
 A: We follow the academic calendar and adjust for major holidays, with make-up sessions scheduled as needed.
@@ -24,17 +24,18 @@ A: While attendance is important, we understand conflicts arise. We provide mate
 ## Detailed Information
 
 ### Regular Schedule
-- **Day**: Every Friday during the academic year
+- **Day**: Every weekend during the academic year
 - **Duration**: 2+ hours per session
-- **Timing**: After-school hours (specific times vary by cohort)
+- **Timing**: Weekends (specific times vary by cohort)
+- **Location**: Lephalale, Limpopo
 - **Format**: In-person instruction with hands-on projects
 - **Structure**: Brief instruction followed by project work
 
-### Academic Calendar Alignment
-- Start date aligns with school year
-- Breaks for major holidays
-- Summer session options available
-- Final project showcase at year-end
+### Rolling Programme
+- Join any month; there is no fixed start or end date
+- One unit is one weekend session plus about an hour of homework
+- Show-and-tell every month
+- A demo day every term for students who have finished a final project
 
 ### Flexibility Options
 - Multiple session times available

@@ -119,12 +119,12 @@ export function ChatInput({
             disabled={disabled}
             maxLength={maxLength}
             className={cn(
-              "w-full resize-none rounded-lg border border-zinc-600 bg-zinc-800 px-4 py-3 text-sm text-zinc-100",
+              "w-full resize-none rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-3 text-sm text-zinc-900",
               "placeholder:text-zinc-400 focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-primary/30",
               "disabled:cursor-not-allowed disabled:opacity-50",
               "h-[88px] relative z-10 overflow-y-auto",
               "scrollbar-hide",
-              "focus:bg-zinc-750 transition-all duration-200",
+              "focus:bg-white transition-all duration-200",
               "shadow-sm focus:shadow-lg focus:shadow-primary/10",
               disabled && "cursor-not-allowed"
             )}
@@ -150,11 +150,11 @@ export function ChatInput({
             onClick={toggleListening}
             disabled={disabled}
             className={cn(
-              "shrink-0 transition-all duration-200 border border-zinc-600 hover:border-primary/50 relative z-10",
-              "hover:bg-zinc-700 hover:shadow-md hover:shadow-primary/10",
-              "focus:border-primary focus:bg-zinc-700 focus:shadow-md focus:shadow-primary/10",
+              "shrink-0 transition-all duration-200 border border-zinc-300 hover:border-primary/50 relative z-10",
+              "hover:bg-zinc-200 hover:shadow-md hover:shadow-primary/10",
+              "focus:border-primary focus:bg-white focus:shadow-md focus:shadow-primary/10",
               "flex items-center justify-center",
-              isListening && "bg-red-950/30 text-red-400 border-red-800/50 hover:bg-red-950/50 hover:border-red-700 animate-pulse"
+              isListening && "bg-red-50 text-red-600 border-red-200 hover:bg-red-50 hover:border-red-300 animate-pulse"
             )}
             title={isListening ? "Stop recording" : "Start voice input"}
           >
@@ -204,7 +204,7 @@ export function ChatInput({
       )}
 
       {/* Help text */}
-      <div className="text-xs text-zinc-400">
+      <div className="text-xs text-zinc-500">
         Press Enter to send, Shift+Enter for new line
       </div>
     </form>

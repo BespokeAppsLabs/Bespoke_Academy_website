@@ -13,8 +13,6 @@ const curriculumTech = [
   { name: "TypeScript", logo: "/stack/typescript-svgrepo-com.svg", category: "Programming" },
   { name: "React", logo: "/stack/react-1-logo-svgrepo-com.svg", category: "Framework" },
   { name: "Next.js", logo: "/stack/nextjs-2.svg", category: "Framework" },
-  { name: "OpenAI", logo: "/stack/openai-svgrepo-com.svg", category: "AI Platform" },
-  { name: "Google Gemini", logo: "/stack/gemini-ai.svg", category: "AI Platform" },
   { name: "Arduino", logo: "/stack/arduino-1.svg", category: "Hardware" },
   { name: "VS Code", logo: "/stack/visual-studio-code-1-1.svg", category: "Editor" },
   { name: "Firebase", logo: "/stack/firebase-svgrepo-com.svg", category: "Database" },
@@ -26,9 +24,9 @@ const curriculumTech = [
 
 export default function LogoCloudSection() {
   return (
-    <section className="py-20 bg-zinc-900 text-white relative overflow-hidden">
+    <section className="py-20 bg-white text-zinc-900 relative overflow-hidden">
       {/* Animated Parallel Lines Background */}
-      <ParallelLinesBackground theme="dark" />
+      <ParallelLinesBackground theme="light" />
 
       {/* Floating Elements (fixed positions, decorative) */}
       <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
@@ -58,7 +56,7 @@ export default function LogoCloudSection() {
           transition={{ duration: 0.6 }}
         >
           <motion.span
-            className="text-gold-400 text-sm font-semibold tracking-wider uppercase"
+            className="text-gold-700 text-sm font-semibold tracking-wider uppercase"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -68,24 +66,24 @@ export default function LogoCloudSection() {
           </motion.span>
 
           <motion.h2
-            className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-white"
+            className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-zinc-900"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            Learn <span className="text-emerald-400">{curriculumTech.length}</span> Real-World Tools
+            Learn <span className="text-emerald-600">{curriculumTech.length}</span> Real-World Tools
           </motion.h2>
 
           <motion.p
-            className="text-xl text-zinc-300 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-zinc-600 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
             Your child will learn the cutting-edge tools and frameworks powering today's AI revolution.
-            Our 40-week curriculum covers everything from programming fundamentals to advanced AI applications.
+            Our curriculum covers everything from programming fundamentals to advanced AI applications.
           </motion.p>
         </motion.div>
 
@@ -101,7 +99,7 @@ export default function LogoCloudSection() {
             {curriculumTech.map((tech) => (
               <div
                 key={tech.name}
-                className="group flex w-36 shrink-0 flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur-sm transition-colors duration-300 hover:border-gold-500/50 hover:bg-white/10"
+                className="group flex w-36 shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-200 bg-white px-6 py-5 shadow-sm transition-colors duration-300 hover:border-gold-500/50 hover:bg-zinc-50"
               >
                 <img
                   src={tech.logo}
@@ -109,8 +107,8 @@ export default function LogoCloudSection() {
                   className="h-12 w-12 object-contain opacity-80 transition duration-300 group-hover:scale-110 group-hover:opacity-100"
                 />
                 <div className="text-center">
-                  <span className="block whitespace-nowrap text-sm font-medium text-zinc-200">{tech.name}</span>
-                  <span className="whitespace-nowrap text-xs text-gold-400/80">{tech.category}</span>
+                  <span className="block whitespace-nowrap text-sm font-medium text-zinc-800">{tech.name}</span>
+                  <span className="whitespace-nowrap text-xs text-gold-700">{tech.category}</span>
                 </div>
               </div>
             ))}
@@ -128,7 +126,7 @@ export default function LogoCloudSection() {
           <BespokeCard
             variant="premium-card"
             size="lg"
-            className="inline-flex items-center gap-3 bg-emerald-900/50 text-emerald-300 px-8 py-4 rounded-full border border-emerald-600/30 shadow-lg"
+            className="inline-flex items-center gap-3 bg-emerald-50 text-emerald-700 px-8 py-4 rounded-full border border-emerald-200 shadow-lg"
           >
             <Sparkles className="w-6 h-6" strokeWidth={1.5} />
             <span className="font-semibold text-lg">
@@ -145,10 +143,10 @@ export default function LogoCloudSection() {
           viewport={{ once: true }}
           transition={{ delay: 1.2 }}
         >
-          <h3 className="text-3xl font-bold text-white mb-4">
+          <h3 className="text-3xl font-bold text-zinc-900 mb-4">
             Ready to Build the Future?
           </h3>
-          <p className="text-xl text-zinc-300 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-zinc-600 mb-8 max-w-3xl mx-auto">
             Give your child the competitive edge they need for tomorrow's tech careers.
             Our hands-on approach ensures they build real AI projects with industry-standard tools.
           </p>

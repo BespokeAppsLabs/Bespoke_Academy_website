@@ -6,11 +6,7 @@ import { GoldUnderline } from "@/components/ui/gold-underline";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[50vh] bg-gradient-to-br from-blue-50 to-emerald-50 flex items-center justify-center overflow-hidden">
-      <BespokeAnimation preset="curtain-reveal" className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-100/20 via-emerald-100/10 to-transparent" />
-      </BespokeAnimation>
-
+    <section className="relative min-h-[50vh] bg-white flex items-center justify-center overflow-hidden">
       <div className="relative z-10 text-center px-4">
         <BespokeAnimation preset="slide-in-up" delay={0.2}>
           <div className="mb-4">
@@ -22,7 +18,7 @@ export default function Hero() {
             Find Your AI & <span className="text-emerald-600"><GoldUnderline>Robotics Path</GoldUnderline></span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8">
-            No experience required! Join our 40-week structured curriculum with hands-on Friday sessions
+            No experience required! Join any month in the Engineering or Media stream, with hands-on weekend sessions in Lephalale
             and transform from curious beginner to confident creator.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -43,11 +39,11 @@ export default function Hero() {
             </div>
             <div className="flex items-center gap-2">
               <span className="text-emerald-600">📅</span>
-              <span>Friday Sessions</span>
+              <span>Weekend Sessions</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-emerald-600">🏗️</span>
-              <span>40-Week Program</span>
+              <span>Join Any Month</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-emerald-600">👥</span>

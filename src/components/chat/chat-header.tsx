@@ -30,7 +30,7 @@ export function ChatHeader({
 }: ChatHeaderProps) {
   return (
     <div className={cn(
-      "flex items-center justify-between border-b border-zinc-700 bg-zinc-800 px-4 py-3",
+      "flex items-center justify-between border-b border-zinc-200 bg-zinc-50 px-4 py-3",
       "shadow-sm relative overflow-hidden",
       "before:absolute before:inset-0 before:bg-gradient-to-r before:from-primary/5 before:via-transparent before:to-transparent before:pointer-events-none",
       className
@@ -48,12 +48,12 @@ export function ChatHeader({
             <h3 className="text-sm font-semibold text-emerald-500">
               {title}
             </h3>
-            <Badge variant="outline" className="text-xs bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
+            <Badge variant="outline" className="text-xs bg-emerald-500/20 text-emerald-600 border-emerald-500/30">
               Online
             </Badge>
           </div>
           {!isMinimized && (
-            <p className="text-xs text-zinc-300">
+            <p className="text-xs text-zinc-600">
               {subtitle}
             </p>
           )}
@@ -69,7 +69,7 @@ export function ChatHeader({
               variant="ghost"
               size="icon"
               onClick={onToggleMinimize}
-              className="h-8 w-8 hover:bg-zinc-700 border border-transparent hover:border-zinc-600 text-zinc-300 hover:text-white transition-colors duration-200"
+              className="h-8 w-8 hover:bg-zinc-200 border border-transparent hover:border-zinc-300 text-zinc-600 hover:text-zinc-900 transition-colors duration-200"
               title={isMinimized ? "Maximize" : "Minimize"}
             >
               {isMinimized ? (
@@ -86,7 +86,7 @@ export function ChatHeader({
               variant="ghost"
               size="icon"
               onClick={onClose}
-              className="h-8 w-8 hover:bg-red-950/50 hover:text-red-400 border border-transparent hover:border-red-800/50 text-zinc-300 transition-colors duration-200"
+              className="h-8 w-8 hover:bg-red-50 hover:text-red-600 border border-transparent hover:border-red-200 text-zinc-600 transition-colors duration-200"
               title="Close chat"
             >
               <X className="h-4 w-4 stroke-red-400 fill-red-400/20" />

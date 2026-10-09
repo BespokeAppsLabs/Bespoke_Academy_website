@@ -18,7 +18,7 @@ Here are the most common questions parents and students have about Bespoke Acade
 A: It's learning how machines think, learn, and interact with the world. Students learn programming, electronics, and how to build intelligent systems that can solve real-world problems.
 
 **Q: Is this program suitable for beginners with no technical experience?**
-A: Absolutely! Our curriculum is designed for complete beginners. We start with foundational concepts and progressively build skills throughout the 40-week program.
+A: Absolutely! Our curriculum is designed for complete beginners. We start with foundational concepts and progressively build skills level by level. Students move up when they pass each level's checkpoint.
 
 **Q: How is this different from regular school computer classes?**
 A: Our program is hands-on, project-based, and focuses on cutting-edge technologies like AI and robotics. Students build actual working systems rather than just learning theory.
@@ -26,10 +26,13 @@ A: Our program is hands-on, project-based, and focuses on cutting-edge technolog
 ### Schedule & Time Commitment
 
 **Q: How much time does this program require?**
-A: Students attend weekly 2-hour sessions on Fridays, plus 1-2 hours of project work between classes. The total commitment is about 4-5 hours per week.
+A: Students attend 2-hour sessions on weekends, plus 1-2 hours of project work between classes. The total commitment is about 4-5 hours per week.
 
 **Q: Can my child participate if they have other activities?**
-A: Yes! Our program is designed to complement, not replace, other activities. Sessions are on Fridays so they fit around school, sport and other commitments.
+A: Yes! Our program is designed to complement, not replace, other activities. Sessions are on weekends so they fit around school, sport and other commitments.
+
+**Q: Where are classes held?**
+A: In Lephalale, Limpopo. We welcome learners from Lephalale, Onverwacht, Marapong and the surrounding Waterberg area.
 
 **Q: What happens if my child misses a class?**
 A: We provide materials for catch-up and offer make-up opportunities. We also provide individual support to help students get back on track.
@@ -37,10 +40,10 @@ A: We provide materials for catch-up and offer make-up opportunities. We also pr
 ### Technical Requirements
 
 **Q: What equipment or software do we need to buy?**
-A: Nothing! All necessary equipment, software, and materials are included in the tuition. We provide everything students need to succeed.
+A: Every student needs their own laptop. Engineering Base parents also buy an Arduino Uno starter kit (about R800). Mid and High include the hardware kit, and Media needs no kit. The software is free and the academy provides its AI tools.
 
 **Q: Does my child need a powerful computer?**
-A: No, any modern computer (Windows, Mac, or Chromebook) with internet access is sufficient for the first phases. We provide specialized equipment when needed.
+A: Engineering needs a Core i3 8th gen, Ryzen 3 or Apple M1 laptop with 8 GB memory. Media needs a stronger one for Blender 3D: 4 cores, 16 GB memory and, for Macs, Apple Silicon. Chromebooks and tablets don't work. See Requirements for the full list.
 
 **Q: What if we don't have technical experience at home?**
 A: No problem! We provide complete technical support and setup assistance. No technical background is needed at home.
@@ -48,10 +51,10 @@ A: No problem! We provide complete technical support and setup assistance. No te
 ### Enrollment & Costs
 
 **Q: How much does the program cost?**
-A: R1,500 per month for 10 months. This includes all materials, equipment and instruction for the 40-week programme.
+A: Engineering Base is R500 per month, Engineering Mid R1,500, and Engineering High or Media R2,500. It is paid monthly with no fixed end date and one month's notice to leave.
 
 **Q: Are there any hidden fees?**
-A: No, everything is included in the tuition - no hidden fees for materials, software, or equipment.
+A: No. The laptop is your own, and Engineering Base parents buy their child's Arduino kit. Everything else for the tier is in the monthly fee.
 
 **Q: Do you offer discounts?**
 A: Please ask us directly by email (info@bespokeapps.co.za) or WhatsApp (082 290 2428).

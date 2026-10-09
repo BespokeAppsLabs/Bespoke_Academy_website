@@ -36,7 +36,8 @@ A: We recommend enrolling at least 2-3 weeks before your desired start date to e
    - Answer all family questions
 
 3. **Program Selection**
-   - Choose appropriate cohort and schedule
+   - Choose a stream (Engineering or Media) and tier
+   - Check the laptop meets the requirements
    - Review payment options
    - Understand program expectations
 
@@ -57,11 +58,11 @@ A: We recommend enrolling at least 2-3 weeks before your desired start date to e
 - Payment arrangement setup
 - Parent/guardian consent
 
-### Timeline and Deadlines
-- **Fall Enrollment**: June - August
-- **Winter Enrollment**: November - January
-- **Spring Enrollment**: March - May
-- **Summer Programs**: April - June
+### Timeline
+- Students can join any month
+- Choose a stream and tier on the application form: Engineering Base, Mid or High, or Media
+- Payment is monthly with no fixed end date; one month's notice to leave
+- Stream or tier can change up to unit 8
 
 ### What to Expect After Enrollment
 - Welcome packet and resources

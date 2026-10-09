@@ -6,50 +6,19 @@ interface LogoProps {
   size?: "sm" | "md" | "lg"
   className?: string
   priority?: boolean
-  colorVariant?: "default" | "monochrome" | "emerald"
 }
 
-export function Logo({
-  variant = "full",
-  size = "md",
-  className,
-  priority = false,
-  colorVariant = "default"
-}: LogoProps) {
-  // Map variants to file paths
-  const logoPath = {
-    full: "/brain-circuit-logo-optimized.svg",
-    stacked: "/brain-circuit-logo-stacked.svg",
-    icon: "/brain-circuit-logo-icon.svg"
-  }[variant]
-
-  // Map sizes to dimensions
-  const dimensions = {
-    sm: { width: 24, height: 24 },
-    md: { width: 40, height: 24 },  // Different aspect ratio for full logo
-    lg: { width: 56, height: 56 }
-  }[variant === "full" ? "md" : size]  // Full logo uses different sizing
-
-  // Apply color filters based on variant
-  const colorFilter = {
-    default: "",
-    monochrome: "grayscale",
-    emerald: "hue-rotate-0 saturate-150" // Enhance emerald tones
-  }[colorVariant];
-
+// ponytail: every variant shows the Bespoke </> mark for now; split per variant when the academy gets its own artwork.
+export function Logo({ className, priority = false }: LogoProps) {
   return (
     <div className={cn("relative", className)}>
       <Image
-        src={logoPath}
-        alt="Bespoke Academy - Brain Circuit AI Education Logo"
-        width={dimensions.width}
-        height={dimensions.height}
-        className={cn("w-full h-full object-contain", colorFilter)}
+        src="/bespoke-mark.svg"
+        alt="Bespoke"
+        width={64}
+        height={64}
+        className="w-full h-full object-contain"
         priority={priority}
-        style={{
-          filter: colorVariant === "emerald" ? "hue-rotate(0deg) saturate(1.5)" :
-                 colorVariant === "monochrome" ? "grayscale(100%)" : "none"
-        }}
       />
     </div>
   )

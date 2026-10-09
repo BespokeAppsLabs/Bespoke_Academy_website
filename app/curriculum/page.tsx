@@ -1,1 +1,1 @@
-export { default } from '@/domain/curriculum';
+export { default, metadata } from '@/domain/curriculum';

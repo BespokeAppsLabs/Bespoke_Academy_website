@@ -142,8 +142,8 @@ export default function Features() {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.4, ease: ease.outExpo }}
           >
-            Join our 40-week AI Robotics program where you'll build amazing projects, learn cutting-edge skills,
-            and have fun creating robots and AI tools in our Friday 2-hour hands-on sessions.
+            Join our monthly AI programme in the Engineering or Media stream, where you'll build amazing projects, learn cutting-edge skills,
+            and have fun creating robots and AI tools in our weekend 2-hour hands-on sessions.
           </motion.p>
         </motion.div>
 

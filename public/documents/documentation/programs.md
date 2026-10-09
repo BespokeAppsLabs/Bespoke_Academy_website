@@ -1,7 +1,7 @@
 # Programs
 
 ## Overview
-Bespoke Academy offers specialized AI and Robotics programs designed to prepare students for future technology careers. Our comprehensive educational approach combines hands-on learning with professional mentorship.
+Bespoke Academy offers a rolling monthly AI programme in two streams. Engineering covers coding, AI, electronics, IoT and robotics on the Base (R500), Mid (R1,500) or High (R2,500) tier. Media covers coding, AI images and video, characters, motion graphics and Blender 3D at R2,500 per month. Our comprehensive educational approach combines hands-on learning with professional mentorship.
 
 ## Key Information
 - Grade 8-11 focused curriculum
@@ -27,9 +27,10 @@ A: Sessions are run by Bespoke Applications Labs, a South African software and A
 We believe in learning by doing. Our programs emphasize hands-on projects, collaborative problem-solving, and real-world applications that prepare students for future success.
 
 ### Program Structure
-- Progressive skill development across four phases
-- Weekly supervised Friday sessions
-- Peer collaboration and team projects
+- Engineering: 4 levels; Media: 6 levels
+- Join any month; move up a level when you pass its checkpoint
+- Weekly supervised weekend sessions with mixed-level classes: a 20-minute group talk, then each student works on their own unit
+- New students are paired with a Level 2+ student for their first session
 - Individual portfolio development
 - Regular progress assessments and feedback
 

@@ -75,23 +75,23 @@ export default function StickyScroll() {
   // 0 when the section pins, 1 when the second panel fully covers the first.
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
   const backScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const backDim = useTransform(scrollYProgress, [0, 1], [0, 0.55]);
+  const backDim = useTransform(scrollYProgress, [0, 1], [0, 0.15]);
   const backRadius = useTransform(scrollYProgress, [0, 1], [0, 32]);
   const frontRadius = useTransform(scrollYProgress, [0, 1], [40, 0]);
 
   return (
     <div ref={containerRef} className="relative min-h-[200vh] w-full md:h-[200vh]">
       {/* Panel 1: About Us - recedes as panel 2 slides over it */}
-      <div className="h-screen w-full md:min-h-screen sticky top-0 overflow-hidden bg-zinc-900">
+      <div className="h-screen w-full md:min-h-screen sticky top-0 overflow-hidden bg-zinc-200">
         <motion.div className="h-full w-full origin-top overflow-hidden" style={{ scale: backScale, borderRadius: backRadius }}>
           <AboutUsSection />
-          <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-zinc-950" style={{ opacity: backDim }} />
+          <motion.div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-zinc-900" style={{ opacity: backDim }} />
         </motion.div>
       </div>
 
       {/* Panel 2: Solutions */}
       <motion.div
-        className="h-screen w-full md:min-h-screen sticky top-0 overflow-hidden shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.5)]"
+        className="h-screen w-full md:min-h-screen sticky top-0 overflow-hidden shadow-[0_-24px_60px_-20px_rgba(0,0,0,0.15)]"
         style={{ borderTopLeftRadius: frontRadius, borderTopRightRadius: frontRadius }}
       >
         <SolutionsSection />
@@ -132,8 +132,8 @@ function AboutUsSection() {
             whileHover={{ scale: 1.05, rotate: 2 }}
           >
             <BespokeCard variant="premium-card" className="p-6 md:p-8 shadow-2xl">
-              <div className="text-4xl md:text-6xl font-bold text-emerald-500 mb-2">40</div>
-              <div className="text-base md:text-lg font-semibold text-zinc-800">Week Curriculum</div>
+              <div className="text-4xl md:text-6xl font-bold text-emerald-500 mb-2">2</div>
+              <div className="text-base md:text-lg font-semibold text-zinc-800">Learning Streams</div>
               <div className="text-sm md:text-base text-zinc-600">for Grades 8-11</div>
             </BespokeCard>
           </motion.div>
@@ -158,12 +158,12 @@ function AboutUsSection() {
             </h2>
 
             <p className="text-lg md:text-xl text-zinc-600 mb-6 leading-relaxed">
-              Designed specifically for Grades 8-11, our comprehensive 40-week program transforms
+              Designed specifically for Grades 8-11, our rolling monthly programme transforms
               curious students into confident tech innovators through hands-on learning and real projects.
             </p>
 
             <p className="text-base md:text-lg text-zinc-600 mb-8 leading-relaxed">
-              Our Friday sessions provide the perfect balance of structured learning and creative exploration,
+              Our weekend sessions provide the perfect balance of structured learning and creative exploration,
               preparing students for future careers and college success in technology fields.
             </p>
 
@@ -203,9 +203,9 @@ function AboutUsSection() {
 // SolutionsSection.tsx
 function SolutionsSection() {
   return (
-    <section className="h-full w-full bg-zinc-900 text-white flex flex-col justify-center p-8 md:p-16 lg:p-24 relative overflow-hidden">
+    <section className="h-full w-full bg-zinc-50 text-zinc-900 flex flex-col justify-center p-8 md:p-16 lg:p-24 relative overflow-hidden">
       {/* Animated Parallel Lines Background */}
-      <ParallelLinesBackground theme="dark" />
+      <ParallelLinesBackground theme="light" />
 
       <div className="relative z-10 flex flex-col h-full justify-center">
         <motion.div
@@ -215,16 +215,16 @@ function SolutionsSection() {
           transition={{ duration: 0.6 }}
           className="mb-8 md:mb-12"
         >
-          <span className="text-gold-400 text-sm font-semibold tracking-wider uppercase">
+          <span className="text-gold-700 text-sm font-semibold tracking-wider uppercase">
             Learning Pathways
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 text-white">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-4 text-zinc-900">
             Master AI & Robotics
-            <span className="text-emerald-400 block"><GoldUnderline>Through Hands-On Projects.</GoldUnderline></span>
+            <span className="text-emerald-600 block"><GoldUnderline>Through Hands-On Projects.</GoldUnderline></span>
           </h2>
-          <p className="text-zinc-300 mt-4 max-w-3xl text-base md:text-lg">
-            Our 40-week curriculum takes students from coding basics to advanced AI applications.
-            Each Friday session builds practical skills through real projects that prepare students
+          <p className="text-zinc-600 mt-4 max-w-3xl text-base md:text-lg">
+            Our level-by-level curriculum takes students from coding basics to advanced AI applications.
+            Each weekend session builds practical skills through real projects that prepare students
             for college STEM programs and future tech careers.
           </p>
         </motion.div>
@@ -240,21 +240,21 @@ function SolutionsSection() {
             {solutions.map((solution) => (
               <div
                 key={solution.title}
-                className="group w-72 sm:w-80 md:w-96 shrink-0 rounded-2xl border border-zinc-700 bg-zinc-800/90 p-6 text-white backdrop-blur-sm transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-gold-500/60 hover:shadow-2xl hover:shadow-gold-500/20"
+                className="group w-72 sm:w-80 md:w-96 shrink-0 rounded-2xl border border-zinc-200 bg-white p-6 text-zinc-900 shadow-sm transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-gold-500/60 hover:shadow-xl hover:shadow-gold-500/10"
               >
                 <div className={`${solution.color} mb-4 transition-transform duration-300 group-hover:scale-110`}>
                   {solution.icon}
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold mb-3 text-white transition-colors duration-300 group-hover:text-gold-300">
+                <h3 className="text-lg md:text-xl font-semibold mb-3 text-zinc-900 transition-colors duration-300 group-hover:text-gold-700">
                   {solution.title}
                 </h3>
-                <p className="text-zinc-300 text-sm mb-4 leading-relaxed">
+                <p className="text-zinc-600 text-sm mb-4 leading-relaxed">
                   {solution.description}
                 </p>
                 <ul className="space-y-2">
                   {solution.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-xs text-zinc-400">
-                      <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full" />
+                    <li key={feature} className="flex items-center gap-2 text-xs text-zinc-500">
+                      <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
                       {feature}
                     </li>
                   ))}
@@ -272,20 +272,20 @@ function SolutionsSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
         >
-          <BespokeCard variant="glass-card" className="bg-zinc-800/50 backdrop-blur-sm p-4 md:p-6 inline-block">
+          <BespokeCard variant="course-card" className="p-4 md:p-6 inline-block">
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-sm">
               <div className="flex items-center gap-2">
-                <Award className="w-5 h-5 text-emerald-400" strokeWidth={1.5} />
+                <Award className="w-5 h-5 text-emerald-600" strokeWidth={1.5} />
                 <span>Competition Ready</span>
               </div>
-              <div className="hidden sm:block text-zinc-500">•</div>
+              <div className="hidden sm:block text-zinc-400">•</div>
               <div className="flex items-center gap-2">
-                <Users className="w-5 h-5 text-emerald-400" strokeWidth={1.5} />
+                <Users className="w-5 h-5 text-emerald-600" strokeWidth={1.5} />
                 <span>Expert Mentors</span>
               </div>
-              <div className="hidden sm:block text-zinc-500">•</div>
+              <div className="hidden sm:block text-zinc-400">•</div>
               <div className="flex items-center gap-2">
-                <GraduationCap className="w-5 h-5 text-emerald-400" strokeWidth={1.5} />
+                <GraduationCap className="w-5 h-5 text-emerald-600" strokeWidth={1.5} />
                 <span>College Prep</span>
               </div>
             </div>

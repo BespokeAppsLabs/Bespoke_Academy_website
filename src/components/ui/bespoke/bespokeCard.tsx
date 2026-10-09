@@ -74,7 +74,7 @@ const BespokeCard = React.forwardRef<HTMLDivElement, BespokeCardProps>(
       <motion.div
         whileHover={animation === "float" || animation === "tilt" ? { y: -6 } : undefined}
         transition={spring}
-        className={cn("relative group")}
+        className={cn("relative group h-full")}
       >
         <Component
           ref={ref}
@@ -83,12 +83,12 @@ const BespokeCard = React.forwardRef<HTMLDivElement, BespokeCardProps>(
         >
           {/* Gradient overlay for premium variants */}
           {(variant === "premium-card" || variant === "feature-card") && (
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
           )}
 
           {/* Shimmer effect for premium cards */}
           {variant === "premium-card" && (
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 animate-shimmer" />
             </div>
           )}

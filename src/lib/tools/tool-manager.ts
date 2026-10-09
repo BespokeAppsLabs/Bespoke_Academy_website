@@ -122,7 +122,7 @@ export class ToolManager {
     const contextPatterns = {
       pricing: ['cost', 'price', 'payment', 'tuition', 'afford', 'expensive', 'fee'],
       enrollment: ['enroll', 'register', 'sign up', 'join', 'start', 'apply'],
-      schedule: ['when', 'time', 'schedule', 'friday', 'duration', 'how long', 'calendar'],
+      schedule: ['when', 'time', 'schedule', 'weekend', 'saturday', 'sunday', 'duration', 'how long', 'calendar'],
       requirements: ['need', 'require', 'computer', 'hardware', 'software', 'equipment'],
       support: ['help', 'issue', 'problem', 'troubleshoot', 'contact', 'support'],
       projects: ['projects', 'build', 'create', 'portfolio', 'showcase', 'make', 'develop'],

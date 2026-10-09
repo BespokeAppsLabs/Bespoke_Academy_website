@@ -15,11 +15,9 @@ const floatingLogos = [
   { path: "/stack/expo-1.svg", left: 22, top: 72, depth: 0.3 },
   { path: "/stack/express-svgrepo-com.svg", left: 35, top: 12, depth: 0.45 },
   { path: "/stack/firebase-svgrepo-com.svg", left: 48, top: 86, depth: 0.7 },
-  { path: "/stack/gemini-ai.svg", left: 62, top: 20, depth: 0.35 },
   { path: "/stack/google-icon-logo-svgrepo-com.svg", left: 78, top: 66, depth: 0.55 },
   { path: "/stack/mongodb-icon-2.svg", left: 90, top: 30, depth: 0.25 },
   { path: "/stack/nextjs-2.svg", left: 12, top: 48, depth: 0.4 },
-  { path: "/stack/openai-svgrepo-com.svg", left: 86, top: 84, depth: 0.65 },
   { path: "/stack/react-logo-svgrepo-com.svg", left: 70, top: 44, depth: 0.2 },
   { path: "/stack/typescript-svgrepo-com.svg", left: 28, top: 38, depth: 0.5 },
   { path: "/stack/visual-studio-code-1-1.svg", left: 54, top: 58, depth: 0.3 },
@@ -58,9 +56,9 @@ export default function Hero() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className="relative min-h-screen bg-zinc-900 text-white overflow-hidden">
+    <section ref={ref} className="relative min-h-screen bg-zinc-50 text-zinc-900 overflow-hidden">
       {/* Animated Parallel Lines Background */}
-      <ParallelLinesBackground theme="dark" />
+      <ParallelLinesBackground theme="light" />
 
       {/* Gold/emerald glow that settles in behind the headline */}
       <motion.div
@@ -90,10 +88,10 @@ export default function Hero() {
               className="relative z-20 space-y-6"
             >
               <motion.span
-                className="text-gold-400 text-sm font-semibold tracking-wider uppercase inline-block"
+                className="text-gold-700 text-sm font-semibold tracking-wider uppercase inline-block"
                 variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0 } }}
               >
-                Perfect for Grades 8-11 • No Experience Required • Friday Sessions
+                Grades 8-11 in Lephalale • No Experience Required • Weekend Sessions
               </motion.span>
 
               <motion.h1
@@ -113,7 +111,7 @@ export default function Hero() {
                     </span>
                   ))}
                   <span className="block overflow-hidden pb-[0.15em]">
-                    <motion.span className="relative inline-block text-emerald-400" variants={word}>
+                    <motion.span className="relative inline-block text-emerald-600" variants={word}>
                       {currentTitle.subtitle}
                       <motion.span
                         className="absolute -bottom-1 left-0 h-[3px] w-full origin-left rounded-full bg-gradient-to-r from-gold-300 via-gold-500 to-gold-600"
@@ -125,7 +123,7 @@ export default function Hero() {
               </motion.h1>
 
               <motion.p
-                className="text-lg md:text-xl text-zinc-300 leading-relaxed"
+                className="text-lg md:text-xl text-zinc-600 leading-relaxed"
                 variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: ease.outExpo } } }}
               >
                 Build real robots, master AI tools, and create your future with our hands-on AI & Robotics curriculum.
@@ -133,10 +131,10 @@ export default function Hero() {
               </motion.p>
 
               <motion.p
-                className="text-sm text-zinc-400"
+                className="text-sm text-zinc-500"
                 variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: ease.outExpo } } }}
               >
-                40-Week AI Robotics Curriculum • Ages 13-17 • Applications Open for 2027
+                Engineering & Media Streams • Ages 13-17 • Join Any Month
               </motion.p>
 
               <motion.div
@@ -155,15 +153,15 @@ export default function Hero() {
                     </svg>
                   }
                 >
-                  Apply for 2027
+                  Apply now
                 </BespokeButton>
                 </Magnetic>
 
                 <BespokeButton
                   href="/courses"
-                  variant="bespoke-secondary"
+                  variant="bespoke-outline"
                   size="xl"
-                  className="font-semibold border-2 border-zinc-600 hover:border-zinc-500"
+                  className="font-semibold"
                   icon={
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

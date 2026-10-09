@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Bespoke </> monogram: geometry from brand/_loom.tpl.html monogram(), apex 62deg, enlarged for small sizes -->
+  <rect width="64" height="64" rx="14" fill="#161A22"/>
+  <g transform="translate(32 32) scale(1.35) translate(-32 -32)" fill="none" stroke="#008F64" stroke-width="2.94" stroke-linejoin="miter" stroke-miterlimit="8" stroke-linecap="butt">
+    <path d="M23.63 21.49 L17.31 32 L23.63 42.51"/>
+    <path d="M27.28 42.51 L33.81 21.49"/>
+    <path d="M37.46 21.49 L43.78 32 L37.46 42.51"/>
+  </g>
+</svg>

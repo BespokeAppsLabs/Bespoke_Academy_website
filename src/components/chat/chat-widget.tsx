@@ -7,10 +7,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from "motion/react"
 import { ChatInterface } from './chat-interface'
-import { MessageCircle, X, Minimize2, Maximize2 } from 'lucide-react'
+import { MessageCircle, X, Maximize2, Send } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import { site } from '@/config/site'
 import type { ChatMessage, ChatWidgetState } from '@/lib/chat'
 import { STORAGE_KEYS, loadFromLocalStorage, saveToLocalStorage } from '@/lib/chat'
 
@@ -200,6 +201,20 @@ export function ChatWidget({
         )}
       </AnimatePresence>
 
+      <div className="flex items-center justify-end gap-3">
+      {/* WhatsApp hand-off, always beside the chat */}
+      <a
+        href={`${site.whatsapp.href}?text=${encodeURIComponent("Hi, I have a question about Bespoke Academy.")}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex h-11 min-w-11 items-center justify-center gap-2 rounded-full bg-[#25D366] px-3 sm:px-4 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-[#1ebe5a]"
+      >
+        <Send className="h-4 w-4" />
+        {/* ponytail: icon only on phones so the pill and chat bubble don't cover the form */}
+        <span className="sr-only sm:hidden">WhatsApp</span>
+        <span className="hidden sm:inline">Send message on WhatsApp</span>
+      </a>
+
       {/* Floating chat bubble */}
       <AnimatePresence>
         {!isOpen && (
@@ -254,6 +269,7 @@ export function ChatWidget({
           </motion.div>
         )}
       </AnimatePresence>
+      </div>
 
       {/* Minimized state (if needed in future) */}
       <AnimatePresence>
@@ -263,13 +279,13 @@ export function ChatWidget({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             className={cn(
-              "flex items-center gap-2 bg-zinc-800 border border-zinc-700 rounded-lg shadow-lg px-3 py-2",
-              "hover:bg-zinc-750 transition-colors duration-200"
+              "flex items-center gap-2 bg-zinc-50 border border-zinc-200 rounded-lg shadow-lg px-3 py-2",
+              "hover:bg-zinc-100 transition-colors duration-200"
             )}
           >
             <div className="flex items-center gap-2">
               <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-sm font-medium text-zinc-100">Chat is active</span>
+              <span className="text-sm font-medium text-zinc-900">Chat is active</span>
             </div>
 
             <div className="flex items-center gap-1 ml-auto">

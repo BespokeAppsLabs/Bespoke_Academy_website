@@ -35,7 +35,7 @@ A: Yes. Reach us by email at info@bespokeapps.co.za or on WhatsApp at 082 290 24
 - Hardware troubleshooting and diagnostics
 - Account and access issues resolution
 - Project help and guidance
-- Equipment loan and replacement
+- Spare academy kits for loans and replacements
 
 ### Educational Support
 - Additional learning resources

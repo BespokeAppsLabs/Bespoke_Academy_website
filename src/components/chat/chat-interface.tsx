@@ -318,7 +318,7 @@ What would you like to explore today?`,
       exit="exit"
       transition={{ duration: 0.2 }}
       className={cn(
-        "flex flex-col bg-zinc-900 border border-zinc-700 rounded-lg shadow-2xl overflow-hidden",
+        "flex flex-col bg-white border border-zinc-200 rounded-lg shadow-2xl overflow-hidden",
         "ring-1 ring-primary/20",
         sizeClasses,
         className
@@ -333,7 +333,7 @@ What would you like to explore today?`,
 
       {/* Messages */}
       <div className="flex-1 overflow-hidden flex flex-col">
-        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-zinc-900 text-white" role="log" aria-label="Chat messages" aria-live="polite" aria-atomic="false"
+        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-white text-zinc-900" role="log" aria-label="Chat messages" aria-live="polite" aria-atomic="false"
          style={{
            backgroundImage: 'radial-gradient(circle at 20% 80%, rgba(120, 252, 214, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(120, 252, 214, 0.03) 0%, transparent 50%)'
          }}>
@@ -376,7 +376,7 @@ What would you like to explore today?`,
                   size="sm"
                   onClick={() => handleQuickAction(action)}
                   className={cn(
-                    "text-xs border-zinc-600 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:border-primary/60",
+                    "text-xs border-zinc-300 bg-zinc-50 text-zinc-600 hover:bg-zinc-200 hover:border-primary/60",
                     "hover:text-primary transition-all duration-200",
                     "relative overflow-hidden group",
                     "before:absolute before:inset-0 before:bg-gradient-to-r before:from-primary/10 before:to-transparent before:opacity-0 before:transition-opacity before:duration-200",
@@ -396,7 +396,7 @@ What would you like to explore today?`,
               animate={{ opacity: 1, y: 0 }}
               className={cn(
                 "flex items-center gap-2 p-3 rounded-lg",
-                "bg-red-950/50 border border-red-800/50 text-red-400"
+                "bg-red-50 border border-red-200 text-red-700"
               )}
             >
               <span className="text-sm text-red-400">{error}</span>
@@ -419,10 +419,10 @@ What would you like to explore today?`,
               animate={{ opacity: 1, y: 0 }}
               className={cn(
                 "flex items-center gap-2 p-3 rounded-lg",
-                "bg-zinc-800 border border-zinc-700 text-zinc-300"
+                "bg-zinc-50 border border-zinc-200 text-zinc-600"
               )}
             >
-              <span className="text-sm text-zinc-300">Was this helpful?</span>
+              <span className="text-sm text-zinc-600">Was this helpful?</span>
               <div className="flex gap-1 ml-auto">
                 <Button
                   variant="ghost"
@@ -448,7 +448,7 @@ What would you like to explore today?`,
         </div>
 
         {/* Input */}
-        <div className="border-t border-zinc-700 bg-zinc-800/50 p-4 relative">
+        <div className="border-t border-zinc-200 bg-zinc-50 p-4 relative">
           <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
           <div className="relative z-10">
             <ChatInput

@@ -9,6 +9,7 @@ const schema = z.object({
   studentName: z.string().trim().max(100).optional().default(""),
   grade: z.string().trim().max(20).optional().default(""),
   intent: z.enum(["apply", "question"]).default("question"),
+  tier: z.string().trim().max(20).optional().default(""),
   message: z.string().trim().max(5000).optional().default(""),
   company: z.string().optional(), // honeypot: real visitors never fill this
 });
@@ -26,7 +27,7 @@ export async function POST(request: Request) {
   const d = parsed.data;
   if (d.company) return Response.json({ status: "sent" }); // bot: pretend success
 
-  const label = d.intent === "apply" ? `${site.intakeYear} Application` : "Question";
+  const label = d.intent === "apply" ? "Application" : "Question";
   // ponytail: plain-text body, no HTML template, so user input can't inject markup.
   const text = [
     `Type: ${label}`,
@@ -35,6 +36,7 @@ export async function POST(request: Request) {
     `Phone: ${d.phone || "-"}`,
     `Student: ${d.studentName || "-"}`,
     `Grade: ${d.grade || "-"}`,
+    `Programme: ${site.tiers.find((t) => t.id === d.tier)?.name ?? "Not sure yet"}`,
     "",
     d.message || "(no message)",
   ].join("\n");

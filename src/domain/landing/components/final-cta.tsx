@@ -36,8 +36,8 @@ export default function FinalCTA() {
             </h2>
 
             <p className="text-xl text-zinc-600 mb-8 leading-relaxed">
-              Applications are open for the 2027 intake. Our 40-week curriculum takes Grades 8-11 learners
-              from complete beginner to building AI-powered robots. Build real projects, develop critical thinking skills, and prepare for
+              Applications are open, and students can join any month. Our Engineering and Media streams take Grades 8-11 learners
+              from complete beginner to building AI-powered robots, films and 3D worlds. Build real projects, develop critical thinking skills, and prepare for
               the technology-driven future.
             </p>
 
@@ -50,7 +50,7 @@ export default function FinalCTA() {
                 icon={<ArrowRight className="w-5 h-5" />}
                 animation="scale"
               >
-                Apply for 2027
+                Apply now
               </BespokeButton>
               </Magnetic>
 
@@ -84,10 +84,10 @@ export default function FinalCTA() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-zinc-900 mb-2">
-                    Friday Sessions
+                    Weekend Sessions
                   </h3>
                   <p className="text-zinc-600 leading-relaxed">
-                    Weekly Friday classes designed for teen schedules. Perfect for after-school learning
+                    Weekly weekend classes designed for teen schedules. Perfect around school and sport
                     with hands-on AI and Robotics projects.
                   </p>
                 </div>
@@ -103,7 +103,7 @@ export default function FinalCTA() {
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
                   <img
-                    src="/stack/openai-svgrepo-com.svg"
+                    src="/stack/python.svg"
                     alt="AI Projects"
                     className="w-8 h-8 object-contain opacity-80"
                   />
@@ -196,7 +196,7 @@ export default function FinalCTA() {
                   />
                 </div>
                 <h4 className="font-semibold text-zinc-900 mb-2">Safe Learning Environment</h4>
-                <p className="text-sm text-zinc-600">Small, supervised Friday sessions with progress updates for parents</p>
+                <p className="text-sm text-zinc-600">Small, supervised weekend sessions with progress updates for parents</p>
               </div>
             </div>
           </BespokeCard>

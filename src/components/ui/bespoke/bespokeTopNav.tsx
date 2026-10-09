@@ -49,7 +49,7 @@ const defaultNavItems: NavItem[] = [
     name: "Curriculum",
     href: "/curriculum",
     icon: BookOpenIcon,
-    description: "40-week learning program"
+    description: "Engineering and Media streams"
   },
   {
     name: "Courses",
@@ -123,10 +123,10 @@ export function BespokeTopNav({
             "fixed left-1/2 transform -translate-x-1/2 z-50",
             "border dark:border-neutral-700/20 rounded-full",
             "transition-[top,padding,background-color,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-            // Condenses once the page scrolls: tighter, darker glass, gold hairline
+            // Condenses once the page scrolls: tighter, deeper emerald, gold hairline
             scrolled
-              ? "top-2 py-2 backdrop-blur-2xl bg-zinc-900/75 border-gold-500/30 shadow-2xl shadow-black/30"
-              : "top-4 py-3 backdrop-blur-xl bg-emerald-800/60 border-white/20 shadow-2xl shadow-black/10",
+              ? "top-2 py-2 backdrop-blur-2xl bg-emerald-800/85 border-gold-500/30 shadow-xl shadow-black/10"
+              : "top-4 py-3 backdrop-blur-xl bg-emerald-800/90 border-gold-500/30 shadow-xl shadow-black/10",
             // Layout
             "flex items-center justify-between gap-4 px-6",
             "min-h-16 lg:w-3/5 mx-4",
@@ -246,7 +246,7 @@ export function BespokeTopNav({
                 icon={<SparklesIcon className="w-4 h-4" />}
                 animation="glow"
               >
-                Apply for 2027
+                Apply now
               </BespokeButton>
             </div>
           )}
@@ -257,9 +257,9 @@ export function BespokeTopNav({
       <motion.div
         className={cn(
           "fixed top-4 left-4 right-4 z-50 md:hidden",
-          "backdrop-blur-xl bg-white/10 dark:bg-neutral-900/10",
-          "border border-white/20 dark:border-neutral-700/20",
-          "rounded-full shadow-2xl shadow-black/10",
+          // Same emerald pill as desktop so it reads on the light pages
+          "backdrop-blur-xl bg-emerald-800/90 border border-gold-500/30",
+          "rounded-full shadow-xl shadow-black/15",
           "flex items-center justify-between px-4 py-3",
           "min-h-14"
         )}
@@ -279,7 +279,7 @@ export function BespokeTopNav({
           <Logo
             variant="icon"
             size="md"
-            className="w-6 h-6"
+            className="w-8 h-8"
           />
           <span className="font-bold text-sm text-white">
             Bespoke Academy
@@ -376,7 +376,7 @@ export function BespokeTopNav({
                       icon={<SparklesIcon className="w-4 h-4" />}
                       animation="glow"
                     >
-                      Apply for 2027
+                      Apply now
                     </BespokeButton>
                   </div>
                 )}

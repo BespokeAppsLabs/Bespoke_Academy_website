@@ -67,7 +67,7 @@ export function MessageBubble({
           "flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-full border",
           isUser
             ? "bg-gradient-to-br from-emerald-500 to-emerald-600 text-white border-emerald-400/50 shadow-md shadow-emerald-500/25"
-            : "bg-gradient-to-br from-emerald-500/20 to-emerald-600/5 text-emerald-400 border-emerald-400/40 shadow-md"
+            : "bg-gradient-to-br from-emerald-500/20 to-emerald-600/5 text-emerald-600 border-emerald-400/40 shadow-md"
         )}>
           {isUser ? (
             <svg className="h-4 w-4 fill-white stroke-emerald-300" strokeWidth="0.5" viewBox="0 0 20 20">
@@ -92,7 +92,7 @@ export function MessageBubble({
           "overflow-hidden",
           isUser
             ? "bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-br-sm border-emerald-400/60 shadow-lg shadow-emerald-500/30"
-            : "bg-zinc-800 text-zinc-100 rounded-bl-sm border-zinc-700",
+            : "bg-zinc-50 text-zinc-900 rounded-bl-sm border-zinc-200",
           !isUser && "before:absolute before:inset-0 before:bg-gradient-to-br before:from-emerald-500/8 before:via-emerald-500/4 before:to-transparent before:pointer-events-none"
         )}>
           <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
@@ -110,7 +110,7 @@ export function MessageBubble({
               "border shadow-md hover:shadow-lg transition-all duration-200",
               isUser
                 ? "bg-white/90 text-emerald-600 hover:bg-white hover:scale-110 border-emerald-400/60 hover:border-emerald-400"
-                : "bg-zinc-700 text-zinc-100 hover:bg-gradient-to-br hover:from-emerald-500/90 hover:to-emerald-600/90 hover:text-white hover:border-emerald-400 hover:scale-110 border-zinc-600"
+                : "bg-zinc-100 text-zinc-900 hover:bg-gradient-to-br hover:from-emerald-500/90 hover:to-emerald-600/90 hover:text-white hover:border-emerald-400 hover:scale-110 border-zinc-300"
             )}
           >
             {copied ? (
