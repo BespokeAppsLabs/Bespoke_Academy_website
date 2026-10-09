@@ -228,6 +228,21 @@
 
 /* Enhanced Typography Utility Classes - Tech-Focused */
 @layer utilities {
+  /* Marquee: track holds two identical copies, so -50% is exactly one copy */
+  .animate-marquee {
+    animation: marquee var(--marquee-duration, 40s) linear infinite;
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none;
+    }
+  }
+
   .text-display-2xl {
     font-size: var(--text-display-2xl);
     line-height: 1;

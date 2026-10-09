@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from "motion/react";
 import { BespokeCard } from '@/components/ui/bespoke/bespokeCard';
 import { BespokeButton } from '@/components/ui/bespoke/bespokeButton';
-import AutoScrollingCarousel from '@/components/ui/auto-scrolling-carousel';
+import { Marquee } from '@/components/ui/marquee';
 import { ParallelLinesBackground } from '@/components/ui/parallel-lines-background';
 import {
   Brain,
@@ -229,88 +229,40 @@ function SolutionsSection() {
           </p>
         </motion.div>
 
-        {/* Solutions Infinite Scroll Carousel */}
-        <div className=" flex items-center relative">
-          <AutoScrollingCarousel
-            speed={20}
-            gap="2rem"
-            showArrows={false}
-            className="py-4 w-full"
-          >
-            {solutions.map((solution, index) => (
-              <div key={solution.title} className="w-72 sm:w-80 md:w-96 flex-shrink-0">
-                <motion.div
-                  whileHover={{
-                    scale: 1.03,
-                    y: -4,
-                  }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.08,
-                    ease: [0.16, 1, 0.3, 1]
-                  }}
-                  className="h-full"
-                >
-                  <BespokeCard
-                    variant="glass-card"
-                    className={`
-                      bg-zinc-800/90 backdrop-blur-sm border-zinc-700 text-white p-6 h-full
-                      transition-all duration-300 hover:bg-zinc-750/90 hover:border-gold-500/60
-                      hover:shadow-2xl hover:shadow-gold-500/20
-                      group cursor-pointer
-                    `}
-                    style={{
-                      transform: 'translateZ(0)',
-                      backfaceVisibility: 'hidden'
-                    }}
-                  >
-                    <div className={`${solution.color} mb-4 transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-2`}>
-                      {solution.icon}
-                    </div>
-                    <h3 className="text-lg md:text-xl font-semibold mb-3 text-white group-hover:text-emerald-400 transition-all duration-300">
-                      {solution.title}
-                    </h3>
-                    <p className="text-zinc-300 text-sm mb-4 leading-relaxed group-hover:text-zinc-200 transition-colors duration-300">
-                      {solution.description}
-                    </p>
-                    <div className="space-y-2 mb-4">
-                      {solution.features.map((feature, i) => (
-                        <div
-                          key={i}
-                          className="flex items-center gap-2 text-xs text-zinc-400 group-hover:text-zinc-300 transition-colors duration-300"
-                        >
-                          <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full group-hover:bg-emerald-300 transition-colors duration-300" />
-                          {feature}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="mt-4 pt-4 border-t border-zinc-700 group-hover:border-emerald-600/30 transition-colors duration-300">
-                      <div className="text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-all duration-300 flex items-center gap-2 group-hover:translate-x-1">
-                        Learn More
-                        <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </BespokeCard>
-                </motion.div>
+        {/* Solutions marquee */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, delay: 0.2 }}
+        >
+          <Marquee duration={60} gapClass="gap-6 pr-6" className="py-4">
+            {solutions.map((solution) => (
+              <div
+                key={solution.title}
+                className="group w-72 sm:w-80 md:w-96 shrink-0 rounded-2xl border border-zinc-700 bg-zinc-800/90 p-6 text-white backdrop-blur-sm transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-gold-500/60 hover:shadow-2xl hover:shadow-gold-500/20"
+              >
+                <div className={`${solution.color} mb-4 transition-transform duration-300 group-hover:scale-110`}>
+                  {solution.icon}
+                </div>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 text-white transition-colors duration-300 group-hover:text-gold-300">
+                  {solution.title}
+                </h3>
+                <p className="text-zinc-300 text-sm mb-4 leading-relaxed">
+                  {solution.description}
+                </p>
+                <ul className="space-y-2">
+                  {solution.features.map((feature) => (
+                    <li key={feature} className="flex items-center gap-2 text-xs text-zinc-400">
+                      <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
-          </AutoScrollingCarousel>
-        </div>
-
-        {/* Override dark gradient overlays to make cards visible */}
-        <style jsx>{`
-          div[class*="absolute left-0 top-0 bottom-0"] {
-            background: linear-gradient(to right, transparent, transparent) !important;
-          }
-          div[class*="absolute right-0 top-0 bottom-0"] {
-            background: linear-gradient(to left, transparent, transparent) !important;
-          }
-        `}</style>
+          </Marquee>
+        </motion.div>
 
         {/* Additional Info */}
         <motion.div
