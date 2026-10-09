@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "framer-motion";
+import { spring } from "@/lib/motion";
+import { motion } from "motion/react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
@@ -32,9 +33,9 @@ const bespokeCardVariants = cva(
       animation: {
         none: "",
         float: "hover:shadow-2xl hover:-translate-y-1",
-        scale: "hover:scale-105",
-        glow: "hover:shadow-primary-emerald-500/25 hover:shadow-2xl",
-        tilt: "hover:scale-105 hover:rotate-0.5"
+        scale: "hover:scale-[1.02]",
+        glow: "hover:shadow-gold-500/25 hover:shadow-2xl",
+        tilt: "hover:shadow-2xl"
       }
     },
     defaultVariants: {
@@ -62,28 +63,18 @@ const BespokeCard = React.forwardRef<HTMLDivElement, BespokeCardProps>(
     animation,
     asChild = false,
     children,
-    delay = 0,
-    duration = 0.5,
+    delay,
+    duration,
     ...props
   }, ref) => {
     const Component = asChild ? React.Fragment : "div";
 
     return (
+      // Entrances are owned by the section wrappers (in-view reveals); the card only lifts on hover.
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration,
-          delay,
-          ease: "easeInOut"
-        }}
-        whileHover={{
-          scale: variant?.includes("scale") || variant?.includes("float") ? 1.02 : 1,
-          y: animation === "float" ? -4 : 0,
-          rotate: animation === "tilt" ? 0.5 : 0,
-          transition: { duration: 0.2, ease: "easeInOut" }
-        }}
-        className={cn("relative group")}
+        whileHover={animation === "float" || animation === "tilt" ? { y: -6 } : undefined}
+        transition={spring}
+        className={cn("relative group h-full")}
       >
         <Component
           ref={ref}
@@ -92,12 +83,12 @@ const BespokeCard = React.forwardRef<HTMLDivElement, BespokeCardProps>(
         >
           {/* Gradient overlay for premium variants */}
           {(variant === "premium-card" || variant === "feature-card") && (
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
           )}
 
           {/* Shimmer effect for premium cards */}
           {variant === "premium-card" && (
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 animate-shimmer" />
             </div>
           )}

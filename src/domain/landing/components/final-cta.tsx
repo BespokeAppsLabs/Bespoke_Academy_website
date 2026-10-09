@@ -1,14 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
+import { motion } from "motion/react";
 import { BespokeButton } from "@/components/ui/bespoke/bespokeButton";
 import { BespokeCard } from "@/components/ui/bespoke/bespokeCard";
+import { Magnetic } from "@/components/ui/magnetic";
+import { StaggerContainer } from "@/components/ui/bespoke/bespokeAnimation";
 import { ParallelLinesBackground } from "@/components/ui/parallel-lines-background";
 import {
-  Star,
-  Shield,
   ArrowRight
 } from "lucide-react";
+import { GoldUnderline } from "@/components/ui/gold-underline";
 
 export default function FinalCTA() {
   return (
@@ -25,58 +27,48 @@ export default function FinalCTA() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-emerald-500 text-sm font-semibold tracking-wider uppercase">
+            <span className="text-gold-700 text-sm font-semibold tracking-wider uppercase">
               Ready to Build Your Future?
             </span>
 
             <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-zinc-900">
               Start Your AI & Robotics
-              <span className="text-emerald-500 block">Journey Today.</span>
+              <span className="text-emerald-500 block"><GoldUnderline>Journey Today.</GoldUnderline></span>
             </h2>
 
             <p className="text-xl text-zinc-600 mb-8 leading-relaxed">
-              Join thousands of teens (Grades 8-11) mastering AI and Robotics through our comprehensive
-              40-week curriculum. Build real projects, develop critical thinking skills, and prepare for
+              Applications are open, and students can join any month. Our Engineering and Media streams take Grades 8-11 learners
+              from complete beginner to building AI-powered robots, films and 3D worlds. Build real projects, develop critical thinking skills, and prepare for
               the technology-driven future.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
+              <Magnetic>
               <BespokeButton
+                href="/#contact"
                 variant="bespoke-primary"
                 size="lg"
                 icon={<ArrowRight className="w-5 h-5" />}
                 animation="scale"
               >
-                Enroll Now
+                Apply now
               </BespokeButton>
+              </Magnetic>
 
               <BespokeButton
+                href="/#contact"
                 variant="bespoke-outline"
                 size="lg"
                 animation="scale"
               >
-                Parent Consultation
+                Ask a Question
               </BespokeButton>
             </div>
 
-            {/* Trust Indicators */}
-            <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
-              <div className="flex items-center gap-2">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-500 fill-current" />
-                ))}
-                <span className="text-zinc-700 font-medium ml-1">4.9/5 Parent Rating</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Shield className="w-5 h-5 text-emerald-500" />
-                <span className="text-zinc-700 font-medium">30-Day Satisfaction Guarantee</span>
-              </div>
-            </div>
           </motion.div>
 
           {/* Right Content - Feature Cards */}
-          <div className="space-y-6">
+          <StaggerContainer className="space-y-6" staggerDelay={0.12}>
             <BespokeCard
               variant="premium-card"
               animation="float"
@@ -85,18 +77,20 @@ export default function FinalCTA() {
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-                  <img
+                  <Image
                     src="/stack/firebase-svgrepo-com.svg"
                     alt="Learning Platform"
+                    width={32}
+                    height={32}
                     className="w-8 h-8 object-contain opacity-80"
                   />
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-zinc-900 mb-2">
-                    Friday Sessions
+                    Weekend Sessions
                   </h3>
                   <p className="text-zinc-600 leading-relaxed">
-                    Weekly Friday classes designed for teen schedules. Perfect for after-school learning
+                    Weekly weekend classes designed for teen schedules. Perfect around school and sport
                     with hands-on AI and Robotics projects.
                   </p>
                 </div>
@@ -111,9 +105,11 @@ export default function FinalCTA() {
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-                  <img
-                    src="/stack/openai-svgrepo-com.svg"
+                  <Image
+                    src="/stack/python.svg"
                     alt="AI Projects"
+                    width={32}
+                    height={32}
                     className="w-8 h-8 object-contain opacity-80"
                   />
                 </div>
@@ -137,9 +133,11 @@ export default function FinalCTA() {
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-                  <img
+                  <Image
                     src="/stack/google-icon-logo-svgrepo-com.svg"
                     alt="Career Preparation"
+                    width={32}
+                    height={32}
                     className="w-8 h-8 object-contain opacity-80"
                   />
                 </div>
@@ -154,7 +152,7 @@ export default function FinalCTA() {
                 </div>
               </div>
             </BespokeCard>
-          </div>
+          </StaggerContainer>
         </div>
 
         {/* Bottom Stats/Features */}
@@ -176,36 +174,42 @@ export default function FinalCTA() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
-                  <img
+                  <Image
                     src="/stack/arduino-1.svg"
-                    alt="Expert Instructors"
+                    alt=""
+                    width={40}
+                    height={40}
                     className="w-10 h-10 object-contain"
                   />
                 </div>
-                <h4 className="font-semibold text-zinc-900 mb-2">Expert Instructors</h4>
-                <p className="text-sm text-zinc-600">University-educated mentors with real AI/Robotics industry experience</p>
+                <h4 className="font-semibold text-zinc-900 mb-2">Hands-On Hardware</h4>
+                <p className="text-sm text-zinc-600">Learners build with real electronics, sensors and microcontrollers every week</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
-                  <img
+                  <Image
                     src="/stack/visual-studio-code-1-1.svg"
-                    alt="Proven Results"
+                    alt=""
+                    width={40}
+                    height={40}
                     className="w-10 h-10 object-contain"
                   />
                 </div>
-                <h4 className="font-semibold text-zinc-900 mb-2">Proven Results</h4>
-                <p className="text-sm text-zinc-600">95% college acceptance rate for tech programs and competition wins</p>
+                <h4 className="font-semibold text-zinc-900 mb-2">Portfolio of Real Projects</h4>
+                <p className="text-sm text-zinc-600">Every phase ends in a project learners can show schools and future employers</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
-                  <img
+                  <Image
                     src="/stack/hostinger.svg"
-                    alt="Safe Learning Environment"
+                    alt=""
+                    width={40}
+                    height={40}
                     className="w-10 h-10 object-contain"
                   />
                 </div>
                 <h4 className="font-semibold text-zinc-900 mb-2">Safe Learning Environment</h4>
-                <p className="text-sm text-zinc-600">Parent portal access, progress tracking, and dedicated support</p>
+                <p className="text-sm text-zinc-600">Small, supervised weekend sessions with progress updates for parents</p>
               </div>
             </div>
           </BespokeCard>
@@ -214,5 +218,3 @@ export default function FinalCTA() {
     </section>
   );
 }
-
-export type FinalCTAProps = {};

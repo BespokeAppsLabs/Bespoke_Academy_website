@@ -62,7 +62,7 @@ import { BespokeTopNav } from "@/components/ui/bespoke/bespokeTopNav";
 The component includes sensible defaults for Bespoke Academy:
 
 - **Home** (/) - Starting point for learning journey
-- **Curriculum** (/curriculum) - 40-week program overview
+- **Curriculum** (/curriculum) - Engineering and Media stream overview
 - **Courses** (/courses) - Available course offerings
 - **About** (/about) - Mission and educational values
 - **Dashboard** (/dashboard) - Progress tracking

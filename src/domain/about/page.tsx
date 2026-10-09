@@ -4,7 +4,6 @@ import { ModernHeader } from "@/components/modern-header";
 import { ModernFooter } from "@/components/modern-footer";
 import {
   Hero,
-  Team,
   Story,
   Values,
   ContactCTA
@@ -18,7 +17,6 @@ export default function AboutPage() {
         <Hero />
         <Story />
         <Values />
-        <Team />
         <ContactCTA />
       </main>
       <ModernFooter />

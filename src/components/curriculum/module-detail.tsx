@@ -3,12 +3,11 @@
 import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   Clock,
-  Users,
   Target,
   Award,
   BookOpen,
@@ -168,7 +167,7 @@ export function ModuleDetail({ module, className }: ModuleDetailProps) {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Lightbulb className="h-5 w-5 text-primary" />
-                What You'll Learn
+                What You&apos;ll Learn
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -523,7 +522,7 @@ export function ModuleDetail({ module, className }: ModuleDetailProps) {
       {/* Call to Action */}
       <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-8 border border-primary/20 text-center">
         <h3 className="text-2xl font-bold text-foreground mb-4">
-          Ready to Start Your Child's Journey with {module.title}?
+          Ready to Start Your Child&apos;s Journey with {module.title}?
         </h3>
         <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
           Join this comprehensive phase where your child will develop essential skills,

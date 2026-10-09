@@ -24,7 +24,7 @@ export default function Phase1Page() {
           <BespokeAnimation preset="slide-in-up">
             <div className="text-center mb-12">
               <BespokeBadge variant="level-badge" className="mb-4">
-                Phase 1 • Weeks 1-8
+                Engineering Level 1 • Units 1-8
               </BespokeBadge>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-emerald-600 mb-6">
                 Digital Foundations
@@ -41,12 +41,12 @@ export default function Phase1Page() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
               <BespokeCard variant="stats-card" className="text-center p-4">
                 <Clock className="h-8 w-8 text-primary-emerald-600 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-foreground">8 Weeks</div>
+                <div className="text-2xl font-bold text-foreground">8 Units</div>
                 <div className="text-sm text-muted-foreground">Duration</div>
               </BespokeCard>
               <BespokeCard variant="stats-card" className="text-center p-4">
                 <Target className="h-8 w-8 text-primary-emerald-600 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-foreground">8 Projects</div>
+                <div className="text-2xl font-bold text-foreground">3 Projects</div>
                 <div className="text-sm text-muted-foreground">Hands-on</div>
               </BespokeCard>
               <BespokeCard variant="stats-card" className="text-center p-4">
@@ -107,7 +107,7 @@ export default function Phase1Page() {
                       </h3>
                       <p className="text-muted-foreground mb-4">
                         Before diving into code, students learn computational thinking through visual programming.
-                        Using Scratch and block-based tools, they understand logic without getting stuck on syntax.
+                        Using flowcharts and simple Python, they understand logic without getting stuck on syntax.
                       </p>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div className="flex items-start gap-2">
@@ -191,7 +191,7 @@ export default function Phase1Page() {
                   <h3 className="text-xl font-bold text-foreground mb-4">Parent Information</h3>
                   <div className="space-y-4">
                     <div>
-                      <h4 className="text-sm font-semibold text-foreground mb-1">Friday Sessions</h4>
+                      <h4 className="text-sm font-semibold text-foreground mb-1">Weekend Sessions</h4>
                       <p className="text-sm text-muted-foreground">
                         2-hour weekly meetings with hands-on activities and collaborative learning
                       </p>
@@ -199,7 +199,7 @@ export default function Phase1Page() {
                     <div>
                       <h4 className="text-sm font-semibold text-foreground mb-1">No Homework Required</h4>
                       <p className="text-sm text-muted-foreground">
-                        All learning happens during our Friday sessions, perfect for busy teens
+                        All learning happens during our weekend sessions, perfect for busy teens
                       </p>
                     </div>
                     <div>
@@ -232,12 +232,12 @@ export default function Phase1Page() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <BespokeButton variant="bespoke-primary" size="lg">
-                  Enroll in Phase 1
+                  Enroll in Level 1
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </BespokeButton>
-                <Link href="/curriculum/phase-2">
+                <Link href="/curriculum/module-2">
                   <BespokeButton variant="bespoke-outline" size="lg">
-                    View Phase 2
+                    View Level 2
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </BespokeButton>
                 </Link>
@@ -252,6 +252,7 @@ export default function Phase1Page() {
 }
 
 export const metadata = {
-  title: "Phase 1: Digital Foundations | Bespoke Academy",
-  description: "Build computer confidence and basic programming skills in this comprehensive 8-week phase for Grades 8-11. Perfect for teens with no prior computer knowledge.",
+  title: "Engineering Level 1: Foundations",
+  alternates: { canonical: "/curriculum/module-1" },
+  description: "Build computer confidence and basic programming skills in this level for Grades 8-11. Perfect for teens with no prior computer knowledge.",
 }

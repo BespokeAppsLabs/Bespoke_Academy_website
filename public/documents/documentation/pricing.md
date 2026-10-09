@@ -1,57 +1,36 @@
 # Pricing
 
 ## Overview
-Bespoke Academy offers flexible pricing from R1 to R10 000 options to make our AI and Robotics education accessible to families. We provide various payment plans and financial assistance to ensure cost doesn't become a barrier to quality education.
+Bespoke Academy is a rolling monthly programme with no fixed end date. Students join any month and pay monthly. There are two streams. Engineering has three tiers: Base R500, Mid R1,500 and High R2,500 per month. Media is R2,500 per month. Families outside South Africa see the fee in US dollars (US$29, US$85 and US$143 per month).
 
 ## Key Information
-- Comprehensive 40-week program tuition
-- Flexible payment plans available
-- All materials and equipment included
-- No hidden fees or surprise costs
-- Financial assistance options
-- Value-based education investment
+- Engineering Base: R500 per month. Coding, AI and Arduino basics. Parents buy an Arduino Uno starter kit (about R800).
+- Engineering Mid: R1,500 per month. Coding, AI and IoT. Kit included: ESP32, Raspberry Pi, breadboard, wires and sensors. Up to R300 in final-project parts.
+- Engineering High: R2,500 per month. Coding, AI, IoT and full robotics. Mid kit plus an Arduino Mega kit and robotics pack. Up to R500 in final-project parts.
+- Media: R2,500 per month. Coding, AI images and video, characters, motion graphics and Blender 3D. Image and video generation tools with a monthly budget. No kit needed.
+- Every student needs their own laptop (see Requirements)
+- Paid monthly, no fixed end date; one month's notice to leave
+- No payment is taken on the website; payment details are shared once an application is accepted
 
 ## Common Questions
-**Q: What is included in the tuition?**
-A: Tuition covers all instruction, materials, equipment usage, software licenses, and project supplies for the entire 40-week program.
+**Q: How much does the programme cost?**
+A: From R500 per month for Engineering Base, R1,500 for Engineering Mid, and R2,500 for Engineering High or Media.
 
-**Q: Do you offer payment plans?**
-A: Yes, we offer several flexible payment options including monthly, quarterly, and semester-based plans to fit your budget.
+**Q: How long do we pay for?**
+A: Monthly, for as long as your child is in the programme. Students move up a level when they pass its checkpoint. A typical pace is about 10 months for Engineering and about 13 months for Media. Leaving needs one month's notice.
 
-**Q: Are there any additional costs I should know about?**
-A: No, everything is included in the tuition. There are no hidden fees for materials, software, or equipment.
+**Q: What is included?**
+A: Weekend sessions, software and learning resources, the academy's AI tools, progress updates and a project portfolio. Mid and High include a hardware kit, bought in two halves over the first two months. Media includes image and video generation tools.
 
-## Detailed Information
+**Q: Is a laptop included?**
+A: No. Every student needs their own laptop. Media needs a stronger laptop for Blender 3D.
 
-### Tuition Structure
-- Full 40-week program coverage
-- All instructional materials included
-- Equipment and software access
-- Project supplies and components
-- Portfolio development support
-- Career guidance services
+**Q: Can I pay online?**
+A: Not yet. Apply on the website and we will share payment details once the application is accepted.
 
-### Payment Options
-- **Full Payment**: Single payment with discount
-- **Semester Plans**: 4 payments over the program
-- **Monthly Plans**: 10 equal monthly payments
-- **Custom Plans**: Tailored to family needs
-
-### Financial Assistance
-- Need-based scholarships available
-- Merit-based awards
-- Family discounts for multiple students
-- Community partnership programs
-- Flexible payment arrangements
-
-### Value Proposition
-Our program provides exceptional value through:
-- Small class sizes and personalized attention
-- Expert instructors with industry experience
-- Comprehensive curriculum covering AI and robotics
-- Portfolio development and career preparation
-- Long-term skill development and opportunities
+**Q: Do you offer discounts?**
+A: Please ask us directly by email (info@bespokeapps.co.za) or WhatsApp (082 290 2428).
 
 ## Website Integration
-Primary URL: /pricing
-Related URLs: /enroll, /programs, /financial-aid
+Primary URL: /courses
+Related URLs: /curriculum, /about

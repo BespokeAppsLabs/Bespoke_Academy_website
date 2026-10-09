@@ -1,12 +1,13 @@
 "use client";
 
 import { BespokeCard, BespokeAnimation } from "@/components/ui/bespoke";
+import { GoldUnderline } from "@/components/ui/gold-underline";
 
 const values = [
   {
     icon: "🎯",
     title: "Personalization",
-    description: "Every learning journey is tailored to individual goals, skills, and pace through AI-driven adaptation."
+    description: "Small groups mean each learner gets attention at their own pace, from first click to first robot."
   },
   {
     icon: "🚀",
@@ -21,7 +22,7 @@ const values = [
   {
     icon: "📊",
     title: "Results-Driven",
-    description: "Our focus is on real-world outcomes and career advancement, not just completion certificates."
+    description: "Every phase ends in something real that learners built themselves, not just a certificate."
   },
   {
     icon: "🌍",
@@ -37,12 +38,12 @@ const values = [
 
 export default function Values() {
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <BespokeAnimation preset="slide-in-up">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our <span className="text-emerald-600">Values</span>
+              Our <span className="text-emerald-600"><GoldUnderline>Values</GoldUnderline></span>
           </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               These principles guide everything we do, from curriculum design to student support
@@ -57,7 +58,7 @@ export default function Values() {
               preset="slide-in-up"
               delay={index * 0.1}
             >
-              <BespokeCard variant="feature-card" className="h-full group hover:shadow-xl transition-all duration-300">
+              <BespokeCard variant="course-card" className="h-full group hover:shadow-xl transition-all duration-300">
                 <div className="p-6">
                   <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
                     {value.icon}

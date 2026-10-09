@@ -5,16 +5,12 @@
 
 import OpenAI from 'openai'
 import type {
-  ChatMessage,
   ChatRequest,
   ChatResponse,
-  ChatError,
-  StreamingChunk,
   ChatConfig
 } from './chat'
 import {
   getGroqConfig,
-  createGroqConfigOverrides,
   type GroqConfig
 } from '@/config'
 import {
@@ -25,13 +21,14 @@ import {
   logGroqError
 } from '@/lib/errors/groq-errors'
 import { toolManager } from '@/lib/tools'
+import type { ToolCallResponse } from '@/types/context'
 import {
   validateChatRequest,
   prepareMessages,
-  buildDynamicSystemMessage,
-  optimizeConversationHistory,
   generateConciseResponse
 } from '@/lib/utils/chat-utils'
+
+type ToolResultEntry = { tool_call_id: string; result?: ToolCallResponse; error?: string }
 
 export class GroqClient {
   private client: OpenAI
@@ -122,17 +119,15 @@ export class GroqClient {
       return new ReadableStream<Uint8Array>({
         async start(controller) {
           const encoder = new TextEncoder()
-          let fullResponse = ''
-          let toolResults: any[] = []
+          const toolResults: ToolResultEntry[] = []
           let isProcessingTools = false
 
           try {
             console.log(`🚀 [${requestId}] Starting to process stream...`)
-            for await (const chunk of stream as any) {
+            for await (const chunk of stream as AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>) {
               const delta = chunk.choices[0]?.delta
 
               if (delta?.content) {
-                fullResponse += delta.content
                 const sseChunk = `data: ${JSON.stringify({
                   content: delta.content,
                   type: 'content'
@@ -195,21 +190,21 @@ export class GroqClient {
                   const toolCalls = response.choices[0].message.tool_calls
 
                   for (const toolCall of toolCalls) {
-                    if ((toolCall as any).function?.name && (toolCall as any).function?.arguments) {
-                      console.log(`🚀 [${requestId}] Executing tool: ${(toolCall as any).function.name} with ID: ${(toolCall as any).id}`)
+                    if (toolCall.type === 'function' && toolCall.function.name && toolCall.function.arguments) {
+                      console.log(`🚀 [${requestId}] Executing tool: ${toolCall.function.name} with ID: ${toolCall.id}`)
 
                       const executionStart = Date.now()
                       try {
-                        const parameters = JSON.parse((toolCall as any).function.arguments)
+                        const parameters = JSON.parse(toolCall.function.arguments)
                         console.log(`📝 [${requestId}] Tool parameters:`, parameters)
 
                         const result = await toolManager.executeToolCall(
-                          (toolCall as any).function.name,
+                          toolCall.function.name,
                           parameters
                         )
 
                         const executionTime = Date.now() - executionStart
-                        console.log(`✅ [${requestId}] Tool ${(toolCall as any).function.name} executed successfully in ${executionTime}ms`)
+                        console.log(`✅ [${requestId}] Tool ${toolCall.function.name} executed successfully in ${executionTime}ms`)
                         console.log(`📊 [${requestId}] Tool result summary:`, {
                           success: result.success,
                           contentLength: result.content?.length || 0,
@@ -217,7 +212,7 @@ export class GroqClient {
                         })
 
                         toolResults.push({
-                          tool_call_id: (toolCall as any).id,
+                          tool_call_id: toolCall.id,
                           result: result
                         })
 
@@ -229,7 +224,7 @@ export class GroqClient {
                         const responseChunk = `data: ${JSON.stringify({
                           content: conciseResponse,
                           type: 'tool_result',
-                          toolName: (toolCall as any).function.name
+                          toolName: toolCall.function.name
                         })}\n\n`
 
                         console.log(`📤 [${requestId}] Sending response to client...`)
@@ -237,7 +232,7 @@ export class GroqClient {
 
                       } catch (toolError) {
                         const executionTime = Date.now() - executionStart
-                        console.error(`❌ [${requestId}] Tool execution error for ${(toolCall as any).function.name} after ${executionTime}ms:`, toolError)
+                        console.error(`❌ [${requestId}] Tool execution error for ${toolCall.function.name} after ${executionTime}ms:`, toolError)
 
                         const errorResponse = `I encountered an issue while retrieving that information. Let me help you differently.`
 
@@ -360,25 +355,25 @@ export class GroqClient {
       if (choice.message?.tool_calls) {
         console.log(`🔧 Processing ${choice.message.tool_calls.length} tool calls in non-streaming mode`)
 
-        const toolResults: any[] = []
+        const toolResults: ToolResultEntry[] = []
 
         for (const toolCall of choice.message.tool_calls) {
-          if ((toolCall as any).function?.name && (toolCall as any).function?.arguments) {
+          if (toolCall.type === 'function' && toolCall.function.name && toolCall.function.arguments) {
             try {
-              const parameters = JSON.parse((toolCall as any).function.arguments)
+              const parameters = JSON.parse(toolCall.function.arguments)
               const result = await toolManager.executeToolCall(
-                (toolCall as any).function.name,
+                toolCall.function.name,
                 parameters
               )
 
               toolResults.push({
-                tool_call_id: (toolCall as any).id,
+                tool_call_id: toolCall.id,
                 result
               })
             } catch (toolError) {
               console.error(`❌ Tool execution error:`, toolError)
               toolResults.push({
-                tool_call_id: (toolCall as any).id,
+                tool_call_id: toolCall.id,
                 error: toolError instanceof Error ? toolError.message : 'Unknown error'
               })
             }
@@ -524,7 +519,7 @@ export async function sendNonStreamingMessage(request: ChatRequest): Promise<Cha
  */
 export async function testGroqConnection(): Promise<{ connected: boolean; error?: GroqApiError; models?: string[] }> {
   try {
-    const client = getGroqClient()
+    getGroqClient() // throws if the client can't be configured
     const models = await getGroqModels()
     return { connected: true, models: models.models }
   } catch (error) {

@@ -37,7 +37,7 @@ export default function BespokeTopNavExample() {
               <div>
                 <h3 className="font-medium mb-2">Design System</h3>
                 <p className="text-sm text-neutral-600 dark:text-neutral-300">
-                  Integrates with Bespoke Academy's design tokens and color palette
+                  Integrates with Bespoke Academy&apos;s design tokens and color palette
                 </p>
               </div>
               <div>

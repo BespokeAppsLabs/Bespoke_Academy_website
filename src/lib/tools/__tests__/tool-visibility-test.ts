@@ -9,12 +9,12 @@ interface TestResult {
   testName: string;
   passed: boolean;
   duration: number;
-  details: any;
+  details: unknown;
   error?: string;
 }
 
 class ToolVisibilityTester {
-  async runTest(testName: string, testFn: () => Promise<any>): Promise<TestResult> {
+  async runTest(testName: string, testFn: () => Promise<unknown>): Promise<TestResult> {
     const startTime = Date.now();
 
     try {

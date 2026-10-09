@@ -9,48 +9,6 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-// Unsplash API - Using Source API (no auth needed for basic downloads)
-const UNSPLASH_BASE = 'https://source.unsplash.com';
-
-// Image specifications matching our GenZ-professional AI education theme
-const imagesToDownload = [
-  {
-    url: `${UNSPLASH_BASE}/1600x900/?artificial-intelligence,technology`,
-    filename: 'phases/ai-fundamentals.jpg',
-    description: 'AI fundamentals - modern tech education'
-  },
-  {
-    url: `${UNSPLASH_BASE}/1600x900/?ai-tools,automation`,
-    filename: 'phases/advanced-tools.jpg',
-    description: 'Advanced AI tools and automation'
-  },
-  {
-    url: `${UNSPLASH_BASE}/1600x900/?ai-applications,industry`,
-    filename: 'phases/specialized-apps.jpg',
-    description: 'Specialized AI applications'
-  },
-  {
-    url: `${UNSPLASH_BASE}/1600x900/?portfolio,projects`,
-    filename: 'phases/capstone-portfolio.jpg',
-    description: 'Capstone projects and portfolio'
-  },
-  {
-    url: `${UNSPLASH_BASE}/1600x900/?tech-education,learning`,
-    filename: 'hero/tech-education-hero.jpg',
-    description: 'Hero image - tech education'
-  },
-  {
-    url: `${UNSPLASH_BASE}/800x800/?young-professional,tech-career`,
-    filename: 'testimonials/success-student-1.jpg',
-    description: 'Successful student testimonial'
-  },
-  {
-    url: `${UNSPLASH_BASE}/800x800/?tech-professional,career`,
-    filename: 'testimonials/success-student-2.jpg',
-    description: 'Tech professional testimonial'
-  }
-];
-
 // Better approach: Use specific Unsplash photo IDs for consistent, professional images
 const professionalImages = [
   {

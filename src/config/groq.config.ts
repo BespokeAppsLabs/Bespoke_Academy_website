@@ -44,7 +44,7 @@ export interface GroqConfig {
 export interface GroqConfigValidationError {
   field: string
   message: string
-  value: any
+  value: unknown
 }
 
 /**
@@ -193,7 +193,7 @@ export function validateGroqConfig(): GroqConfigValidationError[] | null {
   try {
     validateConfig()
     return null
-  } catch (error) {
+  } catch {
     // In a production environment, you might want to extract the validation errors
     // For now, return null to indicate the config check passed validation logic
     return null

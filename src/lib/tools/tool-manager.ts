@@ -1,3 +1,4 @@
+import type OpenAI from 'openai';
 import { chatbotContextTool } from './chatbot-context';
 import { ContextResponse, ToolCallRequest, ToolCallResponse } from '@/types/context';
 
@@ -5,7 +6,7 @@ export class ToolManager {
   private toolUsageStats: Map<string, number> = new Map();
   private errorStats: Map<string, number> = new Map();
 
-  async executeToolCall(toolName: string, parameters: any): Promise<any> {
+  async executeToolCall(toolName: string, parameters: ToolCallRequest): Promise<ToolCallResponse> {
     const startTime = Date.now();
     const executionId = `exec_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
 
@@ -91,7 +92,7 @@ export class ToolManager {
   }
 
   // Get available tools
-  getAvailableTools(): any[] {
+  getAvailableTools(): OpenAI.Chat.Completions.ChatCompletionTool[] {
     return [
       {
         type: "function",
@@ -115,14 +116,14 @@ export class ToolManager {
   }
 
   // Determine if a tool should be used based on user message
-  shouldUseTool(message: string): { shouldUse: boolean; toolName?: string; parameters?: any } {
+  shouldUseTool(message: string): { shouldUse: boolean; toolName?: string; parameters?: ToolCallRequest } {
     const lowerMessage = message.toLowerCase();
 
     // Context detection rules - ordered by specificity (most specific first)
     const contextPatterns = {
       pricing: ['cost', 'price', 'payment', 'tuition', 'afford', 'expensive', 'fee'],
       enrollment: ['enroll', 'register', 'sign up', 'join', 'start', 'apply'],
-      schedule: ['when', 'time', 'schedule', 'friday', 'duration', 'how long', 'calendar'],
+      schedule: ['when', 'time', 'schedule', 'weekend', 'saturday', 'sunday', 'duration', 'how long', 'calendar'],
       requirements: ['need', 'require', 'computer', 'hardware', 'software', 'equipment'],
       support: ['help', 'issue', 'problem', 'troubleshoot', 'contact', 'support'],
       projects: ['projects', 'build', 'create', 'portfolio', 'showcase', 'make', 'develop'],
@@ -138,7 +139,7 @@ export class ToolManager {
         return {
           shouldUse: true,
           toolName: 'retrieve_chatbot_context',
-          parameters: { context_type: contextType }
+          parameters: { context_type: contextType as ToolCallRequest['context_type'] }
         };
       }
     }
@@ -178,7 +179,7 @@ export class ToolManager {
   }
 
   // Validate tool parameters
-  validateToolParameters(toolName: string, parameters: any): { valid: boolean; error?: string } {
+  validateToolParameters(toolName: string, parameters: { context_type?: string }): { valid: boolean; error?: string } {
     switch (toolName) {
       case 'retrieve_chatbot_context':
         if (!parameters.context_type) {

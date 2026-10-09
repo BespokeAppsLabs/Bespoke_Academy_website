@@ -1,9 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
+import Link from "next/link";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
+import { spring } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const bespokeButtonVariants = cva(
@@ -12,7 +14,7 @@ const bespokeButtonVariants = cva(
     variants: {
       variant: {
         "bespoke-primary":
-          "bg-primary-emerald-500 hover:bg-primary-emerald-600 text-black shadow-lg hover:shadow-xl hover:scale-105 ring-1 ring-primary-emerald-400/20 hover:ring-primary-emerald-400/40",
+          "bg-primary-emerald-500 hover:bg-primary-emerald-600 text-black shadow-lg ring-1 ring-primary-emerald-400/20 hover:ring-gold-400/60 hover:shadow-[0_0_32px_-4px_var(--color-gold-500)]",
         "bespoke-secondary":
           "bg-neutral-850 hover:bg-neutral-800 text-white shadow-lg hover:shadow-xl ring-1 ring-white/10 hover:ring-white/20",
         "bespoke-outline":
@@ -20,7 +22,7 @@ const bespokeButtonVariants = cva(
         "bespoke-ghost":
           "hover:bg-neutral-800 text-white hover:text-primary-emerald-400",
         "bespoke-premium":
-          "bg-gradient-to-r from-primary-emerald-500 to-primary-emerald-600 hover:from-primary-emerald-600 hover:to-primary-emerald-700 text-black shadow-xl hover:shadow-2xl hover:scale-105 ring-2 ring-primary-emerald-400/30 hover:ring-primary-emerald-400/50",
+          "bg-gradient-to-r from-primary-emerald-500 to-primary-emerald-600 hover:from-primary-emerald-600 hover:to-primary-emerald-700 text-black shadow-xl ring-2 ring-primary-emerald-400/30 hover:ring-gold-400/60 hover:shadow-[0_0_40px_-4px_var(--color-gold-500)]",
       },
       size: {
         default: "h-10 px-6 py-2",
@@ -57,6 +59,8 @@ export interface BespokeButtonProps
   loading?: boolean;
   animation?: "none" | "scale" | "glow" | "bounce";
   fullWidth?: boolean;
+  /** Renders a Next.js Link instead of a button. */
+  href?: string;
 }
 
 const BespokeButton = React.forwardRef<HTMLButtonElement, BespokeButtonProps>(
@@ -69,31 +73,34 @@ const BespokeButton = React.forwardRef<HTMLButtonElement, BespokeButtonProps>(
     loading = false,
     animation,
     fullWidth = false,
+    href,
     children,
     disabled,
     ...props
   }, ref) => {
-    const Comp = asChild ? Slot : "button";
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Comp: any = href ? Link : asChild ? Slot : "button";
 
     const buttonVariants = bespokeButtonVariants({ variant, size, animation, loading });
 
     return (
       <motion.div
-        whileHover={loading || disabled ? {} : { scale: animation === "scale" ? 1.05 : 1.02 }}
-        whileTap={loading || disabled ? {} : { scale: animation === "scale" ? 0.95 : 0.98 }}
-        transition={{ duration: 0.2, ease: "easeInOut" }}
+        whileHover={loading || disabled ? {} : { scale: 1.03 }}
+        whileTap={loading || disabled ? {} : { scale: 0.97 }}
+        transition={spring}
         className={cn(fullWidth && "w-full")}
       >
         <Comp
           className={cn(buttonVariants, className)}
           ref={ref}
-          disabled={disabled || loading}
+          disabled={href ? undefined : disabled || loading}
+          href={href}
           {...props}
         >
           {/* Shimmer effect for premium variant */}
           {variant === "bespoke-premium" && (
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-shimmer" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold-200/40 to-transparent -skew-x-12 animate-shimmer" />
             </div>
           )}
 

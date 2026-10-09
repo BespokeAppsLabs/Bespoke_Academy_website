@@ -1,6 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import type { PointerEvent } from "react";
+import { motion } from "motion/react";
+import { ease, spring } from "@/lib/motion";
 import { BespokeCard } from "@/components/ui/bespoke";
 import { ParallelLinesBackground } from "@/components/ui/parallel-lines-background";
 import {
@@ -14,6 +16,7 @@ import {
   Award,
   Rocket
 } from "lucide-react";
+import { GoldUnderline } from "@/components/ui/gold-underline";
 
 const features = [
   {
@@ -78,17 +81,24 @@ export default function Features() {
     },
   } as const;
 
+  // Cards fan up out of a slight backward tilt, one after another.
   const cardVariants = {
-    hidden: { opacity: 0, y: 25 },
+    hidden: { opacity: 0, y: 48, rotateX: 14, scale: 0.96 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeInOut" as const,
-      },
+      rotateX: 0,
+      scale: 1,
+      transition: { duration: 0.9, ease: ease.outExpo },
     },
   };
+
+  // Gold spotlight follows the pointer across a card (CSS vars, no re-render).
+  function trackPointer(e: PointerEvent<HTMLDivElement>) {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--x", `${e.clientX - r.left}px`);
+    e.currentTarget.style.setProperty("--y", `${e.clientY - r.top}px`);
+  }
 
   return (
     <section className="py-24 bg-white relative overflow-hidden">
@@ -102,14 +112,14 @@ export default function Features() {
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
+          transition={{ duration: 0.4, ease: ease.outExpo }}
         >
           <motion.span
-            className="text-emerald-500 text-sm font-semibold tracking-wider uppercase"
+            className="text-gold-700 text-sm font-semibold tracking-wider uppercase"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.3, ease: "easeInOut" }}
+            transition={{ delay: 0.1, duration: 0.3, ease: ease.outExpo }}
           >
             Why Students & Parents Love Our AI Program
           </motion.span>
@@ -119,10 +129,10 @@ export default function Features() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.15, duration: 0.4, ease: "easeInOut" }}
+            transition={{ delay: 0.15, duration: 0.4, ease: ease.outExpo }}
           >
             Build, Create, and Innovate with
-            <span className="text-emerald-500 block">AI & Robotics</span>
+            <span className="text-emerald-500 block"><GoldUnderline>AI & Robotics</GoldUnderline></span>
           </motion.h2>
 
           <motion.p
@@ -130,16 +140,16 @@ export default function Features() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.4, ease: "easeInOut" }}
+            transition={{ delay: 0.2, duration: 0.4, ease: ease.outExpo }}
           >
-            Join our 40-week AI Robotics program where you'll build amazing projects, learn cutting-edge skills,
-            and have fun creating robots and AI tools in our Friday 2-hour hands-on sessions.
+            Join our monthly AI programme in the Engineering or Media stream, where you&apos;ll build amazing projects, learn cutting-edge skills,
+            and have fun creating robots and AI tools in our weekend 2-hour hands-on sessions.
           </motion.p>
         </motion.div>
 
         {/* Features Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 [perspective:1200px]"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -149,22 +159,25 @@ export default function Features() {
             <motion.div
               key={feature.title}
               variants={cardVariants}
-              whileHover={{
-                y: -8,
-                transition: { duration: 0.2, ease: "easeInOut" },
-                scale: 1.02
-              }}
+              whileHover={{ y: -6 }}
+              transition={spring}
+              onPointerMove={trackPointer}
+              className="relative group/spot"
             >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 z-10 rounded-2xl opacity-0 transition-opacity duration-300 group-hover/spot:opacity-100 bg-[radial-gradient(240px_circle_at_var(--x)_var(--y),color-mix(in_oklch,var(--color-gold-400)_28%,transparent),transparent_70%)]"
+              />
               <BespokeCard
                 variant="feature-card"
-                className={`h-full group border-2 shadow-lg bg-gradient-to-br ${feature.bgGradient} ${feature.borderColor} hover:border-emerald-300 transition-all duration-300`}
-                animation="tilt"
+                className={`h-full group border-2 shadow-lg bg-gradient-to-br ${feature.bgGradient} ${feature.borderColor} hover:border-gold-300 transition-colors duration-300`}
+                animation="none"
               >
                 <div className="pb-4">
                   <motion.div
                     className={`${feature.color} mb-4 transform transition-transform duration-300 group-hover:scale-110`}
                     whileHover={{ rotate: [0, -8, 8, 0] }}
-                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    transition={{ duration: 0.4, ease: ease.outExpo }}
                   >
                     {feature.icon}
                   </motion.div>
@@ -177,19 +190,13 @@ export default function Features() {
                     {feature.description}
                   </p>
                   <motion.div
-                    className="mt-4 pt-4 border-t border-zinc-200 group-hover:border-emerald-200 transition-colors duration-300"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "100%" }}
+                    aria-hidden="true"
+                    className="mt-5 h-px origin-left bg-gradient-to-r from-gold-400 via-gold-300 to-transparent"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.8 + i * 0.08, duration: 0.6, ease: "easeInOut" }}
-                  >
-                    <div className="flex items-center text-emerald-600 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      Learn more
-                      <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </motion.div>
+                    transition={{ delay: 0.5 + i * 0.08, duration: 0.9, ease: ease.outExpo }}
+                  />
                 </div>
               </BespokeCard>
             </motion.div>
@@ -202,7 +209,7 @@ export default function Features() {
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
+          transition={{ duration: 0.6, ease: ease.outExpo }}
         >
           <BespokeCard
             variant="premium-card"
@@ -230,5 +237,3 @@ export default function Features() {
     </section>
   );
 }
-
-export type FeaturesProps = {};

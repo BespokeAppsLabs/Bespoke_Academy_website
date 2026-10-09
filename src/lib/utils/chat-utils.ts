@@ -2,7 +2,9 @@
  * Utility functions for chat processing
  */
 
+import type OpenAI from 'openai';
 import type { ChatMessage, ChatRequest } from '../chat';
+import type { ToolCallResponse } from '@/types/context';
 import { BASE_PROMPT, CONTEXT_PROMPTS } from '../prompts';
 
 /**
@@ -29,8 +31,8 @@ export function validateChatRequest(request: ChatRequest): void {
 /**
  * Prepare messages for the API
  */
-export function prepareMessages(request: ChatRequest): any[] {
-  const messages: any[] = [];
+export function prepareMessages(request: ChatRequest): OpenAI.Chat.Completions.ChatCompletionMessageParam[] {
+  const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [];
 
   // Add system message
   const systemMessage = buildDynamicSystemMessage(request);
@@ -89,7 +91,7 @@ export function buildDynamicSystemMessage(request: ChatRequest): string {
 /**
  * Generate a concise response from tool results
  */
-export function generateConciseResponse(toolResult: any): string {
+export function generateConciseResponse(toolResult: ToolCallResponse): string {
   const { content, metadata } = toolResult
 
   console.log('🔧 generateConciseResponse called with:', {
@@ -186,7 +188,7 @@ export function generateConciseResponse(toolResult: any): string {
         break
 
       case 'schedule':
-        const scheduleMatch = content.match(/Friday|weekly|week|sessions|2\+ hours/gi)
+        const scheduleMatch = content.match(/Weekend|weekly|week|sessions|2\+ hours/gi)
         if (scheduleMatch) {
           response += ` Classes meet ${scheduleMatch[0]}.`
           console.log('📅 Added schedule info:', scheduleMatch[0])

@@ -6,15 +6,14 @@
 "use client"
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from "motion/react"
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
 import { MessageBubble } from './message-bubble'
 import { TypingIndicator } from './typing-indicator'
 import { ChatHeader } from './chat-header'
 import { ChatInput } from './chat-input'
-import { DocumentationResult } from './documentation-result'
-import { MessageCircle, ThumbsUp, ThumbsDown, RotateCcw } from 'lucide-react'
+import { DocumentationResult, type DocumentationToolResult } from './documentation-result'
+import { ThumbsUp, ThumbsDown, RotateCcw } from 'lucide-react'
 import type { ChatMessage } from '@/lib/chat'
 import { detectMessageContext } from '@/lib/chat'
 import { cn } from '@/lib/utils'
@@ -27,44 +26,9 @@ interface ChatInterfaceProps {
   onClose?: () => void
 }
 
-export function ChatInterface({
-  embedded = false,
-  initialMessages = [],
-  className,
-  onMessageSent,
-  onClose
-}: ChatInterfaceProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages)
-  const [isLoading, setIsLoading] = useState(false)
-  const [isTyping, setIsTyping] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [showQuickActions, setShowQuickActions] = useState(true)
-  const [sessionRated, setSessionRated] = useState(false)
-  const [input, setInput] = useState('')
-
-  const messagesEndRef = useRef<HTMLDivElement>(null)
-  const abortControllerRef = useRef<AbortController | null>(null)
-
-  // Auto-scroll to bottom
-  const scrollToBottom = useCallback(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [])
-
-  // Enhanced scroll for streaming - use immediate scroll during streaming
-  const scrollToBottomImmediate = useCallback(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'auto', block: 'end' })
-  }, [])
-
-  useEffect(() => {
-    scrollToBottom()
-  }, [messages, scrollToBottom])
-
-  // Add welcome message if no messages
-  useEffect(() => {
-    if (messages.length === 0) {
-      const welcomeMessage: ChatMessage = {
-        id: 'welcome',
-        content: `Welcome to Bespoke Academy! I'm your AI learning assistant, here to help you succeed in your AI and robotics education journey.
+const createWelcomeMessage = (): ChatMessage => ({
+  id: 'welcome',
+  content: `Welcome to Bespoke Academy! I'm your AI learning assistant, here to help you succeed in your AI and robotics education journey.
 
 I can assist you with:
 🎓 Course information and recommendations
@@ -76,81 +40,40 @@ I can assist you with:
 I have access to all of Bespoke Academy's documentation and can search for specific information to help answer your questions accurately.
 
 What would you like to explore today?`,
-        sender: 'assistant',
-        timestamp: new Date(),
-        metadata: {
-          context: 'general-inquiry'
-        }
-      }
-      setMessages([welcomeMessage])
-    }
+  sender: 'assistant',
+  timestamp: new Date(),
+  metadata: {
+    context: 'general-inquiry'
+  }
+})
+
+export function ChatInterface({
+  embedded = false,
+  initialMessages = [],
+  className,
+  onMessageSent,
+  onClose
+}: ChatInterfaceProps) {
+  const [messages, setMessages] = useState<ChatMessage[]>(() =>
+    initialMessages.length > 0 ? initialMessages : [createWelcomeMessage()]
+  )
+  const [isLoading, setIsLoading] = useState(false)
+  const [isTyping, setIsTyping] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [showQuickActions, setShowQuickActions] = useState(true)
+  const [sessionRated, setSessionRated] = useState(false)
+
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const abortControllerRef = useRef<AbortController | null>(null)
+
+  // Auto-scroll to bottom
+  const scrollToBottom = useCallback(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [])
 
-  const handleSendMessage = useCallback(async (message: string) => {
-    if (isLoading) return
-
-    // Add user message
-    const userMessage: ChatMessage = {
-      id: `user_${Date.now()}`,
-      content: message,
-      sender: 'user',
-      timestamp: new Date()
-    }
-
-    setMessages(prev => [...prev, userMessage])
-    setIsLoading(true)
-    setIsTyping(true)
-    setError(null)
-    setShowQuickActions(false)
-
-    // Cancel any existing request
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort()
-    }
-
-    // Create new abort controller
-    abortControllerRef.current = new AbortController()
-
-    try {
-      // Prepare chat request
-      const chatRequest = {
-        message,
-        conversationHistory: messages,
-        context: { type: detectMessageContext(message) }
-      }
-
-      // Send message to API
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(chatRequest),
-        signal: abortControllerRef.current.signal
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
-        throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`)
-      }
-
-      if (!response.body) {
-        throw new Error('No response body received')
-      }
-
-      // Process streaming response (AI SDK format)
-      await processStreamingResponse(response.body)
-      onMessageSent?.(message)
-
-    } catch (error) {
-      console.error('Chat error:', error)
-      setError(error instanceof Error ? error.message : 'Failed to send message. Please try again.')
-      setIsTyping(false)
-    } finally {
-      setIsLoading(false)
-      abortControllerRef.current = null
-    }
-  }, [isLoading, messages, onMessageSent])
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages, scrollToBottom])
 
   const processStreamingResponse = useCallback(async (stream: ReadableStream<Uint8Array>) => {
     const reader = stream.getReader()
@@ -223,7 +146,7 @@ What would you like to explore today?`,
                     metadata: {
                       context: detectMessageContext(messages[messages.length - 1]?.content || ''),
                       toolData: data
-                    } as any
+                    }
                   }
                 } else {
                   // Add tool data to existing message
@@ -232,11 +155,11 @@ What would you like to explore today?`,
                       context: detectMessageContext(messages[messages.length - 1]?.content || '')
                     }
                   }
-                  ;(currentAssistantMessage.metadata as any).toolData = data
+                  currentAssistantMessage.metadata.toolData = data
                 }
 
                 // Don't update the UI for tool events alone - wait for actual content or completion
-                return
+                continue
               }
 
               // Handle completion
@@ -244,7 +167,7 @@ What would you like to explore today?`,
                 setIsTyping(false)
                 if (currentAssistantMessage) {
                   // Only add the message if it has content or tool data
-                  if (currentAssistantMessage.content || (currentAssistantMessage.metadata as any)?.toolData) {
+                  if (currentAssistantMessage.content || currentAssistantMessage.metadata?.toolData) {
                     setMessages(prev => [...prev, currentAssistantMessage as ChatMessage])
                   }
                 }
@@ -266,6 +189,72 @@ What would you like to explore today?`,
     }
   }, [messages])
 
+  const handleSendMessage = useCallback(async (message: string) => {
+    if (isLoading) return
+
+    // Add user message
+    const userMessage: ChatMessage = {
+      id: `user_${Date.now()}`,
+      content: message,
+      sender: 'user',
+      timestamp: new Date()
+    }
+
+    setMessages(prev => [...prev, userMessage])
+    setIsLoading(true)
+    setIsTyping(true)
+    setError(null)
+    setShowQuickActions(false)
+
+    // Cancel any existing request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+
+    // Create new abort controller
+    abortControllerRef.current = new AbortController()
+
+    try {
+      // Prepare chat request
+      const chatRequest = {
+        message,
+        conversationHistory: messages,
+        context: { type: detectMessageContext(message) }
+      }
+
+      // Send message to API
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(chatRequest),
+        signal: abortControllerRef.current.signal
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+        throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`)
+      }
+
+      if (!response.body) {
+        throw new Error('No response body received')
+      }
+
+      // Process streaming response (AI SDK format)
+      await processStreamingResponse(response.body)
+      onMessageSent?.(message)
+
+    } catch (error) {
+      console.error('Chat error:', error)
+      setError(error instanceof Error ? error.message : 'Failed to send message. Please try again.')
+      setIsTyping(false)
+    } finally {
+      setIsLoading(false)
+      abortControllerRef.current = null
+    }
+  }, [isLoading, messages, onMessageSent, processStreamingResponse])
+
   const handleQuickAction = useCallback((action: string) => {
     handleSendMessage(action)
   }, [handleSendMessage])
@@ -284,13 +273,6 @@ What would you like to explore today?`,
     setSessionRated(true)
     // Here you would typically send this rating to your analytics service
     console.log('Chat session rated:', rating)
-  }, [])
-
-  const clearChat = useCallback(() => {
-    setMessages([])
-    setError(null)
-    setShowQuickActions(true)
-    setSessionRated(false)
   }, [])
 
   const quickActions = [
@@ -318,7 +300,7 @@ What would you like to explore today?`,
       exit="exit"
       transition={{ duration: 0.2 }}
       className={cn(
-        "flex flex-col bg-zinc-900 border border-zinc-700 rounded-lg shadow-2xl overflow-hidden",
+        "flex flex-col bg-white border border-zinc-200 rounded-lg shadow-2xl overflow-hidden",
         "ring-1 ring-primary/20",
         sizeClasses,
         className
@@ -333,7 +315,7 @@ What would you like to explore today?`,
 
       {/* Messages */}
       <div className="flex-1 overflow-hidden flex flex-col">
-        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-zinc-900 text-white" role="log" aria-label="Chat messages" aria-live="polite" aria-atomic="false"
+        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-white text-zinc-900" role="log" aria-label="Chat messages" aria-live="polite" aria-atomic="false"
          style={{
            backgroundImage: 'radial-gradient(circle at 20% 80%, rgba(120, 252, 214, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(120, 252, 214, 0.03) 0%, transparent 50%)'
          }}>
@@ -346,9 +328,9 @@ What would you like to explore today?`,
                 />
 
                 {/* Display tool results if present in metadata */}
-                {(message.metadata as any)?.toolData && (
+                {message.metadata?.toolData && (
                   <DocumentationResult
-                    toolResult={{ result: (message.metadata as any).toolData.output || (message.metadata as any).toolData }}
+                    toolResult={{ result: (message.metadata.toolData.output || message.metadata.toolData) as DocumentationToolResult }}
                   />
                 )}
               </div>
@@ -376,7 +358,7 @@ What would you like to explore today?`,
                   size="sm"
                   onClick={() => handleQuickAction(action)}
                   className={cn(
-                    "text-xs border-zinc-600 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:border-primary/60",
+                    "text-xs border-zinc-300 bg-zinc-50 text-zinc-600 hover:bg-zinc-200 hover:border-primary/60",
                     "hover:text-primary transition-all duration-200",
                     "relative overflow-hidden group",
                     "before:absolute before:inset-0 before:bg-gradient-to-r before:from-primary/10 before:to-transparent before:opacity-0 before:transition-opacity before:duration-200",
@@ -396,7 +378,7 @@ What would you like to explore today?`,
               animate={{ opacity: 1, y: 0 }}
               className={cn(
                 "flex items-center gap-2 p-3 rounded-lg",
-                "bg-red-950/50 border border-red-800/50 text-red-400"
+                "bg-red-50 border border-red-200 text-red-700"
               )}
             >
               <span className="text-sm text-red-400">{error}</span>
@@ -419,10 +401,10 @@ What would you like to explore today?`,
               animate={{ opacity: 1, y: 0 }}
               className={cn(
                 "flex items-center gap-2 p-3 rounded-lg",
-                "bg-zinc-800 border border-zinc-700 text-zinc-300"
+                "bg-zinc-50 border border-zinc-200 text-zinc-600"
               )}
             >
-              <span className="text-sm text-zinc-300">Was this helpful?</span>
+              <span className="text-sm text-zinc-600">Was this helpful?</span>
               <div className="flex gap-1 ml-auto">
                 <Button
                   variant="ghost"
@@ -448,7 +430,7 @@ What would you like to explore today?`,
         </div>
 
         {/* Input */}
-        <div className="border-t border-zinc-700 bg-zinc-800/50 p-4 relative">
+        <div className="border-t border-zinc-200 bg-zinc-50 p-4 relative">
           <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
           <div className="relative z-10">
             <ChatInput

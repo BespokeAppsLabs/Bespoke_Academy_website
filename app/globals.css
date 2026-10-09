@@ -120,6 +120,19 @@
   --color-primary-emerald-800: oklch(0.358 0.144 142.5);
   --color-primary-emerald-900: oklch(0.298 0.132 142.5);
 
+  /* Gold accent (#D4A24C): highlights and interactive moments; emerald stays primary */
+  --color-gold: oklch(0.74 0.125 78);
+  --color-gold-50: oklch(0.98 0.02 85);
+  --color-gold-100: oklch(0.95 0.045 85);
+  --color-gold-200: oklch(0.9 0.08 83);
+  --color-gold-300: oklch(0.84 0.11 82);
+  --color-gold-400: oklch(0.79 0.125 80);
+  --color-gold-500: oklch(0.74 0.125 78);
+  --color-gold-600: oklch(0.64 0.115 75);
+  --color-gold-700: oklch(0.53 0.095 72);
+  --color-gold-800: oklch(0.43 0.075 70);
+  --color-gold-900: oklch(0.34 0.055 68);
+
   /* Neutral Professional Palette */
   --color-neutral-50: oklch(0.985 0.002 106.5);
   --color-neutral-100: oklch(0.971 0.004 106.5);
@@ -196,6 +209,14 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
   * {
     @apply border-border outline-ring/50;
   }
@@ -207,6 +228,21 @@
 
 /* Enhanced Typography Utility Classes - Tech-Focused */
 @layer utilities {
+  /* Marquee: track holds two identical copies, so -50% is exactly one copy */
+  .animate-marquee {
+    animation: marquee var(--marquee-duration, 40s) linear infinite;
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none;
+    }
+  }
+
   .text-display-2xl {
     font-size: var(--text-display-2xl);
     line-height: 1;

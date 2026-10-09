@@ -13,9 +13,11 @@ interface UseRandomTitleReturn {
 export function useRandomTitle(): UseRandomTitleReturn {
   const [titleIndex, setTitleIndex] = useState(0);
 
-  // Select random title on component mount
+  // Select random title after mount; randomising during render would make the
+  // server and client HTML disagree and break hydration
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * TITLES.length);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTitleIndex(randomIndex);
   }, []);
 

@@ -17,6 +17,7 @@ export default function CurriculumPage() {
 }
 
 export const metadata = {
-  title: "AI & Robotics Curriculum | Bespoke Academy",
-  description: "Explore our comprehensive 40-week AI & Robotics program for Grades 8-11. Master digital foundations, electronics, AI concepts, and advanced robotics through hands-on Friday sessions.",
+  title: "Engineering & Media Curriculum",
+  description: "Explore the Engineering and Media streams for Grades 8-11: coding, AI, electronics and robotics, or AI images, video and Blender 3D. Weekend classes in Lephalale, Limpopo. Join any month.",
+  alternates: { canonical: "/curriculum" },
 }

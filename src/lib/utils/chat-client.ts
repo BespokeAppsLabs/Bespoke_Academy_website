@@ -6,7 +6,7 @@
  */
 
 import type { ChatRequest, ChatResponse } from '@/lib/chat'
-import { getClientGroqConfig, isBrowser } from '@/config/groq.client'
+import { getClientGroqConfig } from '@/config/groq.client'
 
 /**
  * Send a chat message through the API route (client-safe)
@@ -44,7 +44,7 @@ export async function sendNonStreamingChatMessage(request: ChatRequest): Promise
   const decoder = new TextDecoder()
   let fullContent = ''
   let isComplete = false
-  let metadata: any = {}
+  let metadata = {} as ChatResponse['metadata']
 
   try {
     while (true) {
@@ -71,7 +71,7 @@ export async function sendNonStreamingChatMessage(request: ChatRequest): Promise
               metadata = data.metadata
               isComplete = true
             }
-          } catch (parseError) {
+          } catch {
             // Ignore parsing errors for individual chunks
           }
         }

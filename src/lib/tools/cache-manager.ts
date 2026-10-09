@@ -229,7 +229,7 @@ export class ChatbotContextCache extends CacheManager<string> {
   }
 
   // Method to cache context with metadata
-  setContext(contextType: string, content: string, metadata?: any): void {
+  setContext(contextType: string, content: string, metadata?: Record<string, unknown>): void {
     const key = `context:${contextType}`;
 
     // Include metadata in the cached data if provided
@@ -241,7 +241,7 @@ export class ChatbotContextCache extends CacheManager<string> {
   }
 
   // Method to retrieve cached context
-  getContext(contextType: string): { content: string; metadata?: any } | null {
+  getContext(contextType: string): { content: string; metadata?: Record<string, unknown> } | null {
     const key = `context:${contextType}`;
     const cached = this.get(key);
 
@@ -286,13 +286,11 @@ export class ChatbotContextCache extends CacheManager<string> {
     cacheHitRate: number;
   } {
     const contextEntries: Array<{ contextType: string; accessCount: number }> = [];
-    let totalAccesses = 0;
 
     for (const [key, entry] of this.getAllEntries()) {
       if (key.startsWith('context:')) {
         const contextType = key.replace('context:', '');
         contextEntries.push({ contextType, accessCount: entry.accessCount });
-        totalAccesses += entry.accessCount;
       }
     }
 

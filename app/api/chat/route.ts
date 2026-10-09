@@ -42,39 +42,41 @@ function checkRateLimit(ipAddress: string, limit: number = 10, windowMs: number 
 }
 
 // Input validation
-function validateChatRequest(data: any): { isValid: boolean; error?: string; sanitized?: ChatRequest } {
+function validateChatRequest(data: unknown): { isValid: boolean; error?: string; sanitized?: ChatRequest } {
   if (!data || typeof data !== 'object') {
     return { isValid: false, error: 'Invalid request format' }
   }
+  const body = data as Record<string, unknown>
+  const { message, conversationHistory } = body
 
   // Validate message
-  if (!data.message || typeof data.message !== 'string') {
+  if (!message || typeof message !== 'string') {
     return { isValid: false, error: 'Message is required and must be a string' }
   }
 
-  if (data.message.trim().length === 0) {
+  if (message.trim().length === 0) {
     return { isValid: false, error: 'Message cannot be empty' }
   }
 
-  if (data.message.length > 2000) {
+  if (message.length > 2000) {
     return { isValid: false, error: 'Message is too long (max 2000 characters)' }
   }
 
   // Validate conversation history
-  if (data.conversationHistory && !Array.isArray(data.conversationHistory)) {
+  if (conversationHistory && !Array.isArray(conversationHistory)) {
     return { isValid: false, error: 'conversationHistory must be an array' }
   }
 
-  const validHistory = data.conversationHistory?.filter(isValidMessage) || []
+  const validHistory = Array.isArray(conversationHistory) ? conversationHistory.filter(isValidMessage) : []
 
   // Validate context
-  const context = data.context || { type: 'general-inquiry' }
+  const context = body.context || { type: 'general-inquiry' }
   if (!isValidChatContext(context)) {
     return { isValid: false, error: 'Invalid context format' }
   }
 
   // Sanitize message
-  const sanitizedMessage = data.message
+  const sanitizedMessage = message
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
     .replace(/[<>]/g, '')
     .trim()
@@ -89,7 +91,7 @@ function validateChatRequest(data: any): { isValid: boolean; error?: string; san
       message: sanitizedMessage,
       conversationHistory: validHistory,
       context,
-      config: data.config
+      config: body.config as ChatRequest['config']
     }
   }
 }
@@ -344,7 +346,7 @@ export async function GET() {
 
   try {
     let healthStatus = 'healthy'
-    let issues: string[] = []
+    const issues: string[] = []
 
     // Check if documentation service is available
     const availableTypes = await documentationService.getAvailableDocumentTypes()

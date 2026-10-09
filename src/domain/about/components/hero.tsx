@@ -1,15 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { BespokeAnimation, BespokeButton } from "@/components/ui/bespoke";
+import { GoldUnderline } from "@/components/ui/gold-underline";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[60vh] bg-gradient-to-br from-emerald-50 to-white flex items-center justify-center overflow-hidden">
-      <BespokeAnimation preset="curtain-reveal" className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-100/20 via-transparent to-transparent" />
-      </BespokeAnimation>
-
+    <section className="relative min-h-[60vh] bg-white flex items-center justify-center overflow-hidden">
       <div className="relative z-10 text-center px-4">
         <BespokeAnimation preset="slide-in-up" delay={0.2}>
           <div className="mb-4">
@@ -18,18 +14,18 @@ export default function Hero() {
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            About <span className="text-emerald-600">Bespoke Academy</span>
+            About <span className="text-emerald-600"><GoldUnderline>Bespoke Academy</GoldUnderline></span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8">
             Transforming teens from curious beginners to confident AI & robotics creators
-            through our 40-week hands-on curriculum and supportive Friday learning sessions.
+            through our hands-on, level-by-level curriculum and supportive weekend learning sessions in Lephalale, Limpopo.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <BespokeButton variant="bespoke-primary" size="lg">
-              Our Mission
+            <BespokeButton href="/curriculum" variant="bespoke-primary" size="lg">
+              View Curriculum
             </BespokeButton>
-            <BespokeButton variant="bespoke-outline" size="lg">
-              Parent Information
+            <BespokeButton href="/#contact" variant="bespoke-outline" size="lg">
+              Apply now
             </BespokeButton>
           </div>
         </BespokeAnimation>
@@ -38,7 +34,7 @@ export default function Hero() {
           <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-600">
             <div className="flex items-center gap-2">
               <span className="text-emerald-600">🎓</span>
-              <span>40-Week Curriculum</span>
+              <span>Engineering & Media Streams</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-emerald-600">👨‍👩‍👧‍👦</span>
@@ -46,7 +42,7 @@ export default function Hero() {
             </div>
             <div className="flex items-center gap-2">
               <span className="text-emerald-600">📅</span>
-              <span>Friday Sessions</span>
+              <span>Weekend Sessions</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-emerald-600">🤖</span>
