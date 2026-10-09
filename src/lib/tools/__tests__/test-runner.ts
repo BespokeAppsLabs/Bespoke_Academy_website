@@ -12,7 +12,7 @@ interface TestResult {
   passed: boolean;
   duration: number;
   error?: string;
-  details?: any;
+  details?: unknown;
 }
 
 interface TestSuite {
@@ -60,7 +60,7 @@ class TestRunner {
       totalDuration += result.duration;
 
       const status = result.passed ? '✅' : '❌';
-      console.log(`  ${status} ${result.name} (${result.duration}ms)`);
+      console.log(`  ${status} ${result.testName} (${result.duration}ms)`);
 
       if (!result.passed) {
         console.log(`     Error: ${result.error}`);
@@ -136,7 +136,7 @@ class TestRunner {
 }
 
 // Test implementations
-async function runAllTests(): Promise<void> {
+async function runAllTests(): Promise<TestSuite[]> {
   const runner = new TestRunner();
 
   // Context Tool Tests

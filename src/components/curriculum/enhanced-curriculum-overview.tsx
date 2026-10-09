@@ -29,16 +29,6 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
     return icons[moduleId as keyof typeof icons] || <BookOpen className="h-6 w-6" />
   }
 
-  const getModuleColor = (moduleId: string) => {
-    const colors = {
-      'module-1': 'bg-blue-500/10 text-blue-600 border-blue-200',
-      'module-2': 'bg-green-500/10 text-green-600 border-green-200',
-      'module-3': 'bg-purple-500/10 text-purple-600 border-purple-200',
-      'module-4': 'bg-orange-500/10 text-orange-600 border-orange-200'
-    }
-    return colors[moduleId as keyof typeof colors] || 'bg-gray-500/10 text-gray-600 border-gray-200'
-  }
-
   const getModuleNumber = (moduleId: string) => {
     const match = moduleId.match(/module-(\d+)/)
     return match ? parseInt(match[1]) : 1
@@ -118,7 +108,7 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
 
                   {/* Key Learning Objectives */}
                   <div>
-                    <h4 className="text-sm font-semibold text-foreground mb-2">Key Skills You'll Gain</h4>
+                    <h4 className="text-sm font-semibold text-foreground mb-2">Key Skills You&apos;ll Gain</h4>
                     <div className="space-y-2">
                       {module.learningObjectives.slice(0, 3).map((objective, idx) => (
                         <div key={idx} className="flex items-start gap-2">
@@ -190,23 +180,23 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
                 </h3>
               </div>
             {(() => {
-              const module = curriculumFramework.modules.find(m => m.id === selectedModule)
-              if (!module) return null
+              const selected = curriculumFramework.modules.find(m => m.id === selectedModule)
+              if (!selected) return null
 
               return (
                 <>
                   {/* Detailed Overview */}
                   <div>
                     <h4 className="text-lg font-semibold text-foreground mb-3">Program Overview</h4>
-                    <p className="text-muted-foreground leading-relaxed">{module.overview}</p>
+                    <p className="text-muted-foreground leading-relaxed">{selected.overview}</p>
                   </div>
 
                   {/* Prerequisites */}
-                  {module.prerequisites && module.prerequisites.length > 0 && (
+                  {selected.prerequisites && selected.prerequisites.length > 0 && (
                     <div>
                       <h4 className="text-lg font-semibold text-foreground mb-3">Prerequisites</h4>
                       <ul className="space-y-2">
-                        {module.prerequisites.map((prereq, idx) => (
+                        {selected.prerequisites.map((prereq, idx) => (
                           <li key={idx} className="flex items-start gap-2">
                             <CheckCircle2 className="h-4 w-4 text-primary-emerald-500 flex-shrink-0 mt-0.5" />
                             <span className="text-sm text-muted-foreground">{prereq}</span>
@@ -220,19 +210,19 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
                   <div>
                     <h4 className="text-lg font-semibold text-foreground mb-3">Learning Outcomes</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {module.outcomes.learningOutcomes?.map((outcome, idx) => (
+                      {selected.outcomes.learningOutcomes?.map((outcome, idx) => (
                         <div key={idx} className="flex items-start gap-2">
                           <Star className="h-4 w-4 text-yellow-500 flex-shrink-0 mt-0.5" />
                           <span className="text-sm text-muted-foreground">{outcome}</span>
                         </div>
                       ))}
-                      {module.outcomes.technicalSkills?.map((outcome, idx) => (
+                      {selected.outcomes.technicalSkills?.map((outcome, idx) => (
                         <div key={idx} className="flex items-start gap-2">
                           <Star className="h-4 w-4 text-primary-emerald-500 flex-shrink-0 mt-0.5" />
                           <span className="text-sm text-muted-foreground">{outcome}</span>
                         </div>
                       ))}
-                      {module.outcomes.lifeSkills?.map((outcome, idx) => (
+                      {selected.outcomes.lifeSkills?.map((outcome, idx) => (
                         <div key={idx} className="flex items-start gap-2">
                           <Star className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
                           <span className="text-sm text-muted-foreground">{outcome}</span>
@@ -242,13 +232,13 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
                   </div>
 
                   {/* Equipment Information */}
-                  {module.equipment && (
+                  {selected.equipment && (
                     <div>
                       <h4 className="text-lg font-semibold text-foreground mb-3">Equipment Provided</h4>
                       <div className="space-y-2">
-                        <p className="text-sm text-muted-foreground">Value: {module.equipment.value}</p>
+                        <p className="text-sm text-muted-foreground">Value: {selected.equipment.value}</p>
                         <ul className="space-y-1">
-                          {module.equipment.provided.map((item, idx) => (
+                          {selected.equipment.provided.map((item, idx) => (
                             <li key={idx} className="text-xs text-muted-foreground flex items-start gap-1">
                               <span className="w-1 h-1 bg-primary rounded-full mt-1.5 flex-shrink-0" />
                               {item}
@@ -260,11 +250,11 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
                   )}
 
                   {/* Certification Requirements */}
-                  {module.certification?.requirements && (
+                  {selected.certification?.requirements && (
                     <div>
                       <h4 className="text-lg font-semibold text-foreground mb-3">Certification Requirements</h4>
                       <ul className="space-y-2">
-                        {module.certification.requirements.map((req, idx) => (
+                        {selected.certification.requirements.map((req, idx) => (
                           <li key={idx} className="flex items-start gap-2">
                             <Award className="h-4 w-4 text-purple-500 flex-shrink-0 mt-0.5" />
                             <span className="text-sm text-muted-foreground">{req}</span>
@@ -275,11 +265,11 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
                   )}
 
                   {/* Resources */}
-                  {module.resources && (
+                  {selected.resources && (
                     <div>
                       <h4 className="text-lg font-semibold text-foreground mb-3">Included Resources</h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {Object.entries(module.resources).map(([category, items]) => (
+                        {Object.entries(selected.resources).map(([category, items]) => (
                           <div key={category}>
                             <h5 className="text-sm font-medium text-foreground mb-2 capitalize">
                               {category.replace(/([A-Z])/g, ' $1').trim()}

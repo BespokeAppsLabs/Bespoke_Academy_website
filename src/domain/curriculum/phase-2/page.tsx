@@ -1,7 +1,7 @@
 import { ModernHeader } from "@/components/modern-header"
 import { ModernFooter } from "@/components/modern-footer"
 import { BespokeCard, BespokeAnimation, BespokeBadge, BespokeButton } from "@/components/ui/bespoke"
-import { Cpu, Clock, Users, CheckCircle2, ArrowLeft, ArrowRight } from "lucide-react"
+import { Cpu, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
 export default function Phase2Page() {
@@ -37,7 +37,7 @@ export default function Phase2Page() {
               <Cpu className="h-16 w-16 text-primary-emerald-600 mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-foreground mb-4">Level 2 Coming Soon</h2>
               <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-                We're currently developing our advanced electronics and robotics curriculum.
+                We&apos;re currently developing our advanced electronics and robotics curriculum.
                 This level will build upon the digital foundations from Level 1.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

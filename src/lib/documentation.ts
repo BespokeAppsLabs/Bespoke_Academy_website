@@ -73,7 +73,7 @@ export class DocumentationService {
 
       const lowerContent = content.toLowerCase()
       let relevanceScore = 0
-      let matchedTerms: string[] = []
+      const matchedTerms: string[] = []
 
       // Calculate relevance score based on term matches
       for (const term of searchTerms) {

@@ -29,13 +29,14 @@ export function ChatWidget({
   const [isOpen, setIsOpen] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
   const [unreadCount, setUnreadCount] = useState(0)
-  const [isVisible, setIsVisible] = useState(true)
   const [messages, setMessages] = useState<ChatMessage[]>([])
 
   const chatRef = useRef<HTMLDivElement>(null)
   const lastMessageRef = useRef<string>('')
 
-  // Load widget state from localStorage
+  // Load widget state from localStorage. Runs after hydration because the
+  // server render can't see localStorage; reading it in useState would mismatch.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     const savedState = loadFromLocalStorage<Partial<ChatWidgetState>>(
       STORAGE_KEYS.CHAT_WIDGET_STATE,
@@ -65,6 +66,7 @@ export function ChatWidget({
       setTimeout(() => setIsOpen(true), 2000)
     }
   }, [autoOpen])
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // Save widget state to localStorage
   useEffect(() => {
@@ -94,26 +96,9 @@ export function ChatWidget({
           setUnreadCount(prev => prev + 1)
           lastMessageRef.current = lastMessage.id
         }
-      } else if (isOpen && !isMinimized) {
-        // Reset unread count when chat is open and not minimized
-        setUnreadCount(0)
       }
     }
   }, [messages, isOpen, isMinimized])
-
-  // Handle visibility on scroll (optional)
-  useEffect(() => {
-    const handleScroll = () => {
-      if (chatRef.current) {
-        const rect = chatRef.current.getBoundingClientRect()
-        const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight
-        setIsVisible(isVisible)
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   const handleToggleChat = () => {
     setIsOpen(!isOpen)
@@ -128,16 +113,16 @@ export function ChatWidget({
   }
 
   const handleMinimizeChat = () => {
+    // Restoring the chat means the user is reading it, so clear the badge
+    if (isMinimized) {
+      setUnreadCount(0)
+    }
     setIsMinimized(!isMinimized)
   }
 
-  const handleMessageSent = (message: string) => {
+  const handleMessageSent = () => {
     // Update last message ref to prevent notification for user's own message triggering
     lastMessageRef.current = `user_${Date.now()}`
-  }
-
-  const handleMessagesUpdate = (newMessages: ChatMessage[]) => {
-    setMessages(newMessages)
   }
 
   // Position classes
@@ -315,7 +300,7 @@ export function ChatWidget({
 
 // Hook for programmatic chat control
 export function useChatWidget() {
-  const [widgetState, setWidgetState] = useState<{
+  const [widgetState] = useState<{
     isOpen: boolean
     unreadCount: number
   }>({

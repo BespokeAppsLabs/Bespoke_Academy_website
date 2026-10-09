@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import { BespokeCard, BespokeAnimation } from "@/components/ui/bespoke";
 import { GoldUnderline } from "@/components/ui/gold-underline";
 

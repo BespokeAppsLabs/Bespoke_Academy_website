@@ -7,6 +7,3 @@ export { default as LogoCloud } from './logo-cloud';
 export { default as StickyScroll } from './sticky-scroll';
 export { default as Contact } from './contact';
 export { default as FinalCTA } from './final-cta';
-
-// Type exports (only those that exist)
-export type { FinalCTAProps } from './final-cta';

@@ -7,11 +7,11 @@ import { cn } from "@/lib/utils"
 const Carousel = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & {
-    opts?: any
+    opts?: Record<string, unknown>
     orientation?: "horizontal" | "vertical"
-    plugins?: any[]
+    plugins?: unknown[]
   }
->(({ className, children, opts, orientation = "horizontal", ...props }, ref) => {
+>(({ className, children, opts, orientation, ...props }, ref) => {
   return (
     <div
       ref={ref}

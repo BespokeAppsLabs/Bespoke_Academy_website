@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import { ContextFileMetadata } from '@/types/context';
+import { ContextFileMetadata, ContextIndex } from '@/types/context';
 
 export class ContentValidator {
-  private readonly contextDir = path.join(process.cwd(), 'docs', 'chatbot');
+  private readonly contextDir = path.join(process.cwd(), 'public', 'documents', 'documentation');
   private readonly metadataFile = path.join(this.contextDir, 'index.json');
 
   async validateAllContent(): Promise<{
@@ -20,8 +20,8 @@ export class ContentValidator {
       // Read metadata
       const metadata = await this.readMetadata();
 
-      // Validate each context file
-      for (const fileMetadata of metadata.contextFiles) {
+      // Validate each context file (a missing list is reported by validateMetadataConsistency)
+      for (const fileMetadata of metadata.contextFiles ?? []) {
         const validation = await this.validateSingleFile(fileMetadata.filename, fileMetadata);
         fileResults[fileMetadata.filename] = validation;
 
@@ -122,7 +122,7 @@ export class ContentValidator {
     };
   }
 
-  private async readMetadata(): Promise<any> {
+  private async readMetadata(): Promise<Partial<ContextIndex>> {
     try {
       const content = fs.readFileSync(this.metadataFile, 'utf-8');
       return JSON.parse(content);
@@ -131,12 +131,12 @@ export class ContentValidator {
     }
   }
 
-  private async validateMetadataConsistency(metadata: any): Promise<{ errors: string[]; warnings: string[] }> {
+  private async validateMetadataConsistency(metadata: Partial<ContextIndex>): Promise<{ errors: string[]; warnings: string[] }> {
     const errors: string[] = [];
     const warnings: string[] = [];
 
     // Check metadata structure
-    const requiredFields = ['version', 'lastUpdated', 'contextFiles', 'statistics'];
+    const requiredFields = ['version', 'lastUpdated', 'contextFiles', 'statistics'] as const;
     for (const field of requiredFields) {
       if (!metadata[field]) {
         errors.push(`Missing required metadata field: ${field}`);
@@ -148,7 +148,7 @@ export class ContentValidator {
       const expectedFiles = ['curriculum.md', 'programs.md', 'projects.md', 'pricing.md', 'schedule.md', 'requirements.md', 'support.md', 'enrollment.md', 'outcomes.md', 'faq.md'];
 
       for (const expectedFile of expectedFiles) {
-        const found = metadata.contextFiles.find((file: any) => file.filename === expectedFile);
+        const found = metadata.contextFiles.find((file) => file.filename === expectedFile);
         if (!found) {
           errors.push(`Missing metadata for required file: ${expectedFile}`);
         }
@@ -156,7 +156,7 @@ export class ContentValidator {
 
       // Validate each file metadata
       for (const fileMetadata of metadata.contextFiles) {
-        const requiredFileFields = ['filename', 'title', 'contextType', 'primaryUrl'];
+        const requiredFileFields = ['filename', 'title', 'contextType', 'primaryUrl'] as const;
         for (const field of requiredFileFields) {
           if (!fileMetadata[field]) {
             errors.push(`File ${fileMetadata.filename || 'unknown'} missing required field: ${field}`);

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { BespokeButton } from "@/components/ui/bespoke/bespokeButton";
 import { BespokeCard } from "@/components/ui/bespoke/bespokeCard";
@@ -76,9 +77,11 @@ export default function FinalCTA() {
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-                  <img
+                  <Image
                     src="/stack/firebase-svgrepo-com.svg"
                     alt="Learning Platform"
+                    width={32}
+                    height={32}
                     className="w-8 h-8 object-contain opacity-80"
                   />
                 </div>
@@ -102,9 +105,11 @@ export default function FinalCTA() {
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-                  <img
+                  <Image
                     src="/stack/python.svg"
                     alt="AI Projects"
+                    width={32}
+                    height={32}
                     className="w-8 h-8 object-contain opacity-80"
                   />
                 </div>
@@ -128,9 +133,11 @@ export default function FinalCTA() {
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-                  <img
+                  <Image
                     src="/stack/google-icon-logo-svgrepo-com.svg"
                     alt="Career Preparation"
+                    width={32}
+                    height={32}
                     className="w-8 h-8 object-contain opacity-80"
                   />
                 </div>
@@ -167,9 +174,11 @@ export default function FinalCTA() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
-                  <img
+                  <Image
                     src="/stack/arduino-1.svg"
                     alt=""
+                    width={40}
+                    height={40}
                     className="w-10 h-10 object-contain"
                   />
                 </div>
@@ -178,9 +187,11 @@ export default function FinalCTA() {
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
-                  <img
+                  <Image
                     src="/stack/visual-studio-code-1-1.svg"
                     alt=""
+                    width={40}
+                    height={40}
                     className="w-10 h-10 object-contain"
                   />
                 </div>
@@ -189,9 +200,11 @@ export default function FinalCTA() {
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
-                  <img
+                  <Image
                     src="/stack/hostinger.svg"
                     alt=""
+                    width={40}
+                    height={40}
                     className="w-10 h-10 object-contain"
                   />
                 </div>
@@ -205,5 +218,3 @@ export default function FinalCTA() {
     </section>
   );
 }
-
-export type FinalCTAProps = {};

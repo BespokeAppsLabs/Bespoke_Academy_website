@@ -18,3 +18,7 @@ A: The project portfolio gives learners concrete work to show schools, bursary p
 
 **Q: What skills are covered?**
 A: Programming, AI, problem-solving and presentation in both streams, plus electronics and robotics in Engineering or visual storytelling and 3D in Media.
+
+## Website Integration
+Primary URL: /curriculum
+Related URLs: /courses, /about

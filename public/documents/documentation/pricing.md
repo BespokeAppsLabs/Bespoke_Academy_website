@@ -30,3 +30,7 @@ A: Not yet. Apply on the website and we will share payment details once the appl
 
 **Q: Do you offer discounts?**
 A: Please ask us directly by email (info@bespokeapps.co.za) or WhatsApp (082 290 2428).
+
+## Website Integration
+Primary URL: /courses
+Related URLs: /curriculum, /about

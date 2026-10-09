@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { Marquee } from "@/components/ui/marquee";
 import { BespokeCard } from "@/components/ui/bespoke/bespokeCard";
@@ -82,7 +83,7 @@ export default function LogoCloudSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            Your child will learn the cutting-edge tools and frameworks powering today's AI revolution.
+            Your child will learn the cutting-edge tools and frameworks powering today&apos;s AI revolution.
             Our curriculum covers everything from programming fundamentals to advanced AI applications.
           </motion.p>
         </motion.div>
@@ -101,9 +102,11 @@ export default function LogoCloudSection() {
                 key={tech.name}
                 className="group flex w-36 shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-200 bg-white px-6 py-5 shadow-sm transition-colors duration-300 hover:border-gold-500/50 hover:bg-zinc-50"
               >
-                <img
+                <Image
                   src={tech.logo}
                   alt=""
+                  width={48}
+                  height={48}
                   className="h-12 w-12 object-contain opacity-80 transition duration-300 group-hover:scale-110 group-hover:opacity-100"
                 />
                 <div className="text-center">
@@ -147,7 +150,7 @@ export default function LogoCloudSection() {
             Ready to Build the Future?
           </h3>
           <p className="text-xl text-zinc-600 mb-8 max-w-3xl mx-auto">
-            Give your child the competitive edge they need for tomorrow's tech careers.
+            Give your child the competitive edge they need for tomorrow&apos;s tech careers.
             Our hands-on approach ensures they build real AI projects with industry-standard tools.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

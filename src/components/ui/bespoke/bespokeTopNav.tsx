@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -94,10 +94,12 @@ export function BespokeTopNav({
     }
   });
 
-  // Close mobile menu when route changes
-  useEffect(() => {
+  // Close mobile menu when route changes (adjust state during render, not in an effect)
+  const [menuPathname, setMenuPathname] = useState(pathname);
+  if (menuPathname !== pathname) {
+    setMenuPathname(pathname);
     setMobileMenuOpen(false);
-  }, [pathname]);
+  }
 
   // Check if a nav item is active
   const isActive = (href: string) => {

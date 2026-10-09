@@ -17,6 +17,20 @@ interface ChatInputProps {
   maxLength?: number
 }
 
+// Minimal shape of the prefixed Web Speech API; TypeScript's DOM lib doesn't ship it
+interface SpeechRecognitionLike {
+  continuous: boolean
+  interimResults: boolean
+  lang: string
+  onresult: ((event: { results: SpeechRecognitionResultList }) => void) | null
+  onerror: ((event: { error: string }) => void) | null
+  onend: (() => void) | null
+  start(): void
+  stop(): void
+}
+
+type WindowWithSpeech = Window & { webkitSpeechRecognition?: new () => SpeechRecognitionLike }
+
 export function ChatInput({
   onSendMessage,
   disabled = false,
@@ -27,30 +41,32 @@ export function ChatInput({
   const [message, setMessage] = useState('')
   const [isListening, setIsListening] = useState(false)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
-  const recognitionRef = useRef<any>(null)
+  const recognitionRef = useRef<SpeechRecognitionLike | null>(null)
 
   // Fixed 2-line height - no auto-resize needed
   // Textarea is set to h-[88px] (approximately 2 lines)
 
   // Initialize speech recognition
   useEffect(() => {
-    if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
-      const SpeechRecognition = (window as any).webkitSpeechRecognition
+    const SpeechRecognition = typeof window !== 'undefined'
+      ? (window as WindowWithSpeech).webkitSpeechRecognition
+      : undefined
+    if (SpeechRecognition) {
       const recognition = new SpeechRecognition()
 
       recognition.continuous = true
       recognition.interimResults = true
       recognition.lang = 'en-US'
 
-      recognition.onresult = (event: any) => {
+      recognition.onresult = (event) => {
         const transcript = Array.from(event.results)
-          .map((result: any) => result[0].transcript)
+          .map((result) => result[0].transcript)
           .join('')
 
         setMessage(transcript)
       }
 
-      recognition.onerror = (event: any) => {
+      recognition.onerror = (event) => {
         console.error('Speech recognition error:', event.error)
         setIsListening(false)
       }
@@ -142,7 +158,7 @@ export function ChatInput({
         </div>
 
         {/* Voice input button */}
-        {typeof window !== 'undefined' && 'webkitSpeechRecognition' in (window as any) && (
+        {typeof window !== 'undefined' && 'webkitSpeechRecognition' in window && (
           <Button
             type="button"
             variant="outline"

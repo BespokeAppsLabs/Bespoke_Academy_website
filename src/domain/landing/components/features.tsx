@@ -142,7 +142,7 @@ export default function Features() {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.4, ease: ease.outExpo }}
           >
-            Join our monthly AI programme in the Engineering or Media stream, where you'll build amazing projects, learn cutting-edge skills,
+            Join our monthly AI programme in the Engineering or Media stream, where you&apos;ll build amazing projects, learn cutting-edge skills,
             and have fun creating robots and AI tools in our weekend 2-hour hands-on sessions.
           </motion.p>
         </motion.div>
@@ -237,5 +237,3 @@ export default function Features() {
     </section>
   );
 }
-
-export type FeaturesProps = {};

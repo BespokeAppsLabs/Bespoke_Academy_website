@@ -85,7 +85,7 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            Shape Your Teen's
+            Shape Your Teen&apos;s
             <span className="text-primary-emerald-600 block"><GoldUnderline>AI Future.</GoldUnderline></span>
           </motion.h2>
 

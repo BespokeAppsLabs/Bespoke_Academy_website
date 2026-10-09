@@ -63,8 +63,8 @@ const BespokeCard = React.forwardRef<HTMLDivElement, BespokeCardProps>(
     animation,
     asChild = false,
     children,
-    delay = 0,
-    duration = 0.5,
+    delay,
+    duration,
     ...props
   }, ref) => {
     const Component = asChild ? React.Fragment : "div";

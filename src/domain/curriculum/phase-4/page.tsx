@@ -1,7 +1,7 @@
 import { ModernHeader } from "@/components/modern-header"
 import { ModernFooter } from "@/components/modern-footer"
 import { BespokeCard, BespokeAnimation, BespokeBadge, BespokeButton } from "@/components/ui/bespoke"
-import { Award, Clock, Users, ArrowLeft, ArrowRight } from "lucide-react"
+import { Award, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
 export default function Phase4Page() {

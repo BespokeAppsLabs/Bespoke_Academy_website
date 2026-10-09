@@ -10,7 +10,7 @@ export default function EnrollmentCTA() {
         <div className="text-center max-w-4xl mx-auto">
           <BespokeAnimation preset="slide-in-up">
             <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-6">
-              Ready to Transform Your Teen's Future?
+              Ready to Transform Your Teen&apos;s Future?
             </h2>
             <p className="text-xl text-zinc-600 mb-8 max-w-2xl mx-auto">
               Applications are open for Grades 8-11 learners. {site.program.start}.

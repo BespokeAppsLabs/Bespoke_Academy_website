@@ -16,6 +16,9 @@ A: Engineering students build games, sensor alarms, Wi-Fi devices, AI recogniser
 **Q: Can students keep their projects?**
 A: Yes. All code and media go on the student's own portfolio. Final-project parts bought with the academy allowance belong to the student once the project is done.
 
+**Q: How are final projects marked?**
+A: Across five areas: it works or delivers what the proposal promised (30%), process and documentation (25%), code quality and Git history (15%), presentation and demo (15%), and originality and real-world impact (15%).
+
 ## Detailed Information
 
 ### Engineering small projects

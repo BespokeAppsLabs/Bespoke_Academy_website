@@ -1,26 +1,19 @@
 "use client";
 
 import { useRef } from 'react';
+import Image from 'next/image';
 import { motion, useScroll, useTransform } from "motion/react";
 import { BespokeCard } from '@/components/ui/bespoke/bespokeCard';
-import { BespokeButton } from '@/components/ui/bespoke/bespokeButton';
 import { Marquee } from '@/components/ui/marquee';
 import { ParallelLinesBackground } from '@/components/ui/parallel-lines-background';
 import {
   Brain,
-  Target,
-  Lightbulb,
   Users,
   Award,
-  TrendingUp,
-  BookOpen,
   Code,
-  Zap,
-  Globe,
   GraduationCap,
   Cpu,
   Bot,
-  Puzzle,
   Microscope
 } from 'lucide-react';
 import { GoldUnderline } from "@/components/ui/gold-underline";
@@ -111,14 +104,15 @@ function AboutUsSection() {
         {/* Left: Image + Stats Card */}
         <div className="relative h-80 lg:h-auto lg:flex-1">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-emerald-50" />
-          <img
+          <Image
             src="/images/advanced-tools.jpg"
             alt="AI Learning Lab for Teens"
-            className="absolute inset-0 w-full h-full object-cover opacity-90"
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover opacity-90"
             onError={(e) => {
-              // Fallback to a solid color if image fails to load
-              e.currentTarget.src = '';
-              e.currentTarget.className = 'absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-100 to-blue-100';
+              // Hide a failed image so the gradient underneath shows through
+              e.currentTarget.style.display = 'none';
             }}
           />
 

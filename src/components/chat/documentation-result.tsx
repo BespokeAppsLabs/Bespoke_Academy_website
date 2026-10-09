@@ -13,9 +13,29 @@ import { BookOpen, ExternalLink, Search, FileText, ChevronDown, ChevronUp } from
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
+interface DocumentationToolOutput {
+  // searchDocumentation
+  results?: SearchResult[]
+  totalResults?: number
+  query?: string
+  // getDocumentByType
+  content?: string
+  title?: string
+  contextType?: string
+  description?: string
+  primaryUrl?: string
+  keywords?: string[]
+  // failures
+  error?: string
+  availableTypes?: { type: string }[]
+}
+
+// getAvailableDocumentTypes returns a plain list
+export type DocumentationToolResult = DocumentationToolOutput | { title: string; type: string }[]
+
 interface DocumentationResultProps {
-  toolCall?: any
-  toolResult?: any
+  toolCall?: { toolName?: string; args?: { query?: string; documentType?: string } }
+  toolResult?: { result: DocumentationToolResult }
   className?: string
 }
 
@@ -93,7 +113,7 @@ export function DocumentationResult({
     const result = toolResult.result
 
     // Handle search results
-    if (result.results && Array.isArray(result.results)) {
+    if (!Array.isArray(result) && result.results && Array.isArray(result.results)) {
       return (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -114,7 +134,7 @@ export function DocumentationResult({
               <div className="flex items-center gap-2 text-emerald-700 text-xs">
                 <BookOpen className="h-3 w-3" />
                 <span className="font-medium">
-                  Found {result.totalResults} document{result.totalResults !== 1 ? 's' : ''} for "{result.query}"
+                  Found {result.totalResults} document{result.totalResults !== 1 ? 's' : ''} for &quot;{result.query}&quot;
                 </span>
               </div>
             </div>
@@ -215,7 +235,7 @@ export function DocumentationResult({
     }
 
     // Handle single document result
-    if (result.content) {
+    if (!Array.isArray(result) && result.content) {
       return (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -273,7 +293,7 @@ export function DocumentationResult({
 
                 {/* Keywords */}
                 <div className="flex flex-wrap gap-1">
-                  {result.keywords.slice(0, 8).map((keyword: string, index: number) => (
+                  {result.keywords?.slice(0, 8).map((keyword: string, index: number) => (
                     <Badge
                       key={index}
                       variant="secondary"
@@ -291,7 +311,7 @@ export function DocumentationResult({
     }
 
     // Handle error results
-    if (result.error) {
+    if (!Array.isArray(result) && result.error) {
       return (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -315,7 +335,7 @@ export function DocumentationResult({
                 <div className="mt-2">
                   <span className="font-medium">Available document types:</span>
                   <div className="flex flex-wrap gap-1 mt-1">
-                    {result.availableTypes.map((type: any, index: number) => (
+                    {result.availableTypes.map((type, index: number) => (
                       <Badge
                         key={index}
                         variant="outline"
@@ -355,7 +375,7 @@ export function DocumentationResult({
             )}>
               <div className="font-medium mb-2">Available Documents:</div>
               <div className="grid grid-cols-1 gap-1">
-                {result.map((doc: any, index: number) => (
+                {result.map((doc, index: number) => (
                   <div key={index} className="flex items-center gap-2 py-1">
                     <div className="w-2 h-2 rounded-full bg-emerald-400" />
                     <div>

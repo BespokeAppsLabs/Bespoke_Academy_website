@@ -77,7 +77,7 @@ export interface GroqErrorContext {
   retryAttempt?: number
   userAgent?: string
   ipAddress?: string
-  additionalData?: Record<string, any>
+  additionalData?: Record<string, unknown>
 }
 
 export interface GroqErrorDetails {
@@ -125,7 +125,7 @@ export class GroqApiError extends Error {
   /**
    * Convert error to JSON for logging/serialization
    */
-  toJSON(): Record<string, any> {
+  toJSON(): Record<string, unknown> {
     return {
       name: this.name,
       type: this.type,
@@ -399,7 +399,7 @@ function extractStatusCode(error: Error | string | unknown): number | undefined 
 /**
  * Error logging utility
  */
-export function logGroqError(error: GroqApiError, additionalContext?: Record<string, any>): void {
+export function logGroqError(error: GroqApiError, additionalContext?: Record<string, unknown>): void {
   console.error('Groq API Error:', {
     ...error.toJSON(),
     ...additionalContext

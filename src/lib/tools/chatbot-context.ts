@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import { ContextMetadata, ContextResponse } from '@/types/context';
+import { ContextIndex, ContextMetadata, ContextResponse } from '@/types/context';
 
 export class ChatbotContextTool {
-  private readonly contextDir = path.join(process.cwd(), 'docs', 'chatbot');
+  private readonly contextDir = path.join(process.cwd(), 'public', 'documents', 'documentation');
   private readonly metadataFile = path.join(this.contextDir, 'index.json');
   private cache: Map<string, { content: string; timestamp: number; metadata: ContextMetadata }> = new Map();
   private readonly CACHE_TTL = 5 * 60 * 1000; // 5 minutes
@@ -50,8 +50,8 @@ export class ChatbotContextTool {
   private async getValidContextTypes(): Promise<string[]> {
     try {
       const metadataContent = fs.readFileSync(this.metadataFile, 'utf-8');
-      const metadata = JSON.parse(metadataContent);
-      return metadata.contextFiles.map((file: any) => file.contextType);
+      const metadata = JSON.parse(metadataContent) as ContextIndex;
+      return metadata.contextFiles.map((file) => file.contextType);
     } catch (error) {
       console.error('Error reading metadata file:', error);
       return ['curriculum', 'programs', 'projects', 'pricing', 'schedule', 'requirements', 'support', 'enrollment', 'outcomes', 'faq'];
@@ -61,8 +61,8 @@ export class ChatbotContextTool {
   private async getFileMetadata(contextType: string): Promise<ContextMetadata> {
     try {
       const metadataContent = fs.readFileSync(this.metadataFile, 'utf-8');
-      const metadata = JSON.parse(metadataContent);
-      const fileMetadata = metadata.contextFiles.find((file: any) => file.contextType === contextType);
+      const metadata = JSON.parse(metadataContent) as ContextIndex;
+      const fileMetadata = metadata.contextFiles.find((file) => file.contextType === contextType);
 
       if (!fileMetadata) {
         throw new Error(`Metadata not found for context type: ${contextType}`);

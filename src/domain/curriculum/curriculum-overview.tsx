@@ -330,7 +330,7 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
 
                   {/* Key Learning Objectives */}
                   <div>
-                    <h4 className="text-sm font-semibold text-foreground mb-2">Skills You'll Gain</h4>
+                    <h4 className="text-sm font-semibold text-foreground mb-2">Skills You&apos;ll Gain</h4>
                     <div className="space-y-2">
                       {module.learningObjectives.slice(0, 3).map((objective, idx) => (
                         <div key={idx} className="flex items-start gap-2">
@@ -394,23 +394,23 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
                 </h3>
               </div>
             {(() => {
-              const module = levels.find(m => m.id === selectedModule)
-              if (!module) return null
+              const selected = levels.find(m => m.id === selectedModule)
+              if (!selected) return null
 
               return (
                 <>
                   {/* Detailed Overview */}
                   <div>
                     <h4 className="text-lg font-semibold text-foreground mb-3">Level Overview</h4>
-                    <p className="text-muted-foreground leading-relaxed">{module.overview}</p>
+                    <p className="text-muted-foreground leading-relaxed">{selected.overview}</p>
                   </div>
 
                   {/* Prerequisites */}
-                  {module.prerequisites && module.prerequisites.length > 0 && (
+                  {selected.prerequisites && selected.prerequisites.length > 0 && (
                     <div>
                       <h4 className="text-lg font-semibold text-foreground mb-3">Requirements</h4>
                       <ul className="space-y-2">
-                        {module.prerequisites.map((prereq, idx) => (
+                        {selected.prerequisites.map((prereq, idx) => (
                           <li key={idx} className="flex items-start gap-2">
                             <CheckCircle2 className="h-4 w-4 text-primary-emerald-500 flex-shrink-0 mt-0.5" />
                             <span className="text-sm text-muted-foreground">{prereq}</span>
@@ -424,13 +424,13 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
                   <div>
                     <h4 className="text-lg font-semibold text-foreground mb-3">What Students Will Achieve</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {module.outcomes.learningOutcomes?.map((outcome, idx) => (
+                      {selected.outcomes.learningOutcomes?.map((outcome, idx) => (
                         <div key={idx} className="flex items-start gap-2">
                           <Star className="h-4 w-4 text-yellow-500 flex-shrink-0 mt-0.5" />
                           <span className="text-sm text-muted-foreground">{outcome}</span>
                         </div>
                       ))}
-                      {module.outcomes.technicalSkills?.map((outcome, idx) => (
+                      {selected.outcomes.technicalSkills?.map((outcome, idx) => (
                         <div key={idx} className="flex items-start gap-2">
                           <Star className="h-4 w-4 text-primary-emerald-500 flex-shrink-0 mt-0.5" />
                           <span className="text-sm text-muted-foreground">{outcome}</span>
@@ -440,13 +440,13 @@ export function EnhancedCurriculumOverview({ className }: EnhancedCurriculumOver
                   </div>
 
                   {/* Equipment Information */}
-                  {module.equipment && (
+                  {selected.equipment && (
                     <div>
                       <h4 className="text-lg font-semibold text-foreground mb-3">Equipment & Tools</h4>
                       <div className="space-y-2">
-                        <p className="text-sm text-muted-foreground">{module.equipment.value}</p>
+                        <p className="text-sm text-muted-foreground">{selected.equipment.value}</p>
                         <ul className="space-y-1">
-                          {module.equipment.provided.map((item, idx) => (
+                          {selected.equipment.provided.map((item, idx) => (
                             <li key={idx} className="text-xs text-muted-foreground flex items-start gap-1">
                               <span className="w-1 h-1 bg-primary rounded-full mt-1.5 flex-shrink-0" />
                               {item}

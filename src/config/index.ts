@@ -14,20 +14,21 @@ export {
   groqConfig
 } from './groq.config'
 
+import { getGroqConfigSummary } from './groq.config'
+
 /**
  * Configuration validation utility for startup
  */
 export function validateAllConfigurations(): {
   isValid: boolean
   errors: string[]
-  summary: Record<string, any>
+  summary: Record<string, unknown>
 } {
   const errors: string[] = []
-  const summary: Record<string, any> = {}
+  const summary: Record<string, unknown> = {}
 
   try {
-    const { getGroqConfigSummary: getSummary } = require('./groq.config')
-    const groqSummary = getSummary()
+    const groqSummary = getGroqConfigSummary()
     summary.groq = {
       model: groqSummary.model,
       baseURL: groqSummary.baseURL,

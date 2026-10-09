@@ -209,5 +209,3 @@ export default function Hero() {
     </section>
   );
 }
-
-export type HeroProps = {};

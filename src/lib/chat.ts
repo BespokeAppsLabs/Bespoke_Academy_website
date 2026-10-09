@@ -3,6 +3,7 @@
  */
 
 import { BASE_PROMPT, CONTEXT_PROMPTS } from './prompts'
+import type { GroqApiError } from '@/lib/errors/groq-errors'
 
 export interface ToolCall {
   id: string
@@ -24,6 +25,7 @@ export interface ChatMessage {
     sources?: string[]
     model?: string
     responseTime?: number
+    toolData?: { type: string; output?: unknown; [key: string]: unknown }
   }
   toolCalls?: ToolCall[]
   toolCallId?: string
@@ -104,28 +106,33 @@ export interface ChatWidgetState {
 }
 
 // Type guards and validation functions
-export function isValidMessage(message: any): message is ChatMessage {
+export function isValidMessage(message: unknown): message is ChatMessage {
+  if (!message || typeof message !== 'object') return false
+  const m = message as Record<string, unknown>
   return (
-    message &&
-    typeof message.id === 'string' &&
-    typeof message.content === 'string' &&
-    (message.sender === 'user' || message.sender === 'assistant') &&
-    message.timestamp instanceof Date
+    typeof m.id === 'string' &&
+    typeof m.content === 'string' &&
+    (m.sender === 'user' || m.sender === 'assistant') &&
+    m.timestamp instanceof Date
   )
 }
 
-export function isValidChatContext(context: any): context is ChatContext {
+export function isValidChatContext(context: unknown): context is ChatContext {
   return (
-    context &&
+    !!context &&
     typeof context === 'object' &&
-    ['course-advising', 'technical-support', 'general-inquiry', 'learning-assistance'].includes(context.type)
+    ['course-advising', 'technical-support', 'general-inquiry', 'learning-assistance'].includes(
+      (context as Record<string, unknown>).type as string
+    )
   )
 }
 
 // Chat configuration factory (now imports from centralized config)
 export function createChatConfig(overrides: Partial<ChatConfig> = {}): ChatConfig {
-  // Import here to avoid circular dependencies
-  const { getGroqConfig } = require('@/config')
+  // Loaded lazily on purpose: groq.config validates (and throws) at module load, and this
+  // file is shared with client components and the chat route, which must not need the key
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { getGroqConfig } = require('@/config') as typeof import('@/config')
   const groqConfig = getGroqConfig()
 
   return {
@@ -255,7 +262,7 @@ export function createChatError(
 /**
  * Convert a GroqApiError to a ChatError for backward compatibility
  */
-export function groqErrorToChatError(groqError: any): ChatError {
+export function groqErrorToChatError(groqError: GroqApiError): ChatError {
   return {
     type: mapGroqErrorTypeToChatErrorType(groqError.type),
     message: groqError.message,
